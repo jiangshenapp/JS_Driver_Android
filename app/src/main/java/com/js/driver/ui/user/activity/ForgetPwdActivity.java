@@ -5,18 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
-import com.js.driver.ui.user.presenter.RegisterPresenter;
+import com.js.driver.ui.user.presenter.ForgetPwdPresenter;
 import com.js.driver.ui.user.presenter.SmsCodePresenter;
-import com.js.driver.ui.user.presenter.contract.RegisterContract;
+import com.js.driver.ui.user.presenter.contract.ForgetPwdContract;
 import com.js.driver.ui.user.presenter.contract.SmsCodeContract;
 import com.xlgcx.frame.view.BaseActivity;
 
@@ -36,29 +34,22 @@ import io.reactivex.functions.Consumer;
 /**
  * author : hzb
  * e-mail : hanzhanbing@evcoming.com
- * time   : 2019/04/25
- * desc   : 注册
+ * time   : 2019/05/02
+ * desc   : 忘记密码第一步
  * version: 3.0.0
  */
-public class RegisterActivity extends BaseActivity<RegisterPresenter> implements RegisterContract.View, SmsCodeContract.View {
+public class ForgetPwdActivity extends BaseActivity<ForgetPwdPresenter> implements ForgetPwdContract.View, SmsCodeContract.View {
 
     @BindView(R.id.edit_phone)
     EditText mPhone;
-    @BindView(R.id.edit_pwd)
-    EditText mPwd;
     @BindView(R.id.edit_code)
     EditText mCode;
     @BindView(R.id.tv_get_code)
     TextView mGetCode;
-    @BindView(R.id.btn_register)
-    TextView mRegister;
-    @BindView(R.id.cb_agree)
-    CheckBox mAgree;
-    @BindView(R.id.tv_protocal)
-    TextView mProtocal;
+    @BindView(R.id.btn_next_step)
+    TextView mNextStep;
 
     private String phone;
-    private String pwd;
     private String code;
     private Disposable mDisposable;
 
@@ -66,13 +57,12 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     SmsCodePresenter mCodePresenter;
 
     public static void action(Context context) {
-        context.startActivity(new Intent(context, RegisterActivity.class));
+        context.startActivity(new Intent(context, ForgetPwdActivity.class));
     }
 
     @Override
     protected void init() {
         mCodePresenter.attachView(this);
-        mAgree.setChecked(true);
     }
 
     @Override
@@ -86,7 +76,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_register;
+        return R.layout.activity_pwd_forget;
     }
 
     @Override
@@ -94,7 +84,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
         mTitle.setText("");
     }
 
-    @OnClick({R.id.tv_get_code, R.id.btn_register, R.id.tv_protocal})
+    @OnClick({R.id.tv_get_code, R.id.btn_next_step})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_get_code:
@@ -105,31 +95,25 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
                 }
                 mCodePresenter.sendSmsCode(phone);
                 break;
-            case R.id.btn_register:
+            case R.id.btn_next_step:
                 phone = mPhone.getText().toString().trim();
-                pwd = mPwd.getText().toString().trim();
                 code = mCode.getText().toString().trim();
                 if (TextUtils.isEmpty(phone)) {
                     toast("请输入手机号");
-                    return;
-                }
-                if (pwd.length()<6 || pwd.length()>16) {
-                    toast("请设置6-16位密码（字母、数字）");
                     return;
                 }
                 if (TextUtils.isEmpty(code)) {
                     toast("请输入验证码");
                     return;
                 }
-                if (!mAgree.isChecked()) {
-                    toast("请勾选用户协议");
-                    return;
-                }
-                mPresenter.register(phone, pwd, code);
-                break;
-            case R.id.tv_protocal:
+                mPresenter.forgetPwd(phone, code);
                 break;
         }
+    }
+
+    @Override
+    public void onForgetPwd() {
+        ResetPwdActivity.action(this, phone);
     }
 
     @Override
@@ -150,11 +134,6 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
                         mGetCode.setText("重新获取");
                     }
                 }).subscribe();
-    }
-
-    @Override
-    public void onRegister() {
-        LoginActivity.action(this,false);
     }
 
     @Override

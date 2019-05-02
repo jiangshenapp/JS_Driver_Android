@@ -35,6 +35,14 @@
             android:launchMode="singleTop" />
 
         <activity
+            android:name=".ui.user.activity.ForgetPwdActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.user.activity.ResetPwdActivity"
+            android:launchMode="singleTop" />
+
+        <activity
             android:name=".ui.user.activity.UserCenterActivity"
             android:launchMode="singleTop" />
 
