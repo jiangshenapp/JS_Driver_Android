@@ -100,7 +100,7 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
 
     @Override
     public void setActionBar() {
-        setTitle("司机身份认证");
+        mTitle.setText("司机身份认证");
     }
 
 

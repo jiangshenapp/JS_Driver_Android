@@ -61,5 +61,4 @@ public class App extends BaseApplication {
         return mApp;
     }
 
-
 }

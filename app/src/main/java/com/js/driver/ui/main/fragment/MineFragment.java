@@ -26,6 +26,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xlgcx.frame.view.BaseFragment;
+import com.xlgcx.http.HttpApp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,7 +98,9 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     }
 
     private void initData() {
-        mPresenter.getUserInfo();
+        if (!TextUtils.isEmpty(App.getInstance().token)) { //判断token是否为空
+            mPresenter.getUserInfo();
+        }
     }
 
     private void initView() {
