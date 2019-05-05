@@ -10,8 +10,10 @@ import com.js.driver.ui.center.activity.DriversActivity;
 import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.order.activity.OrderDetailActivity;
 import com.js.driver.ui.user.activity.DriverVerifiedActivity;
+import com.js.driver.ui.user.activity.ForgetPwdActivity;
 import com.js.driver.ui.user.activity.ParkUserVerifiedActivity;
 import com.js.driver.ui.user.activity.RegisterActivity;
+import com.js.driver.ui.user.activity.ResetPwdActivity;
 import com.js.driver.ui.user.activity.UserCenterActivity;
 import com.js.driver.ui.wallet.activity.BailActivity;
 import com.js.driver.ui.wallet.activity.RechargeActivity;
@@ -57,5 +59,8 @@ public interface ActivityComponent {
 
     void inject(AddCarActivity addCarActivity);
 
+    void inject(ForgetPwdActivity addCarActivity);
+
+    void inject(ResetPwdActivity addCarActivity);
 }
 

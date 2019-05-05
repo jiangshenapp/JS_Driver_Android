@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/_FFFFFF"
     android:paddingLeft="28dp"
     android:paddingRight="28dp">
 
@@ -11,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="忘记密码"
+        android:text="重置密码"
         android:textColor="@color/_000000"
         android:textSize="20sp" />
 
