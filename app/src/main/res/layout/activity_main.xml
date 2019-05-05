@@ -8,7 +8,6 @@
     tools:context=".ui.main.activity.MainActivity"
     android:orientation="vertical">
 
-    <!--<include layout="@layout/include_toolbar"/>-->
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"

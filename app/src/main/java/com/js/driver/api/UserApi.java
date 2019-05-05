@@ -5,10 +5,12 @@ import com.xlgcx.http.BaseHttpResponse;
 import com.xlgcx.http.HttpResponse;
 
 import io.reactivex.Observable;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 /**
@@ -64,6 +66,9 @@ public interface UserApi {
      * @return
      */
     @GET("app/subscriber/profile")
+    @DELETE
+    @PUT
+    @POST
     Observable<HttpResponse<UserInfo>> profile();
 
 
