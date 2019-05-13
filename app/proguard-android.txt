@@ -111,7 +111,6 @@
 -dontwarn com.soundcloud.android.crop.**
 
 -keep class com.js.driver.model.** {*;}
--keep class com.js.http.** {*;}
 
 -keepattributes *Annotation*
 -keepclassmembers class * {
