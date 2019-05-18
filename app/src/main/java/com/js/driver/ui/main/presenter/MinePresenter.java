@@ -1,5 +1,7 @@
 package com.js.driver.ui.main.presenter;
 
+import android.text.TextUtils;
+
 import com.js.driver.App;
 import com.js.driver.api.UserApi;
 import com.js.driver.model.bean.UserInfo;
@@ -32,20 +34,22 @@ public class MinePresenter extends RxPresenter<MineContract.View> implements Min
 
     @Override
     public void getUserInfo() {
-        Disposable disposable = mApiFactory.getApi(UserApi.class)
-                .profile()
-                .compose(RxSchedulers.io_main())
-                .compose(RxResult.handleResult())
-                .subscribe(new Consumer<UserInfo>() {
-                    @Override
-                    public void accept(UserInfo userInfo) throws Exception {
+        if (!TextUtils.isEmpty(App.getInstance().token)) {
+            Disposable disposable = mApiFactory.getApi(UserApi.class)
+                    .profile()
+                    .compose(RxSchedulers.io_main())
+                    .compose(RxResult.handleResult())
+                    .subscribe(new Consumer<UserInfo>() {
+                        @Override
+                        public void accept(UserInfo userInfo) throws Exception {
+                            mView.finishRefresh();
+                            mView.onUserInfo(userInfo);
+                        }
+                    }, new RxException<>(e -> {
                         mView.finishRefresh();
-                        mView.onUserInfo(userInfo);
-                    }
-                }, new RxException<>(e -> {
-                    mView.finishRefresh();
-                    mView.toast(e.getMessage());
-                }));
-        addDispose(disposable);
+                        mView.toast(e.getMessage());
+                    }));
+            addDispose(disposable);
+        }
     }
 }

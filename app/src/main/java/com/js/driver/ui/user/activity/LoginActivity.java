@@ -24,6 +24,8 @@ import butterknife.BindView;
 /**
  * Created by huyg on 2019/4/21.
  */
+
+@Route(path = "/user/login")
 public class LoginActivity extends SimpleActivity {
 
     @BindView(R.id.login_frame)
