@@ -1,8 +1,11 @@
-package com.xlgcx.http.rx;
+package com.js.driver.rx;
 
 
 import android.text.TextUtils;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.js.driver.App;
+import com.js.driver.manager.SpManager;
 import com.xlgcx.http.HttpResponse;
 
 import io.reactivex.Observable;
@@ -19,8 +22,9 @@ public class RxResult {
             return upstream.flatMap(result -> {
                         if (result.isSuccess()) {
                             return createData(result.getData());
-                        } else if (result.getCode() == -1) {
-
+                        } else if (result.getCode() == 401) {
+                            SpManager.getInstance(App.getInstance()).removeSP("token");
+                            ARouter.getInstance().build("/user/login").navigation();
                             return Observable.error(new Exception("请您重新登录!"));
                         } else {
                             if (TextUtils.isEmpty(result.getMsg())) {

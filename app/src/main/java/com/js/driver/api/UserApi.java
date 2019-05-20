@@ -66,9 +66,6 @@ public interface UserApi {
      * @return
      */
     @GET("app/subscriber/profile")
-    @DELETE
-    @PUT
-    @POST
     Observable<HttpResponse<UserInfo>> profile();
 
 

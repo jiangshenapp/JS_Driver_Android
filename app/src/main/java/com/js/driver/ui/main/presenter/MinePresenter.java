@@ -1,16 +1,16 @@
 package com.js.driver.ui.main.presenter;
 
+import android.text.TextUtils;
+
 import com.js.driver.App;
 import com.js.driver.api.UserApi;
 import com.js.driver.model.bean.UserInfo;
 import com.js.driver.ui.main.presenter.contract.MineContract;
 import com.xlgcx.frame.mvp.RxPresenter;
 import com.xlgcx.http.ApiFactory;
-import com.xlgcx.http.BaseHttpResponse;
-import com.xlgcx.http.HttpResponse;
-import com.xlgcx.http.rx.RxException;
-import com.xlgcx.http.rx.RxResult;
-import com.xlgcx.http.rx.RxSchedulers;
+import com.js.driver.rx.RxException;
+import com.js.driver.rx.RxResult;
+import com.js.driver.rx.RxSchedulers;
 
 import javax.inject.Inject;
 
@@ -32,20 +32,22 @@ public class MinePresenter extends RxPresenter<MineContract.View> implements Min
 
     @Override
     public void getUserInfo() {
-        Disposable disposable = mApiFactory.getApi(UserApi.class)
-                .profile()
-                .compose(RxSchedulers.io_main())
-                .compose(RxResult.handleResult())
-                .subscribe(new Consumer<UserInfo>() {
-                    @Override
-                    public void accept(UserInfo userInfo) throws Exception {
+        if (!TextUtils.isEmpty(App.getInstance().token)) {
+            Disposable disposable = mApiFactory.getApi(UserApi.class)
+                    .profile()
+                    .compose(RxSchedulers.io_main())
+                    .compose(RxResult.handleResult())
+                    .subscribe(new Consumer<UserInfo>() {
+                        @Override
+                        public void accept(UserInfo userInfo) throws Exception {
+                            mView.finishRefresh();
+                            mView.onUserInfo(userInfo);
+                        }
+                    }, new RxException<>(e -> {
                         mView.finishRefresh();
-                        mView.onUserInfo(userInfo);
-                    }
-                }, new RxException<>(e -> {
-                    mView.finishRefresh();
-                    mView.toast(e.getMessage());
-                }));
-        addDispose(disposable);
+                        mView.toast(e.getMessage());
+                    }));
+            addDispose(disposable);
+        }
     }
 }

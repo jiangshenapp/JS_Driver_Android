@@ -51,8 +51,6 @@ dependencies {
     api 'com.squareup.okhttp3:logging-interceptor:3.9.0'
     implementation project(path: ':lib.frame')
 
-    //ARouter
-    implementation 'com.alibaba:arouter-api:1.4.1'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+
 
 }

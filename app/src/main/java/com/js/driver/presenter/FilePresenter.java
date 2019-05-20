@@ -4,11 +4,9 @@ import com.js.driver.api.FileApi;
 import com.js.driver.presenter.contract.FileContract;
 import com.xlgcx.frame.mvp.RxPresenter;
 import com.xlgcx.http.ApiFactory;
-import com.xlgcx.http.BaseHttpResponse;
-import com.xlgcx.http.HttpResponse;
-import com.xlgcx.http.rx.RxException;
-import com.xlgcx.http.rx.RxResult;
-import com.xlgcx.http.rx.RxSchedulers;
+import com.js.driver.rx.RxException;
+import com.js.driver.rx.RxResult;
+import com.js.driver.rx.RxSchedulers;
 
 import java.io.File;
 
