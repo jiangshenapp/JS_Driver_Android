@@ -50,6 +50,15 @@ public class UserManager {
     }
 
     /**
+     * 退出登录
+     */
+    public void logout() {
+        App.getInstance().token = "";
+        SpManager.getInstance(App.getInstance()).removeSP("token");
+        LoginActivity.action(App.getInstance(),true);
+    }
+
+    /**
      * 判断认证状态
      */
     public boolean isVerified(Activity activity) {

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
 import com.js.driver.R;
 import com.js.driver.model.event.LoginChangeEvent;
 import com.js.driver.ui.main.activity.MainActivity;
@@ -22,14 +21,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
-
 /**
  * Created by huyg on 2019/4/21.
  */
 
-@Route(path = "/user/login")
 public class LoginActivity extends SimpleActivity {
 
     @BindView(R.id.login_frame)

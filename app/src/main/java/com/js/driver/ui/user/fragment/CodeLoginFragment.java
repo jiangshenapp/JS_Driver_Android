@@ -139,7 +139,7 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
 
     @Override
     public void onLogin(String token) {
-
+        App.getInstance().token = token;
         SpManager.getInstance(getActivity()).putSP("token",token);
         MainActivity.action(mContext);
     }

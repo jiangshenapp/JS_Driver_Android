@@ -94,6 +94,7 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
 
     @Override
     public void onLogin(String token) {
+        App.getInstance().token = token;
         SpManager.getInstance(getActivity()).putSP("token",token);
         MainActivity.action(mContext);
     }
