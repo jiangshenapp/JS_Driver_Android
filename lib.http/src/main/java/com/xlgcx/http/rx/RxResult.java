@@ -22,6 +22,7 @@ public class RxResult {
                         if (result.isSuccess()) {
                             return createData(result.getData());
                         } else if (result.getCode() == 401) {
+                            SpManager.getInstance(this).removeSP("token");
                             ARouter.getInstance().build("/user/login").navigation();
                             return Observable.error(new Exception("请您重新登录!"));
                         } else {
