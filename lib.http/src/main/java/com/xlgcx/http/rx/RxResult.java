@@ -20,6 +20,7 @@ public class RxResult {
                         if (result.isSuccess()) {
                             return createData(result.getData());
                         } else if (result.getCode() == -1) {
+
                             return Observable.error(new Exception("请您重新登录!"));
                         } else {
                             if (TextUtils.isEmpty(result.getMsg())) {
