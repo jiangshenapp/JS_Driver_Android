@@ -126,6 +126,26 @@ public interface UserApi {
 
 
     /**
+     * 修改头像
+     * @param avatar
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("app/subscriber/changeAvatar")
+    Observable<BaseHttpResponse> changeAvatar(@Field("avatar") String avatar);
+
+
+    /**
+     * 修改昵称
+     * @param nickname
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("app/subscriber/changeNickname")
+    Observable<BaseHttpResponse> changeNickname(@Field("nickname") String nickname);
+
+
+    /**
      * 个人司机认证
      * @param driverVerifiedInfo
      * @return
