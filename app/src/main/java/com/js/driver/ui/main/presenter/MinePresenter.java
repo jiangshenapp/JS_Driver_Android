@@ -22,7 +22,6 @@ import io.reactivex.functions.Consumer;
  */
 public class MinePresenter extends RxPresenter<MineContract.View> implements MineContract.Presenter {
 
-
     private ApiFactory mApiFactory;
 
     @Inject

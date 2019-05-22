@@ -34,14 +34,28 @@ public class SpManager {
         mEditor.commit();
     }
 
+    public void putIntSP(String key, int value) {
+        mEditor.putInt(key, value);
+        mEditor.commit();
+    }
+
     // 获取数据
     public String getSP(String key) {
         return mPreferences.getString(key, "");
+    }
+
+    public int getIntSP(String key) {
+        return mPreferences.getInt(key, 0);
     }
 
     // 移除数据
     public void removeSP(String key) {
         mEditor.remove(key);
         mEditor.commit();
+    }
+
+    // 移除所有数据
+    public void clear() {
+        mPreferences.edit().clear().commit();
     }
 }

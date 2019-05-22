@@ -5,7 +5,6 @@ package com.js.driver.model.bean;
  */
 public class UserInfo {
 
-
     /**
      * id : 5
      * mobile : 13429323525
@@ -23,6 +22,7 @@ public class UserInfo {
     private int id;
     private String mobile;
     private String nickName;
+    private String avatar;
     private String password;
     private int driverVerified;
     private int parkVerified;
@@ -54,6 +54,14 @@ public class UserInfo {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getPassword() {

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.js.driver.App;
+import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.ui.user.presenter.ParkUserVerifiedPresenter;
@@ -36,11 +37,11 @@ public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPrese
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.activity_park_user_verified;
     }
 
     @Override
     public void setActionBar() {
-
+        mTitle.setText("园区成员认证");
     }
 }

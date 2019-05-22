@@ -2,11 +2,14 @@ package com.js.driver.ui.user.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.js.driver.App;
 import com.js.driver.R;
+import com.js.driver.global.Const;
 import com.xlgcx.frame.view.SimpleActivity;
 
 import butterknife.BindView;
@@ -29,7 +32,6 @@ public class UserVerifiedActivity extends SimpleActivity {
         context.startActivity(intent);
     }
 
-
     @Override
     protected int getLayout() {
         return R.layout.activity_verified_guide;
@@ -38,6 +40,10 @@ public class UserVerifiedActivity extends SimpleActivity {
     @Override
     protected void init() {
 
+        mDriverStatus.setText(Const.AuthStateStr[App.getInstance().driverVerified]);
+        mParkStatus.setText(Const.AuthStateStr[App.getInstance().parkVerified]);
+        mDriverStatus.setTextColor(Color.parseColor(Const.AuthStateColor[App.getInstance().driverVerified]));
+        mParkStatus.setTextColor(Color.parseColor(Const.AuthStateColor[App.getInstance().parkVerified]));
     }
 
     @Override

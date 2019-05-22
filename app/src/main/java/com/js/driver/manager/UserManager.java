@@ -5,9 +5,12 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.js.driver.App;
+import com.js.driver.model.event.UserStatusChangeEvent;
 import com.js.driver.ui.user.activity.LoginActivity;
 
 import androidx.appcompat.app.AlertDialog;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * author : hzb
@@ -47,6 +50,15 @@ public class UserManager {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 退出登录
+     */
+    public void logout() {
+        App.getInstance().clearUserInfo();
+        EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGOUT_SUCCESS));
+        LoginActivity.action(App.getInstance(),true);
     }
 
     /**

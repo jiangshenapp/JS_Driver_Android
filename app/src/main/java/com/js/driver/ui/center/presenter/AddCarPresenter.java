@@ -11,7 +11,6 @@ import javax.inject.Inject;
  */
 public class AddCarPresenter extends RxPresenter<AddCarContract.View> implements AddCarContract.Presenter {
 
-
     @Inject
     public AddCarPresenter(){
 

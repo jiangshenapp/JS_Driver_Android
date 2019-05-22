@@ -1,5 +1,6 @@
 package com.js.driver.api;
 
+import com.js.driver.model.bean.AuthInfo;
 import com.js.driver.model.bean.UserInfo;
 import com.xlgcx.http.BaseHttpResponse;
 import com.xlgcx.http.HttpResponse;
@@ -126,23 +127,52 @@ public interface UserApi {
 
 
     /**
+     * 修改头像
+     * @param avatar
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("app/subscriber/changeAvatar")
+    Observable<BaseHttpResponse> changeAvatar(@Field("avatar") String avatar);
+
+
+    /**
+     * 修改昵称
+     * @param nickname
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("app/subscriber/changeNickname")
+    Observable<BaseHttpResponse> changeNickname(@Field("nickname") String nickname);
+
+
+    /**
      * 个人司机认证
-     * @param driverVerifiedInfo
+     * @param idImage
+     * @param idHandImage
+     * @param driverImage
+     * @param personName
+     * @param idCode
+     * @param address
+     * @param driverLevel
      * @return
      */
     @FormUrlEncoded
     @POST("app/subscriber/verify/driverVerified")
-    Observable<BaseHttpResponse> driverVerified(@Field("driverVerifiedInfo") String driverVerifiedInfo);
+    Observable<BaseHttpResponse> driverVerified(@Field("idImage") String idImage,
+                                                @Field("idHandImage") String idHandImage,
+                                                @Field("driverImage") String driverImage,
+                                                @Field("personName") String personName,
+                                                @Field("idCode") String idCode,
+                                                @Field("address") String address,
+                                                @Field("driverLevel") String driverLevel);
 
 
     /**
      * 获取司机认证信息
-     * @param token
      * @return
      */
-    @FormUrlEncoded
     @POST("app/subscriber/verify/getDriverVerifiedInfo")
-    Observable<BaseHttpResponse> getDriverVerifiedInfo(@Field("token") String token);
-
+    Observable<HttpResponse<AuthInfo>> getDriverVerifiedInfo();
 
 }

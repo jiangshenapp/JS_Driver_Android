@@ -11,6 +11,7 @@ import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
 import com.js.driver.manager.SpManager;
 import com.js.driver.model.event.LoginChangeEvent;
+import com.js.driver.model.event.UserStatusChangeEvent;
 import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.user.activity.ForgetPwdActivity;
 import com.js.driver.ui.user.activity.RegisterActivity;
@@ -94,7 +95,8 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
 
     @Override
     public void onLogin(String token) {
-        SpManager.getInstance(getActivity()).putSP("token",token);
+        App.getInstance().putToken(token);
+        EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));
         MainActivity.action(mContext);
     }
 }

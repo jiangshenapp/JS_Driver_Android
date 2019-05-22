@@ -12,6 +12,7 @@ import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
 import com.js.driver.manager.SpManager;
 import com.js.driver.model.event.LoginChangeEvent;
+import com.js.driver.model.event.UserStatusChangeEvent;
 import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.user.activity.RegisterActivity;
 import com.js.driver.ui.user.presenter.CodeLoginPresenter;
@@ -19,6 +20,7 @@ import com.js.driver.ui.user.presenter.SmsCodePresenter;
 import com.js.driver.ui.user.presenter.contract.CodeLoginContract;
 import com.js.driver.ui.user.presenter.contract.SmsCodeContract;
 import com.xlgcx.frame.view.BaseFragment;
+import com.xlgcx.http.HttpApp;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -139,8 +141,8 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
 
     @Override
     public void onLogin(String token) {
-
-        SpManager.getInstance(getActivity()).putSP("token",token);
+        App.getInstance().putToken(token);
+        EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));
         MainActivity.action(mContext);
     }
 

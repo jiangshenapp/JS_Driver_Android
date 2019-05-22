@@ -18,8 +18,4 @@ public class CarsPresenter extends RxPresenter<CarsContract.View> implements Car
         this.mApiFactory = apiFactory;
     }
 
-
-
-
-
 }

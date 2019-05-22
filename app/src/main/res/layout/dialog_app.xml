@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_app_dialog"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:lines="1"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/_646464"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/dialog_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/_ECA73F"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_marginTop="28dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="16dp"
+        >
+
+        <TextView
+            android:id="@+id/dialog_negative"
+            android:layout_width="100dp"
+            android:layout_height="34dp"
+            android:background="@drawable/shape_app_dialog_negative"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/_B4B4B4"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/dialog_positive"
+            android:layout_width="100dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="14dp"
+            android:background="@drawable/shape_app_dialog_positive"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</LinearLayout>
