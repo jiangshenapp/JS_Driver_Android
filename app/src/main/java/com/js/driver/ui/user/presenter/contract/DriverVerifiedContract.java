@@ -11,10 +11,12 @@ import com.xlgcx.frame.mvp.IPresenter;
 public interface DriverVerifiedContract {
 
     interface View extends IBaseView{
-        void onAuthInfo(AuthInfo authInfo);
+        void onDriverVerifiedInfo(AuthInfo authInfo);
+        void onSubmitDriverVerified();
     }
 
     interface Presenter extends IPresenter<View>{
-        void getAuthInfo();
+        void getDriverVerifiedInfo();
+        void submitDriverVerified(String idImage, String idHandImage, String driverImage, String personName, String idCode, String address, String driverLevel);
     }
 }

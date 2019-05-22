@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -31,12 +32,15 @@ import com.js.driver.di.module.ActivityModule;
 import com.js.driver.global.Const;
 import com.js.driver.manager.CommonGlideImageLoader;
 import com.js.driver.model.bean.AuthInfo;
-import com.js.driver.model.request.DriverAuth;
+import com.js.driver.model.event.UserStatusChangeEvent;
 import com.js.driver.presenter.FilePresenter;
 import com.js.driver.presenter.contract.FileContract;
+import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.user.presenter.DriverVerifiedPresenter;
 import com.js.driver.ui.user.presenter.contract.DriverVerifiedContract;
 import com.xlgcx.frame.view.BaseActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 
@@ -92,7 +96,7 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
     private int choseCode;
     private InvokeParam invokeParam;
     private TakePhoto takePhoto;
-    private DriverAuth mDriverAuth;
+    private AuthInfo mAuthInfo;
     private int authState;
 
     public static void action(Context context) {
@@ -102,8 +106,9 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
     @Override
     protected void init() {
         mFilePresenter.attachView(this);
-        mDriverAuth = new DriverAuth();
-        authState = App.getInstance().driverVerified;
+        mAuthInfo = new AuthInfo();
+//        authState = App.getInstance().driverVerified;
+        authState = 0;
         if (authState == 0) { //未认证
             tvAuthState.setVisibility(View.GONE);
         } else {
@@ -117,11 +122,14 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
     }
 
     public void initAuthData() {
-        mPresenter.getAuthInfo();
+        mPresenter.getDriverVerifiedInfo();
     }
 
     @Override
-    public void onAuthInfo(AuthInfo authInfo) {
+    public void onDriverVerifiedInfo(AuthInfo authInfo) {
+
+        mAuthInfo = authInfo;
+
         CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.xlgcx.http.global.Const.IMG_URL + authInfo.getIdImage()
                 , mAuthCard, mContext.getResources().getDrawable(R.mipmap.img_authentication_id));
         CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.xlgcx.http.global.Const.IMG_URL + authInfo.getIdHandImage()
@@ -132,6 +140,13 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
         etIdcard.setText(authInfo.getIdCode());
         etAddress.setText(authInfo.getAddress());
         etDriverLicense.setText(authInfo.getDriverLevel());
+    }
+
+    @Override
+    public void onSubmitDriverVerified() {
+        toast("提交成功，请耐心等待审核");
+        EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.CHANGE_SUCCESS));
+        MainActivity.action(mContext);
     }
 
     public void initAuthView() {
@@ -185,15 +200,65 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
                 toast("选择驾驶证类型");
                 break;
             case R.id.cb_select:
-
+                cbSelect.setChecked(cbSelect.isChecked());
                 break;
             case R.id.tv_protocal:
                 toast("用户协议");
                 break;
             case R.id.auth_submit:
-
+                submitAction();
                 break;
         }
+    }
+
+    /**
+     * 提交审核
+     */
+    public void submitAction() {
+
+        etAddress.setText("1");
+        etDriverLicense.setText("C1");
+
+        String name = etName.getText().toString().trim();
+        String idcard = etIdcard.getText().toString().trim();
+        String address = etAddress.getText().toString().trim();
+        String driverLicense = etDriverLicense.getText().toString().trim();
+
+
+        if (TextUtils.isEmpty(mAuthInfo.getIdImage())) {
+            toast("请上传司机本人真实身份证");
+            return;
+        }
+        if (TextUtils.isEmpty(mAuthInfo.getIdHandImage())) {
+            toast("请上传司机本人手持身份证照片");
+            return;
+        }
+        if (TextUtils.isEmpty(mAuthInfo.getDriverImage())) {
+            toast("请上传司机本人驾驶证正本照片");
+            return;
+        }
+        if (TextUtils.isEmpty(name)) {
+            toast("请输入姓名");
+            return;
+        }
+        if (TextUtils.isEmpty(idcard)) {
+            toast("请输入身份证号");
+            return;
+        }
+        if (TextUtils.isEmpty(address)) {
+            toast("请选择所在区域");
+            return;
+        }
+        if (TextUtils.isEmpty(driverLicense)) {
+            toast("请选择驾驶证类型");
+            return;
+        }
+        if (cbSelect.isChecked() == false) {
+            toast("请勾选用户协议");
+            return;
+        }
+
+        mPresenter.submitDriverVerified(mAuthInfo.getIdImage(),mAuthInfo.getIdHandImage(),mAuthInfo.getDriverImage(),name,idcard,address,driverLicense);
     }
 
     @Override
@@ -201,15 +266,15 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
         Log.d(getClass().getSimpleName(), data);
         switch (choseCode) {
             case Const.AUTH_CARD:
-                mDriverAuth.setIdImage(data);
+                mAuthInfo.setIdImage(data);
                 CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + data, mAuthCard);
                 break;
             case Const.AUTH_BODY:
-                mDriverAuth.setIdHandImage(data);
+                mAuthInfo.setIdHandImage(data);
                 CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + data, mAuthBody);
                 break;
             case Const.AUTH_DRIVER_CARD:
-                mDriverAuth.setDriverImage(data);
+                mAuthInfo.setDriverImage(data);
                 CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + data, mAuthDriverCard);
                 break;
         }

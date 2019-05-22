@@ -9,6 +9,7 @@ import com.js.driver.rx.RxSchedulers;
 import com.js.driver.ui.user.presenter.contract.DriverVerifiedContract;
 import com.xlgcx.frame.mvp.RxPresenter;
 import com.xlgcx.http.ApiFactory;
+import com.xlgcx.http.BaseHttpResponse;
 
 import javax.inject.Inject;
 
@@ -28,7 +29,7 @@ public class DriverVerifiedPresenter extends RxPresenter<DriverVerifiedContract.
     }
 
     @Override
-    public void getAuthInfo() {
+    public void getDriverVerifiedInfo() {
         Disposable disposable = mApiFactory.getApi(UserApi.class)
                 .getDriverVerifiedInfo()
                 .compose(RxSchedulers.io_main())
@@ -36,9 +37,35 @@ public class DriverVerifiedPresenter extends RxPresenter<DriverVerifiedContract.
                 .subscribe(new Consumer<AuthInfo>() {
                     @Override
                     public void accept(AuthInfo authInfo) throws Exception {
-                        mView.onAuthInfo(authInfo);
+                        mView.onDriverVerifiedInfo(authInfo);
                     }
                 }, new RxException<>(e -> {
+                    mView.toast(e.getMessage());
+                }));
+        addDispose(disposable);
+    }
+
+    @Override
+    public void submitDriverVerified(String idImage, String idHandImage, String driverImage, String personName, String idCode, String address, String driverLevel) {
+        Disposable disposable = mApiFactory.getApi(UserApi.class)
+                .driverVerified(idImage, idHandImage, driverImage, personName, idCode, address, driverLevel)
+                .compose(RxSchedulers.io_main())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<BaseHttpResponse>() {
+                    @Override
+                    public void accept(BaseHttpResponse response) throws Exception {
+                        mView.closeProgress();
+                        if (response.isSuccess()){
+                            mView.onSubmitDriverVerified();
+                        }
+                    }
+                }, new RxException<>(e -> {
+                    mView.closeProgress();
                     mView.toast(e.getMessage());
                 }));
         addDispose(disposable);

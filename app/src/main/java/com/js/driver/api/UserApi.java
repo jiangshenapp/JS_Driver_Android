@@ -148,12 +148,24 @@ public interface UserApi {
 
     /**
      * 个人司机认证
-     * @param driverVerifiedInfo
+     * @param idImage
+     * @param idHandImage
+     * @param driverImage
+     * @param personName
+     * @param idCode
+     * @param address
+     * @param driverLevel
      * @return
      */
     @FormUrlEncoded
     @POST("app/subscriber/verify/driverVerified")
-    Observable<BaseHttpResponse> driverVerified(@Field("driverVerifiedInfo") String driverVerifiedInfo);
+    Observable<BaseHttpResponse> driverVerified(@Field("idImage") String idImage,
+                                                @Field("idHandImage") String idHandImage,
+                                                @Field("driverImage") String driverImage,
+                                                @Field("personName") String personName,
+                                                @Field("idCode") String idCode,
+                                                @Field("address") String address,
+                                                @Field("driverLevel") String driverLevel);
 
 
     /**
