@@ -23,6 +23,7 @@ public class UserInfo {
     private int id;
     private String mobile;
     private String nickName;
+    private String avatar;
     private String password;
     private int driverVerified;
     private int parkVerified;
@@ -54,6 +55,14 @@ public class UserInfo {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getPassword() {

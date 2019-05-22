@@ -12,6 +12,7 @@ import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
+import com.js.driver.manager.CommonGlideImageLoader;
 import com.js.driver.model.bean.MineMenu;
 import com.js.driver.model.bean.UserInfo;
 import com.js.driver.ui.main.adapter.MineMenuAdapter;
@@ -188,6 +189,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
             mUserName.setText("未设置");
         }
 
+        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.xlgcx.http.global.Const.IMG_URL + userInfo.getAvatar()
+                , mUserImg);
     }
 
 

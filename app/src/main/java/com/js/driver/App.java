@@ -18,6 +18,7 @@ public class App extends BaseApplication {
     private AppComponent mAppComponent;
     private static App mApp;
     public String token;
+    public String avatar;
 
     @Override
     public void onCreate() {
