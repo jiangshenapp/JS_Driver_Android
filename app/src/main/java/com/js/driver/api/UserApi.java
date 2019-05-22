@@ -1,5 +1,6 @@
 package com.js.driver.api;
 
+import com.js.driver.model.bean.AuthInfo;
 import com.js.driver.model.bean.UserInfo;
 import com.xlgcx.http.BaseHttpResponse;
 import com.xlgcx.http.HttpResponse;
@@ -157,12 +158,9 @@ public interface UserApi {
 
     /**
      * 获取司机认证信息
-     * @param token
      * @return
      */
-    @FormUrlEncoded
     @POST("app/subscriber/verify/getDriverVerifiedInfo")
-    Observable<BaseHttpResponse> getDriverVerifiedInfo(@Field("token") String token);
-
+    Observable<HttpResponse<AuthInfo>> getDriverVerifiedInfo();
 
 }

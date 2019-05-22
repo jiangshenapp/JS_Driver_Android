@@ -11,8 +11,6 @@ public interface MineContract {
 
     interface View extends IBaseView {
         void onUserInfo(UserInfo userInfo);
-
-
         void finishRefresh();
     }
 

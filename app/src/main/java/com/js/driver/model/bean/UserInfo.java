@@ -5,7 +5,6 @@ package com.js.driver.model.bean;
  */
 public class UserInfo {
 
-
     /**
      * id : 5
      * mobile : 13429323525
