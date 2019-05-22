@@ -2,10 +2,13 @@ package com.js.driver.ui.main.fragment;
 
 import android.graphics.Color;
 import android.text.TextUtils;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.js.driver.App;
@@ -15,7 +18,6 @@ import com.js.driver.di.module.FragmentModule;
 import com.js.driver.manager.CommonGlideImageLoader;
 import com.js.driver.model.bean.MineMenu;
 import com.js.driver.model.bean.UserInfo;
-import com.js.driver.model.event.LoginChangeEvent;
 import com.js.driver.model.event.UserStatusChangeEvent;
 import com.js.driver.ui.main.adapter.MineMenuAdapter;
 import com.js.driver.ui.main.presenter.MinePresenter;
@@ -29,17 +31,12 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xlgcx.frame.view.BaseFragment;
-import com.xlgcx.http.HttpApp;
+import com.xlgcx.http.global.Const;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -53,6 +50,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     ImageView mUserImg;
     @BindView(R.id.user_name)
     TextView mUserName;
+    @BindView(R.id.auth_state)
+    TextView authState;
     @BindView(R.id.user_phone)
     TextView mUserPhone;
     @BindView(R.id.wallet_money)
@@ -63,7 +62,6 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     SmartRefreshLayout mRefresh;
     @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
-
 
     private MineMenuAdapter mAdapter;
     private List<MineMenu> mMineMenu;
@@ -145,19 +143,19 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 UserCenterActivity.action(mContext);
                 break;
             case R.id.order_all://我的所有运单
-                OrdersActivity.action(mContext,0);
+                OrdersActivity.action(mContext, 0);
                 break;
             case R.id.order_ing_layout://发布中
-                OrdersActivity.action(mContext,1);
+                OrdersActivity.action(mContext, 1);
                 break;
             case R.id.order_be_paid_layout://待支付
-                OrdersActivity.action(mContext,2);
+                OrdersActivity.action(mContext, 2);
                 break;
             case R.id.order_be_delivery_layout://待配送
-                OrdersActivity.action(mContext,3);
+                OrdersActivity.action(mContext, 3);
                 break;
             case R.id.order_be_receipt_layout://待收货
-                OrdersActivity.action(mContext,4);
+                OrdersActivity.action(mContext, 4);
                 break;
             case R.id.mine_circle_layout://我的圈子
 
@@ -185,11 +183,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 
         App.getInstance().putUserInfo(userInfo); //存储用户信息
 
-        if (!TextUtils.isEmpty(userInfo.getMobile())) {
-            mUserPhone.setText(userInfo.getMobile());
-        } else {
-            mUserPhone.setText("未设置");
-        }
+        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, Const.IMG_URL + userInfo.getAvatar()
+                , mUserImg, mContext.getResources().getDrawable(R.mipmap.ic_center_driver_head_land));
 
         if (!TextUtils.isEmpty(userInfo.getNickName())) {
             mUserName.setText(userInfo.getNickName());
@@ -197,8 +192,31 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
             mUserName.setText("未设置");
         }
 
-        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.xlgcx.http.global.Const.IMG_URL + userInfo.getAvatar()
-                , mUserImg, mContext.getResources().getDrawable(R.mipmap.ic_center_driver_head_land));
+        if (!TextUtils.isEmpty(userInfo.getMobile())) {
+            mUserPhone.setText(userInfo.getMobile());
+        } else {
+            mUserPhone.setText("未设置");
+        }
+
+        if (userInfo.getDriverVerified() == 3 || userInfo.getParkVerified() == 3) {
+            authState.setText("认证失败");
+            return;
+        }
+
+        if (userInfo.getDriverVerified() == 2 || userInfo.getParkVerified() == 2) {
+            authState.setText("已认证");
+            return;
+        }
+
+        if (userInfo.getDriverVerified() == 1 || userInfo.getParkVerified() == 1) {
+            authState.setText("认证中");
+            return;
+        }
+
+        if (userInfo.getDriverVerified() == 0 && userInfo.getParkVerified() == 0) {
+            authState.setText("未提交");
+            return;
+        }
     }
 
     @Subscribe
