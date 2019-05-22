@@ -2,6 +2,8 @@ package com.js.driver.ui.user.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
@@ -27,11 +29,14 @@ import com.js.driver.di.module.ActivityModule;
 import com.js.driver.global.Const;
 import com.js.driver.manager.CommonGlideImageLoader;
 import com.js.driver.manager.UserManager;
+import com.js.driver.model.event.UserStatusChangeEvent;
 import com.js.driver.presenter.FilePresenter;
 import com.js.driver.presenter.contract.FileContract;
 import com.js.driver.ui.user.presenter.UserCenterPresenter;
 import com.js.driver.ui.user.presenter.contract.UserCenterContract;
 import com.xlgcx.frame.view.BaseActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 
@@ -68,6 +73,27 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
     @Override
     protected void init() {
         mFilePresenter.attachView(this);
+        initView();
+    }
+
+    private void initView() {
+        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.xlgcx.http.global.Const.IMG_URL + App.getInstance().avatar
+                , ivHead, mContext.getResources().getDrawable(R.mipmap.ic_center_shipper_head_land));
+        tvNick.setText(App.getInstance().nickName);
+
+        initVersion();
+    }
+
+    private void initVersion() {
+        PackageManager manager = mContext.getPackageManager();
+        String name = "";
+        try {
+            PackageInfo info = manager.getPackageInfo(mContext.getPackageName(), 0);
+            name = info.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        tvVersion.setText(String.format("V%s", name));
     }
 
     @Override
@@ -208,10 +234,12 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
     @Override
     public void onChangeAvatar() {
         toast("头像修改成功");
+        EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.CHANGE_SUCCESS));
     }
 
     @Override
     public void onChangeNickname() {
         toast("昵称修改成功");
+        EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.CHANGE_SUCCESS));
     }
 }

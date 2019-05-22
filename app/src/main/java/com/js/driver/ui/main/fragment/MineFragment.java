@@ -15,6 +15,8 @@ import com.js.driver.di.module.FragmentModule;
 import com.js.driver.manager.CommonGlideImageLoader;
 import com.js.driver.model.bean.MineMenu;
 import com.js.driver.model.bean.UserInfo;
+import com.js.driver.model.event.LoginChangeEvent;
+import com.js.driver.model.event.UserStatusChangeEvent;
 import com.js.driver.ui.main.adapter.MineMenuAdapter;
 import com.js.driver.ui.main.presenter.MinePresenter;
 import com.js.driver.ui.main.presenter.contract.MineContract;
@@ -36,6 +38,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.greenrobot.eventbus.Subscribe;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -177,6 +182,9 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 
     @Override
     public void onUserInfo(UserInfo userInfo) {
+
+        App.getInstance().putUserInfo(userInfo); //存储用户信息
+
         if (!TextUtils.isEmpty(userInfo.getMobile())) {
             mUserPhone.setText(userInfo.getMobile());
         } else {
@@ -190,9 +198,20 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         }
 
         CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.xlgcx.http.global.Const.IMG_URL + userInfo.getAvatar()
-                , mUserImg);
+                , mUserImg, mContext.getResources().getDrawable(R.mipmap.ic_center_driver_head_land));
     }
 
+    @Subscribe
+    public void onEvent(UserStatusChangeEvent event) {
+        switch (event.index) {
+            case UserStatusChangeEvent.LOGIN_SUCCESS: //登录成功
+                initData();
+                break;
+            case UserStatusChangeEvent.CHANGE_SUCCESS: //用户信息改变成功
+                initData();
+                break;
+        }
+    }
 
     @Override
     public void finishRefresh() {
