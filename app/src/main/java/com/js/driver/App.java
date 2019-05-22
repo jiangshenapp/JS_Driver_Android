@@ -94,7 +94,6 @@ public class App extends BaseApplication {
         return mAppComponent;
     }
 
-
     /**
      * 初始化Dagger所使用的连接器
      */
@@ -108,5 +107,4 @@ public class App extends BaseApplication {
     public static App getInstance() {
         return mApp;
     }
-
 }

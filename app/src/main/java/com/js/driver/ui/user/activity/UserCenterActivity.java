@@ -1,15 +1,20 @@
 package com.js.driver.ui.user.activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -65,6 +70,8 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
     private int choseCode;
     private InvokeParam invokeParam;
     private TakePhoto takePhoto;
+    private String avatar;
+    private String nickname;
 
     public static void action(Context context) {
         context.startActivity(new Intent(context, UserCenterActivity.class));
@@ -123,6 +130,7 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
                 getPhoto(Const.UPLOAD_HEADIMG);
                 break;
             case R.id.center_name_layout://昵称
+                changeNickname();
                 break;
             case R.id.center_verified_layout://实名认证
                 UserVerifiedActivity.action(mContext);
@@ -143,13 +151,35 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
         }
     }
 
+    public void changeNickname() {
+        final EditText inputServer = new EditText(this);
+        inputServer.setText(tvNick.getText());
+        inputServer.setFilters(new InputFilter[]{new InputFilter.LengthFilter(50)});
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("修改昵称").setIcon(null).setView(inputServer)
+                .setNegativeButton("取消", null);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                String nick = inputServer.getText().toString();
+                if(nick!=null && !nick.isEmpty()) {
+                    nickname = nick;
+                    mPresenter.changeNickname(nickname);
+                }
+                else {
+                    toast("请输入昵称");
+                }
+            }
+        });
+        builder.show();
+    }
+
     @Override
     public void onUploadFile(String data) {
         Log.d(getClass().getSimpleName(), data);
         switch (choseCode) {
             case Const.UPLOAD_HEADIMG:
+                avatar = data;
                 mPresenter.changeAvatar(data);
-                CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.xlgcx.http.global.Const.IMG_URL + data, ivHead);
                 break;
         }
     }
@@ -234,12 +264,14 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
     @Override
     public void onChangeAvatar() {
         toast("头像修改成功");
+        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.xlgcx.http.global.Const.IMG_URL + avatar, ivHead);
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.CHANGE_SUCCESS));
     }
 
     @Override
     public void onChangeNickname() {
         toast("昵称修改成功");
+        tvNick.setText(nickname);
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.CHANGE_SUCCESS));
     }
 }
