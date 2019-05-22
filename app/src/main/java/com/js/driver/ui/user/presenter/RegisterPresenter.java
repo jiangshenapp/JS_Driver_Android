@@ -44,9 +44,10 @@ public class RegisterPresenter extends RxPresenter<RegisterContract.View> implem
                     @Override
                     public void accept(BaseHttpResponse response) throws Exception {
                         mView.closeProgress();
-                        mView.toast(response.getMsg());
                         if (response.isSuccess()){
                             mView.onRegister();
+                        } else {
+                            mView.toast(response.getMsg());
                         }
                     }
                 }, new RxException<>(e -> {

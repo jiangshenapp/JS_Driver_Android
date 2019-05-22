@@ -2,10 +2,12 @@ package com.js.driver.api;
 
 import com.js.driver.model.bean.AuthInfo;
 import com.js.driver.model.bean.UserInfo;
+import com.js.driver.model.request.DriverVerifiedRequest;
 import com.xlgcx.http.BaseHttpResponse;
 import com.xlgcx.http.HttpResponse;
 
 import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -148,24 +150,11 @@ public interface UserApi {
 
     /**
      * 个人司机认证
-     * @param idImage
-     * @param idHandImage
-     * @param driverImage
-     * @param personName
-     * @param idCode
-     * @param address
-     * @param driverLevel
+     * @param data
      * @return
      */
-    @FormUrlEncoded
     @POST("app/subscriber/verify/driverVerified")
-    Observable<BaseHttpResponse> driverVerified(@Field("idImage") String idImage,
-                                                @Field("idHandImage") String idHandImage,
-                                                @Field("driverImage") String driverImage,
-                                                @Field("personName") String personName,
-                                                @Field("idCode") String idCode,
-                                                @Field("address") String address,
-                                                @Field("driverLevel") String driverLevel);
+    Observable<BaseHttpResponse> driverVerified(@Body DriverVerifiedRequest data);
 
 
     /**

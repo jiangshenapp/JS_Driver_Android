@@ -44,9 +44,10 @@ public class ForgetPwdPresenter extends RxPresenter<ForgetPwdContract.View> impl
                     @Override
                     public void accept(BaseHttpResponse response) throws Exception {
                         mView.closeProgress();
-                        mView.toast(response.getMsg());
                         if (response.isSuccess()){
                             mView.onForgetPwd();
+                        } else {
+                            mView.toast(response.getMsg());
                         }
                     }
                 }, new RxException<>(e -> {

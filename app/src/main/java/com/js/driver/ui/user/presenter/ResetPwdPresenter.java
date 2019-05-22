@@ -44,9 +44,10 @@ public class ResetPwdPresenter extends RxPresenter<ResetPwdContract.View> implem
                     @Override
                     public void accept(BaseHttpResponse response) throws Exception {
                         mView.closeProgress();
-                        mView.toast(response.getMsg());
                         if (response.isSuccess()){
                             mView.onResetPwd();
+                        } else {
+                            mView.toast(response.getMsg());
                         }
                     }
                 }, new RxException<>(e -> {

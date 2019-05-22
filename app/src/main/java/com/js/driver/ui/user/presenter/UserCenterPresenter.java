@@ -43,6 +43,8 @@ public class UserCenterPresenter extends RxPresenter<UserCenterContract.View>  i
                         mView.closeProgress();
                         if (response.isSuccess()){
                             mView.onChangeAvatar();
+                        } else {
+                            mView.toast(response.getMsg());
                         }
                     }
                 }, new RxException<>(e -> {
@@ -69,6 +71,8 @@ public class UserCenterPresenter extends RxPresenter<UserCenterContract.View>  i
                         mView.closeProgress();
                         if (response.isSuccess()){
                             mView.onChangeNickname();
+                        } else {
+                            mView.toast(response.getMsg());
                         }
                     }
                 }, new RxException<>(e -> {

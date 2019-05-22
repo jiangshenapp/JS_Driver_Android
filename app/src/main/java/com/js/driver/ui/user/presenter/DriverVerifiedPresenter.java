@@ -3,6 +3,7 @@ package com.js.driver.ui.user.presenter;
 import com.js.driver.api.UserApi;
 import com.js.driver.model.bean.AuthInfo;
 import com.js.driver.model.bean.UserInfo;
+import com.js.driver.model.request.DriverVerifiedRequest;
 import com.js.driver.rx.RxException;
 import com.js.driver.rx.RxResult;
 import com.js.driver.rx.RxSchedulers;
@@ -48,7 +49,7 @@ public class DriverVerifiedPresenter extends RxPresenter<DriverVerifiedContract.
     @Override
     public void submitDriverVerified(String idImage, String idHandImage, String driverImage, String personName, String idCode, String address, String driverLevel) {
         Disposable disposable = mApiFactory.getApi(UserApi.class)
-                .driverVerified(idImage, idHandImage, driverImage, personName, idCode, address, driverLevel)
+                .driverVerified(new DriverVerifiedRequest(idImage, idHandImage, driverImage, personName, idCode, address, driverLevel))
                 .compose(RxSchedulers.io_main())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
@@ -62,6 +63,8 @@ public class DriverVerifiedPresenter extends RxPresenter<DriverVerifiedContract.
                         mView.closeProgress();
                         if (response.isSuccess()){
                             mView.onSubmitDriverVerified();
+                        } else {
+                            mView.toast(response.getMsg());
                         }
                     }
                 }, new RxException<>(e -> {
