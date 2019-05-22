@@ -37,6 +37,8 @@ import com.js.driver.manager.UserManager;
 import com.js.driver.model.event.UserStatusChangeEvent;
 import com.js.driver.presenter.FilePresenter;
 import com.js.driver.presenter.contract.FileContract;
+import com.js.driver.ui.center.activity.AboutActivity;
+import com.js.driver.ui.center.activity.FeedBackActivity;
 import com.js.driver.ui.user.presenter.UserCenterPresenter;
 import com.js.driver.ui.user.presenter.contract.UserCenterContract;
 import com.xlgcx.frame.view.BaseActivity;
@@ -138,10 +140,12 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
             case R.id.center_campus_layout://园区地址
                 break;
             case R.id.center_feedback_layout://意见反馈
+                FeedBackActivity.action(this);
                 break;
             case R.id.center_version_layout://版本号
                 break;
             case R.id.center_about_layout://关于
+                AboutActivity.action(this);
                 break;
             case R.id.center_cache_layout://清除缓存
                 break;

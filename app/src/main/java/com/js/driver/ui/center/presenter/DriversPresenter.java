@@ -10,8 +10,6 @@ import javax.inject.Inject;
  */
 public class DriversPresenter extends RxPresenter<DriversContract.View> implements DriversContract.Presenter {
 
-
-
     @Inject
     public DriversPresenter(){
 
