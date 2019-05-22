@@ -17,9 +17,7 @@ import java.lang.reflect.Field;
 
 public class UIUtil {
 
-
     public static Toast toast;
-
 
     /**
      * 将dip或dp值转换为px值，保证尺寸大小不变

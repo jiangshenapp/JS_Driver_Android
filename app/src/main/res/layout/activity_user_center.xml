@@ -238,7 +238,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
-                    android:text="36MB"
+                    android:text="0MB"
                     android:textColor="@color/_000000"
                     android:textSize="14sp" />
 

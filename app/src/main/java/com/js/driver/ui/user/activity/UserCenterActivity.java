@@ -41,6 +41,8 @@ import com.js.driver.ui.center.activity.AboutActivity;
 import com.js.driver.ui.center.activity.FeedBackActivity;
 import com.js.driver.ui.user.presenter.UserCenterPresenter;
 import com.js.driver.ui.user.presenter.contract.UserCenterContract;
+import com.js.driver.util.DataCleanManager;
+import com.js.driver.widget.dialog.AppDialogFragment;
 import com.xlgcx.frame.view.BaseActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -89,7 +91,11 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
         CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.xlgcx.http.global.Const.IMG_URL + App.getInstance().avatar
                 , ivHead, mContext.getResources().getDrawable(R.mipmap.ic_center_shipper_head_land));
         tvNick.setText(App.getInstance().nickName);
+        try {
+            tvCache.setText(DataCleanManager.getTotalCacheSize(this));
+        } catch (Exception e) {
 
+        }
         initVersion();
     }
 
@@ -148,6 +154,7 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
                 AboutActivity.action(this);
                 break;
             case R.id.center_cache_layout://清除缓存
+                clearCache();
                 break;
             case R.id.logout://登出
                 UserManager.getUserManager().logout();
@@ -175,6 +182,24 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
             }
         });
         builder.show();
+    }
+
+    public void clearCache() {
+        AppDialogFragment appDialogFragment = AppDialogFragment.getInstance();
+        appDialogFragment.setTitle("温馨提示");
+        appDialogFragment.setMessage("确定清除"+tvCache.getText()+"缓存吗？");
+        appDialogFragment.setPositiveButton("确定", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataCleanManager.clearAllCache(App.getInstance());
+                try {
+                    tvCache.setText(DataCleanManager.getTotalCacheSize(App.getInstance()));
+                } catch (Exception e) {
+
+                }
+            }
+        });
+        appDialogFragment.show(getSupportFragmentManager(), "appDialog");
     }
 
     @Override
