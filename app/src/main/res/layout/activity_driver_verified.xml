@@ -241,7 +241,6 @@
 
             </LinearLayout>
 
-
         </LinearLayout>
 
 
@@ -249,7 +248,8 @@
             android:id="@+id/ll_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:layout_marginTop="10dp"
+            android:background="@color/_FFFFFF"
             android:orientation="vertical">
 
             <LinearLayout
@@ -263,7 +263,6 @@
                     android:id="@+id/cb_select"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -282,10 +281,7 @@
                     android:text="《用户协议》"
                     android:textColor="@color/_ECA73F"
                     android:textSize="12sp" />
-
-
             </LinearLayout>
-
 
             <TextView
                 android:id="@+id/auth_submit"

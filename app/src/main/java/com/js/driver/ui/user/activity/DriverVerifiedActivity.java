@@ -129,8 +129,7 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
     protected void init() {
         mFilePresenter.attachView(this);
         mAuthInfo = new AuthInfo();
-//        authState = App.getInstance().driverVerified;
-        authState = 3;
+        authState = App.getInstance().driverVerified;
         if (authState == 0) { //未认证
             tvAuthState.setVisibility(View.GONE);
         } else {
