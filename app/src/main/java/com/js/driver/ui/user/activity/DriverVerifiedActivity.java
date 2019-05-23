@@ -13,10 +13,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.app.TakePhotoImpl;
 import com.jph.takephoto.model.InvokeParam;
@@ -32,17 +38,22 @@ import com.js.driver.di.module.ActivityModule;
 import com.js.driver.global.Const;
 import com.js.driver.manager.CommonGlideImageLoader;
 import com.js.driver.model.bean.AuthInfo;
+import com.js.driver.model.bean.ShengBean;
 import com.js.driver.model.event.UserStatusChangeEvent;
 import com.js.driver.presenter.FilePresenter;
 import com.js.driver.presenter.contract.FileContract;
 import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.user.presenter.DriverVerifiedPresenter;
 import com.js.driver.ui.user.presenter.contract.DriverVerifiedContract;
+import com.js.driver.util.GetJsonDataUtil;
 import com.xlgcx.frame.view.BaseActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -99,6 +110,17 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
     private AuthInfo mAuthInfo;
     private int authState;
 
+    // 省
+    private List<ShengBean> options1Items = new ArrayList<ShengBean>();
+    // 市
+    private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
+    // 区
+    private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
+
+    // 驾驶证类型
+    private List<String> driverLicenseItems = new ArrayList<String>(Arrays.asList("A1","A2","A3","B1","B2","C1","C2","C3","C4","D","E","F","M","N","P"));
+
+
     public static void action(Context context) {
         context.startActivity(new Intent(context, DriverVerifiedActivity.class));
     }
@@ -108,7 +130,7 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
         mFilePresenter.attachView(this);
         mAuthInfo = new AuthInfo();
 //        authState = App.getInstance().driverVerified;
-        authState = 0;
+        authState = 3;
         if (authState == 0) { //未认证
             tvAuthState.setVisibility(View.GONE);
         } else {
@@ -194,10 +216,14 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
                 getPhoto(Const.AUTH_DRIVER_CARD);
                 break;
             case R.id.ll_address:
-                toast("选择地址");
+                // 解析数据
+                parseAddressData();
+                // 展示省市区选择器
+                showAddressPickerView();
                 break;
             case R.id.ll_driver_license:
-                toast("选择驾驶证类型");
+                // 展示驾驶证选择器
+                showDriverLicensePickerView();
                 break;
             case R.id.cb_select:
                 cbSelect.setChecked(cbSelect.isChecked());
@@ -212,11 +238,96 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
     }
 
     /**
+     * 解析省市区数据并组装成自己想要的list
+     */
+    private void parseAddressData() {
+        String jsonStr = new GetJsonDataUtil().getJson(this, "province.json");//获取assets目录下的json文件数据
+        // 数据解析
+        Gson gson = new Gson();
+        java.lang.reflect.Type type = new TypeToken<List<ShengBean>>() {
+        }.getType();
+        List<ShengBean> shengList = gson.fromJson(jsonStr, type);
+        // 把解析后的数据组装成想要的list
+        options1Items = shengList;
+        // 遍历省
+        for (int i = 0; i < shengList.size(); i++) {
+            // 存放城市
+            ArrayList<String> cityList = new ArrayList<>();
+            // 存放区
+            ArrayList<ArrayList<String>> province_AreaList = new ArrayList<>();
+            // 遍历市
+            for (int c = 0; c < shengList.get(i).city.size(); c++) {
+                // 拿到城市名称
+                String cityName = shengList.get(i).city.get(c).name;
+                cityList.add(cityName);
+
+                ArrayList<String> city_AreaList = new ArrayList<>();//该城市的所有地区列表
+                if (shengList.get(i).city.get(c).area == null || shengList.get(i).city.get(c).area.size() == 0) {
+                    city_AreaList.add("");
+                } else {
+                    city_AreaList.addAll(shengList.get(i).city.get(c).area);
+                }
+                province_AreaList.add(city_AreaList);
+            }
+            /**
+             * 添加城市数据
+             */
+            options2Items.add(cityList);
+            /**
+             * 添加地区数据
+             */
+            options3Items.add(province_AreaList);
+        }
+    }
+
+    /**
+     * 展示省市区地址选择器
+     */
+    private void showAddressPickerView() {// 弹出选择器
+
+        OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                //返回的分别是三个级别的选中位置
+                String tx = options1Items.get(options1).name +
+                        options2Items.get(options1).get(options2) +
+                        options3Items.get(options1).get(options2).get(options3);
+                etAddress.setText(tx);
+            }
+        }).setTitleText("城市选择")
+                .setDividerColor(Color.BLACK)
+                .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
+                .setContentTextSize(20)
+                .build();
+
+        /*pvOptions.setPicker(options1Items);//一级选择器
+        pvOptions.setPicker(options1Items, options2Items);//二级选择器*/
+        pvOptions.setPicker(options1Items, options2Items, options3Items);//三级选择器
+        pvOptions.show();
+    }
+
+    /**
+     * 展示驾驶证选择器
+     */
+    private void showDriverLicensePickerView() {
+        //条件选择器
+        OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3 ,View v) {
+                //返回的分别是三个级别的选中位置
+                String tx = driverLicenseItems.get(options1);
+                etDriverLicense.setText(tx);
+            }
+        }).build();
+        pvOptions.setPicker(driverLicenseItems);
+        pvOptions.show();
+    }
+
+    /**
      * 提交审核
      */
     public void submitAction() {
 
-        etAddress.setText("1");
         etDriverLicense.setText("C1");
 
         String name = etName.getText().toString().trim();
