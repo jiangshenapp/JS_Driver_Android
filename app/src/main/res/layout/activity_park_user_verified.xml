@@ -45,7 +45,7 @@
                 <EditText
                     android:id="@+id/et_name"
                     android:layout_width="wrap_content"
-                    android:layout_height="44dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@null"
                     android:hint="请输入代理点名称/个人姓名"
@@ -72,13 +72,14 @@
                 <EditText
                     android:id="@+id/et_company_type"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="12dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:editable="false"
                     android:hint="服务中心/车代点/网点"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:singleLine="true"
                     android:textAlignment="viewEnd"
                     android:textColor="@color/_B4B4B4"
@@ -99,22 +100,46 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="营业执照" />
 
-                <EditText
-                    android:id="@+id/et_business_license"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="44dp"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:hint=""
-                    android:singleLine="true"
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/_B4B4B4"
-                    android:textSize="14sp" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cb_business_license_have"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="有"
+                        android:textColor="@color/_B4B4B4"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/cb_business_license_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:checked="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="无"
+                        android:textColor="@color/_ECA73F"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -158,12 +183,13 @@
                 <EditText
                     android:id="@+id/et_address"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="12dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:editable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:singleLine="true"
                     android:textAlignment="viewEnd"
                     android:textColor="@color/_B4B4B4"

@@ -177,7 +177,9 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
         etName.setFocusable(false);
         etIdcard.setFocusable(false);
         llAddress.setClickable(false);
+        etAddress.setEnabled(false);
         llDriverLicense.setClickable(false);
+        etDriverLicense.setEnabled(false);
         llBottom.setVisibility(View.GONE);
         ivArrowAddress.setVisibility(View.GONE);
         ivArrowDriverLicense.setVisibility(View.GONE);
@@ -202,7 +204,7 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
         mTitle.setText("司机身份认证");
     }
 
-    @OnClick({R.id.auth_card, R.id.auth_body, R.id.auth_driver_card, R.id.auth_submit, R.id.ll_address, R.id.ll_driver_license, R.id.cb_select, R.id.tv_protocal})
+    @OnClick({R.id.auth_card, R.id.auth_body, R.id.auth_driver_card, R.id.auth_submit, R.id.ll_address, R.id.et_address, R.id.ll_driver_license, R.id.et_driver_license, R.id.cb_select, R.id.tv_protocal})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.auth_card:
@@ -215,12 +217,14 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
                 getPhoto(Const.AUTH_DRIVER_CARD);
                 break;
             case R.id.ll_address:
+            case R.id.et_address:
                 // 解析数据
                 parseAddressData();
                 // 展示省市区选择器
                 showAddressPickerView();
                 break;
             case R.id.ll_driver_license:
+            case R.id.et_driver_license:
                 // 展示驾驶证选择器
                 showDriverLicensePickerView();
                 break;
@@ -327,13 +331,10 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
      */
     public void submitAction() {
 
-        etDriverLicense.setText("C1");
-
         String name = etName.getText().toString().trim();
         String idcard = etIdcard.getText().toString().trim();
         String address = etAddress.getText().toString().trim();
         String driverLicense = etDriverLicense.getText().toString().trim();
-
 
         if (TextUtils.isEmpty(mAuthInfo.getIdImage())) {
             toast("请上传司机本人真实身份证");

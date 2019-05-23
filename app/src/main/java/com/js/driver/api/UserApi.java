@@ -3,6 +3,7 @@ package com.js.driver.api;
 import com.js.driver.model.bean.AuthInfo;
 import com.js.driver.model.bean.UserInfo;
 import com.js.driver.model.request.DriverVerifiedRequest;
+import com.js.driver.model.request.ParkVerifiedRequest;
 import com.xlgcx.http.BaseHttpResponse;
 import com.xlgcx.http.HttpResponse;
 
@@ -163,5 +164,22 @@ public interface UserApi {
      */
     @POST("app/subscriber/verify/getDriverVerifiedInfo")
     Observable<HttpResponse<AuthInfo>> getDriverVerifiedInfo();
+
+
+    /**
+     * 园区成员认证
+     * @param data
+     * @return
+     */
+    @POST("app/subscriber/verify/parkVerified")
+    Observable<BaseHttpResponse> parkVerified(@Body ParkVerifiedRequest data);
+
+
+    /**
+     * 获取园区成员认证信息
+     * @return
+     */
+    @POST("app/subscriber/verify/getParkVerifiedInfo")
+    Observable<HttpResponse<AuthInfo>> getParkVerifiedInfo();
 
 }

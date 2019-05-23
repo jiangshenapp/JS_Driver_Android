@@ -21,6 +21,7 @@ public class AuthInfo {
      * auditRemark : 拒绝
      */
 
+    //司机认证
     private String personName;
     private String idCode;
     private String idImage;
@@ -30,6 +31,13 @@ public class AuthInfo {
     private String driverImage;
     private String driverLevel;
     private String auditRemark;
+
+    //园区认证
+    private String registrationNumber;
+    private String businessLicenceImage;
+    private String companyName;
+    private String companyType;
+    private String detailAddress;
 
     public String getPersonName() {
         return personName;
@@ -101,5 +109,45 @@ public class AuthInfo {
 
     public void setAuditRemark(String auditRemark) {
         this.auditRemark = auditRemark;
+    }
+
+    public String getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
+    }
+
+    public String getBusinessLicenceImage() {
+        return businessLicenceImage;
+    }
+
+    public void setBusinessLicenceImage(String businessLicenceImage) {
+        this.businessLicenceImage = businessLicenceImage;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getCompanyType() {
+        return companyType;
+    }
+
+    public void setCompanyType(String companyType) {
+        this.companyType = companyType;
+    }
+
+    public String getDetailAddress() {
+        return detailAddress;
+    }
+
+    public void setDetailAddress(String detailAddress) {
+        this.detailAddress = detailAddress;
     }
 }
