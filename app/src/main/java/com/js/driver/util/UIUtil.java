@@ -1,6 +1,8 @@
 package com.js.driver.util;
 
+import android.content.res.Resources;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -36,5 +38,20 @@ public class UIUtil {
             }
             toast.show();
         }
+    }
+
+    /**
+     * 屏幕宽度（像素）
+     *
+     * @return
+     */
+    public static int getScreenWidth() {
+        DisplayMetrics metric = Resources.getSystem().getDisplayMetrics();
+        return metric.widthPixels;
+    }
+
+    public static int getScreenHeight() {
+        DisplayMetrics metric = Resources.getSystem().getDisplayMetrics();
+        return metric.heightPixels;
     }
 }

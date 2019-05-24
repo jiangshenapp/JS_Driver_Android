@@ -1,9 +1,7 @@
 package com.js.driver;
 
-import android.content.SharedPreferences;
-import android.text.TextUtils;
-
 import com.facebook.stetho.Stetho;
+import com.google.gson.Gson;
 import com.js.driver.di.componet.AppComponent;
 import com.js.driver.di.componet.DaggerAppComponent;
 import com.js.driver.di.module.AppModule;
@@ -20,6 +18,7 @@ public class App extends BaseApplication {
     private AppComponent mAppComponent;
     private static App mApp;
     public String token;
+    public Gson mGson = new Gson();
     public String avatar;
     public String mobile;
     public String nickName;
@@ -107,4 +106,9 @@ public class App extends BaseApplication {
     public static App getInstance() {
         return mApp;
     }
+
+    public String gsonFormat(Object clazz) {
+        return mGson.toJson(clazz);
+    }
+
 }

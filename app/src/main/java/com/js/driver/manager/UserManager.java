@@ -35,7 +35,6 @@ public class UserManager {
         return instance;
     }
 
-
     /**
      * 判断是否登录
      * @param isJumpLogin 是否跳转登录页面
