@@ -164,7 +164,7 @@ public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPrese
         etAddress.setText(authInfo.getAddress());
         etDetailAddress.setText(authInfo.getDetailAddress());
 
-        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.xlgcx.http.global.Const.IMG_URL + authInfo.getBusinessLicenceImage()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + authInfo.getBusinessLicenceImage()
                 , authBusinessLicense, mContext.getResources().getDrawable(R.mipmap.img_authentication_id));
     }
 

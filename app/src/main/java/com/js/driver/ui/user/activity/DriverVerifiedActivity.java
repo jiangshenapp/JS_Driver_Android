@@ -151,11 +151,11 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
 
         mAuthInfo = authInfo;
 
-        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.xlgcx.http.global.Const.IMG_URL + authInfo.getIdImage()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + authInfo.getIdImage()
                 , mAuthCard, mContext.getResources().getDrawable(R.mipmap.img_authentication_id));
-        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.xlgcx.http.global.Const.IMG_URL + authInfo.getIdHandImage()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + authInfo.getIdHandImage()
                 , mAuthBody, mContext.getResources().getDrawable(R.mipmap.img_authentication_body));
-        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.xlgcx.http.global.Const.IMG_URL + authInfo.getDriverImage()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + authInfo.getDriverImage()
                 , mAuthDriverCard, mContext.getResources().getDrawable(R.mipmap.img_authentication_driver));
         etName.setText(authInfo.getPersonName());
         etIdcard.setText(authInfo.getIdCode());
