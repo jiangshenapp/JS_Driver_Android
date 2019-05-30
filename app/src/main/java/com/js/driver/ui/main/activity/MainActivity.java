@@ -8,6 +8,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.js.driver.App;
 import com.js.driver.R;
@@ -21,17 +26,11 @@ import com.js.driver.ui.main.fragment.MineFragment;
 import com.js.driver.ui.main.fragment.ServiceFragment;
 import com.js.driver.ui.main.presenter.MainPresenter;
 import com.js.driver.ui.main.presenter.contract.MainContract;
-import com.js.driver.ui.user.activity.LoginActivity;
-import com.js.driver.util.UIUtil;
 import com.xlgcx.frame.view.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View, BottomNavigationView.OnNavigationItemSelectedListener {
@@ -113,7 +112,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
             @Override
             public void onPageSelected(int position) {
-                mNavigation.getMenu().getItem(position).setCheckable(true);
+                mNavigation.getMenu().getItem(position).setChecked(true);
             }
 
             @Override

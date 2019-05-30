@@ -33,44 +33,37 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
     implementation 'com.google.android.material:material:1.0.0-beta01'
     implementation 'androidx.recyclerview:recyclerview:1.0.0-rc01'
     implementation 'com.android.support:appcompat-v7:28.0.0'
     testImplementation 'junit:junit:4.12'
-
     implementation project(path: ':lib.frame')
     implementation project(path: ':lib.http')
-
     implementation 'com.hjq:xxpermissions:5.5'
     implementation 'com.youth.banner:banner:1.4.10'
-
     //di
     implementation rootProject.ext.dependencies.dagger
     annotationProcessor rootProject.ext.dependencies.dagger_annotation
-
     implementation rootProject.ext.dependencies.butterknife
     annotationProcessor rootProject.ext.dependencies.butterknife_annotation
     implementation rootProject.ext.dependencies.constraintlayout
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-4'
-
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
-
     implementation 'com.jph.takephoto:takephoto_library:4.0.3'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
-
     implementation 'com.github.anzaizai:EasySwipeMenuLayout:1.1.2'
-
     //ARouter
     implementation 'com.alibaba:arouter-api:1.4.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
     implementation 'com.meituan.android.walle:library:1.1.6'
-
     //ARouter
     implementation 'com.alibaba:arouter-api:1.4.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
-
     implementation 'com.contrarywind:Android-PickerView:4.1.8'
+    implementation files('libs/BaiduLBS_Android.jar')
+
+    implementation 'com.hjq:xxpermissions:5.5'
 }

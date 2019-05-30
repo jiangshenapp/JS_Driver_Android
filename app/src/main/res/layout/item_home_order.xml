@@ -42,6 +42,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/item_order_create_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
@@ -75,6 +76,7 @@
                     android:src="@mipmap/ic_waybill_start" />
 
                 <TextView
+                    android:id="@+id/item_send_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -104,6 +106,7 @@
                     android:src="@mipmap/ic_waybill_end" />
 
                 <TextView
+                    android:id="@+id/item_receive_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -124,6 +127,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/item_loading_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="装货时间：今天全天"
@@ -131,6 +135,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/item_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -142,6 +147,7 @@
 
 
             <TextView
+                android:id="@+id/item_good_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -155,6 +161,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/item_order_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"

@@ -15,6 +15,7 @@
         >
 
         <TextView
+            android:id="@+id/item_waybill_order_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="订单编号：HZ-291820398484-0001"
@@ -27,6 +28,7 @@
 
 
         <TextView
+            android:id="@+id/item_waybill_order_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="待接单"
@@ -72,6 +74,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/item_waybill_send_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="宁波市 海曙区 白云街道14号"
@@ -97,6 +100,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/item_waybill_arrive_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="宁波市 海曙区 白云街道14号"
@@ -107,6 +111,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/item_waybill_car_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="普货 高栏货车4.2米/1.3方/1.0吨"
@@ -134,6 +139,7 @@
             />
 
         <TextView
+            android:id="@+id/item_waybill_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="距离您35km"

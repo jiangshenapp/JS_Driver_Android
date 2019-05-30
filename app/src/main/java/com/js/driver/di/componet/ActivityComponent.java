@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.js.driver.di.ActivityScope;
 import com.js.driver.di.module.ActivityModule;
+import com.js.driver.ui.SplashActivity;
 import com.js.driver.ui.center.activity.AddCarActivity;
 import com.js.driver.ui.center.activity.CarsActivity;
 import com.js.driver.ui.center.activity.DriversActivity;
@@ -33,6 +34,8 @@ public interface ActivityComponent {
 
     Activity getActivity();
 
+
+    void inject(SplashActivity splashActivity);
 
     void inject(MainActivity mainActivity);
 

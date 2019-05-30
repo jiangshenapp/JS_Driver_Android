@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout 
+<com.scwang.smartrefresh.layout.SmartRefreshLayout
+    android:id="@+id/refresh"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
-
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent">
 
 
             <LinearLayout
@@ -24,6 +24,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/detail_avatar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -37,6 +38,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/detail_send_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="张女士"
@@ -44,6 +46,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/detail_send_introduce"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
@@ -55,12 +58,14 @@
 
 
                 <ImageView
+                    android:id="@+id/detail_send_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:src="@mipmap/ic_home_phone" />
 
                 <ImageView
+                    android:id="@+id/detail_send_wechat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -71,6 +76,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/detail_order_number"
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
                 android:layout_marginTop="5dp"
@@ -110,6 +116,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/detail_send_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="行政服务中心"
@@ -118,6 +125,7 @@
 
 
                         <TextView
+                            android:id="@+id/detail_send_city"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="北京市 朝阳区"
@@ -128,6 +136,7 @@
 
 
                     <TextView
+                        android:id="@+id/detail_send_distance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -136,6 +145,7 @@
                         android:textSize="12sp" />
 
                     <ImageView
+                        android:id="@+id/detail_send_navigate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -174,6 +184,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/detail_arrive_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="行政服务中心"
@@ -182,6 +193,7 @@
 
 
                         <TextView
+                            android:id="@+id/detail_arrive_city"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="北京市 朝阳区"
@@ -192,6 +204,7 @@
 
 
                     <TextView
+                        android:id="@+id/detail_arrive_distance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -200,6 +213,7 @@
                         android:textSize="12sp" />
 
                     <ImageView
+                        android:id="@+id/detail_arrive_navigate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -227,6 +241,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
@@ -235,6 +250,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/detail_loading_time"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="12dp"
@@ -262,6 +278,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/detail_car_info"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="12dp"
@@ -295,6 +312,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/detail_goods_type"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="8dp"
@@ -329,6 +347,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/detail_car_use_type"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="12dp"
@@ -364,6 +383,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/detail_pay_type"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="8dp"
@@ -398,6 +418,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/detail_pay_money"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="12dp"
@@ -426,6 +447,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/detail_pay_method"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="12dp"
@@ -450,6 +472,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/detail_order_remark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -480,6 +503,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/detail_arrive_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center_vertical"
@@ -510,6 +534,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/detail_arrive_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center_vertical"
@@ -538,143 +563,138 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingStart="12dp"
-                android:paddingEnd="12dp"
                 android:paddingTop="5dp"
-                >
-                
+                android:paddingEnd="12dp">
+
                 <LinearLayout
+                    android:id="@+id/detail_img1_layout"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
-                    android:orientation="vertical"
                     android:layout_weight="1"
                     android:background="@color/white"
                     android:gravity="center_vertical"
-                    >
+                    android:orientation="vertical">
+
                     <ImageView
+                        android:id="@+id/detail_img1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_waybill_upload_photo"
                         android:layout_gravity="center_horizontal"
-                        />
+                        android:src="@mipmap/ic_waybill_upload_photo" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:text="上传照片"
                         android:textColor="@color/_000000"
-                        android:textSize="12sp"
-                        android:layout_marginTop="10dp"
-                        />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/detail_img2_layout"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
                     android:layout_marginStart="26dp"
                     android:layout_marginEnd="26dp"
-                    >
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
                     <ImageView
+                        android:id="@+id/detail_img2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_waybill_upload_photo"
                         android:layout_gravity="center_horizontal"
-                        />
+                        android:src="@mipmap/ic_waybill_upload_photo" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:text="上传照片"
                         android:textColor="@color/_000000"
-                        android:textSize="12sp"
-                        android:layout_marginTop="10dp"
-                        />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/detail_img3_layout"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
-                    android:orientation="vertical"
                     android:layout_weight="1"
                     android:background="@color/white"
                     android:gravity="center_vertical"
-                    >
+                    android:orientation="vertical">
+
                     <ImageView
+                        android:id="@+id/detail_img3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_waybill_upload_photo"
                         android:layout_gravity="center_horizontal"
-                        />
+                        android:src="@mipmap/ic_waybill_upload_photo" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:text="上传照片"
                         android:textColor="@color/_000000"
-                        android:textSize="12sp"
-                        android:layout_marginTop="10dp"
-                        />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
-                
-                
-                
+
+
             </LinearLayout>
 
         </LinearLayout>
 
-    </ScrollView>
 
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="gone"
-        >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:text="拒绝接单"
-            android:textColor="@color/_000000"
-            android:textSize="14sp"
-            android:background="@color/white"
-            android:gravity="center"
-            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/detail_order_navigate"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="拒绝接单"
+                android:textColor="@color/_000000"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/detail_order_positive"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@color/_ECA73F"
+                android:gravity="center"
+                android:text="立即接单"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:text="立即接单"
-            android:textColor="@color/white"
-            android:textSize="14sp"
+            android:id="@+id/detail_order_finish"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:background="@color/_ECA73F"
             android:gravity="center"
-            />
-    </LinearLayout>
-
-   
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="我已送达"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:gravity="center"
-        android:background="@color/_ECA73F"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
+            android:text="我已送达"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

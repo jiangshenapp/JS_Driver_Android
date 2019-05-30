@@ -1,5 +1,6 @@
 package com.js.driver;
 
+import com.baidu.location.BDLocation;
 import com.facebook.stetho.Stetho;
 import com.google.gson.Gson;
 import com.js.driver.di.componet.AppComponent;
@@ -26,6 +27,7 @@ public class App extends BaseApplication {
     public int parkVerified;
     public int companyConsignorVerified;
     public int personConsignorVerified;
+    public BDLocation mLocation;
 
     @Override
     public void onCreate() {
