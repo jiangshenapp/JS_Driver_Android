@@ -6,8 +6,11 @@ import com.google.gson.Gson;
 import com.js.driver.di.componet.AppComponent;
 import com.js.driver.di.componet.DaggerAppComponent;
 import com.js.driver.di.module.AppModule;
+import com.js.driver.global.Const;
 import com.js.driver.manager.SpManager;
 import com.js.driver.model.bean.UserInfo;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.xlgcx.frame.BaseApplication;
 import com.xlgcx.http.HttpApp;
 
@@ -36,6 +39,12 @@ public class App extends BaseApplication {
         Stetho.initializeWithDefaults(this);
         initDaggerComponent();
         getUserInfo();
+        initWx();
+    }
+
+    private void initWx() {
+//        final IWXAPI msgApi = WXAPIFactory.createWXAPI(this, null);
+//        msgApi.registerApp(Const.APP_ID);
     }
 
     /**
@@ -112,5 +121,6 @@ public class App extends BaseApplication {
     public String gsonFormat(Object clazz) {
         return mGson.toJson(clazz);
     }
+
 
 }

@@ -3,6 +3,7 @@ package com.js.driver.ui.main.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,7 @@ import com.js.driver.ui.main.fragment.MineFragment;
 import com.js.driver.ui.main.fragment.ServiceFragment;
 import com.js.driver.ui.main.presenter.MainPresenter;
 import com.js.driver.ui.main.presenter.contract.MainContract;
+import com.js.driver.ui.user.activity.LoginActivity;
 import com.xlgcx.frame.view.BaseActivity;
 
 import java.util.ArrayList;
@@ -168,7 +170,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             case R.id.navigation_mine:
                 mViewpager.setCurrentItem(4);
                 mToolbar.setVisibility(View.GONE);
-                UserManager.getUserManager().isLogin(true, true);
+                if (TextUtils.isEmpty(App.getInstance().token)){
+                    LoginActivity.action(mContext,true);
+                }
+//                UserManager.getUserManager().isLogin(true, true);
                 break;
         }
         return true;

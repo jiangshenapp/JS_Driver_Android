@@ -24,10 +24,32 @@ android {
         }
 
     }
+    signingConfigs {
+        releaseConfigs {
+            storeFile file("key")
+            keyAlias "key"
+            storePassword "android"
+            keyPassword "android"
+        }
+        debugConfigs {
+            storeFile file("key")
+            keyAlias "key"
+            storePassword "android"
+            keyPassword "android"
+        }
+    }
+
+
     buildTypes {
         release {
+            minifyEnabled true
+            signingConfig signingConfigs.releaseConfigs
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.debugConfigs
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
@@ -66,4 +88,6 @@ dependencies {
     implementation files('libs/BaiduLBS_Android.jar')
 
     implementation 'com.hjq:xxpermissions:5.5'
+    implementation (name: 'alipaySdk-15.6.2-20190416165036', ext: 'aar')
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
 }
