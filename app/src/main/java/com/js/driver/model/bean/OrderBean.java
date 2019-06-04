@@ -7,97 +7,243 @@ public class OrderBean {
 
 
     /**
-     * carLength : string
-     * carModel : string
-     * createBy : 0
-     * createTime : 2019-05-30T03:31:33.939Z
-     * driverId : 0
-     * fee : 0
-     * feeType : 0
-     * finishTime : 2019-05-30T03:31:33.939Z
-     * goodsType : string
-     * goodsVolume : 0
-     * goodsWeight : 0
-     * id : 0
-     * image1 : string
-     * image2 : string
-     * jdSubscriberId : string
-     * loadingTime : 2019-05-30T03:31:33.939Z
+     * id : 4
+     * sendAddressCode : 340020
+     * sendAddress : 发货地址
+     * sendPosition : 121.311,121.215
+     * sendMobile : 17898989999
+     * sendName : 席涛
+     * feeType : null
+     * fee : null
+     * payType : null
+     * payWay : null
+     * goodsWeight : null
+     * goodsVolume : null
+     * goodsType : null
+     * loadingTime : null
+     * useCarType : null
+     * image1 : null
+     * image2 : null
+     * remark : null
+     * createBy : 1
+     * createTime : 2019-05-21 21:49:13
+     * receiveName : null
+     * receiveAddressCode : 320010
+     * receiveAddress : 收货地址
+     * receiveMobile : 18606581266
+     * receivePosition : 121.311,121.215
+     * carLength : 1
+     * carModel : 2
+     * state : 1
+     * jdSubscriberId : null
+     * driverId : 1
+     * payTime : null
+     * transferTime : null
+     * finishTime : null
      * matchState : 0
      * matchSubscriberId : 0
-     * orderNo : string
-     * payTime : 2019-05-30T03:31:33.939Z
-     * payType : 0
-     * payWay : 0
-     * receiveAddress : string
-     * receiveAddressCode : string
-     * receiveMobile : string
-     * receiveName : string
-     * receivePosition : string
-     * remark : string
-     * sendAddress : string
-     * sendAddressCode : string
-     * sendMobile : string
-     * sendName : string
-     * sendPosition : string
-     * state : string
-     * stateName : string
-     * transferTime : 2019-05-30T03:31:33.939Z
-     * useCarType : string
+     * orderNo : D676679
+     * commentImage1 : null
+     * commentImage2 : null
+     * commentImage3 : null
+     * stateNameDriver :
+     * stateNameConsignor : 发布中
+     * useCarTypeName :
+     * carLengthName : 1米
+     * carModelName : 板车
+     * receiveAddressCodeName :
+     * sendAddressCodeName :
      */
 
-    private String carLength;
-    private String carModel;
+    private int id;
+    private String sendAddressCode;
+    private String sendAddress;
+    private String sendPosition;
+    private String sendMobile;
+    private String sendName;
+    private Object feeType;
+    private Object fee;
+    private Object payType;
+    private Object payWay;
+    private Object goodsWeight;
+    private Object goodsVolume;
+    private Object goodsType;
+    private Object loadingTime;
+    private Object useCarType;
+    private Object image1;
+    private Object image2;
+    private Object remark;
     private int createBy;
     private String createTime;
+    private Object receiveName;
+    private String receiveAddressCode;
+    private String receiveAddress;
+    private String receiveMobile;
+    private String receivePosition;
+    private String carLength;
+    private String carModel;
+    private String state;
+    private Object jdSubscriberId;
     private int driverId;
-    private double fee;
-    private int feeType;
-    private String finishTime;
-    private String goodsType;
-    private int goodsVolume;
-    private int goodsWeight;
-    private long id;
-    private String image1;
-    private String image2;
-    private String jdSubscriberId;
-    private String loadingTime;
+    private Object payTime;
+    private Object transferTime;
+    private Object finishTime;
     private int matchState;
     private int matchSubscriberId;
     private String orderNo;
-    private String payTime;
-    private int payType;
-    private int payWay;
-    private String receiveAddress;
-    private String receiveAddressCode;
-    private String receiveMobile;
-    private String receiveName;
-    private String receivePosition;
-    private String remark;
-    private String sendAddress;
-    private String sendAddressCode;
-    private String sendMobile;
-    private String sendName;
-    private String sendPosition;
-    private String state;
-    private String stateName;
-    private String transferTime;
-    private String useCarType;
+    private Object commentImage1;
+    private Object commentImage2;
+    private Object commentImage3;
+    private String stateNameDriver;
+    private String stateNameConsignor;
+    private String useCarTypeName;
+    private String carLengthName;
+    private String carModelName;
+    private String receiveAddressCodeName;
+    private String sendAddressCodeName;
 
-    public String getCarLength() {
-        return carLength;
+    public int getId() {
+        return id;
     }
 
-    public void setCarLength(String carLength) {
-        this.carLength = carLength;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getCarModel() {
-        return carModel;
+    public String getSendAddressCode() {
+        return sendAddressCode;
     }
 
-    public void setCarModel(String carModel) {
-        this.carModel = carModel;
+    public void setSendAddressCode(String sendAddressCode) {
+        this.sendAddressCode = sendAddressCode;
+    }
+
+    public String getSendAddress() {
+        return sendAddress;
+    }
+
+    public void setSendAddress(String sendAddress) {
+        this.sendAddress = sendAddress;
+    }
+
+    public String getSendPosition() {
+        return sendPosition;
+    }
+
+    public void setSendPosition(String sendPosition) {
+        this.sendPosition = sendPosition;
+    }
+
+    public String getSendMobile() {
+        return sendMobile;
+    }
+
+    public void setSendMobile(String sendMobile) {
+        this.sendMobile = sendMobile;
+    }
+
+    public String getSendName() {
+        return sendName;
+    }
+
+    public void setSendName(String sendName) {
+        this.sendName = sendName;
+    }
+
+    public Object getFeeType() {
+        return feeType;
+    }
+
+    public void setFeeType(Object feeType) {
+        this.feeType = feeType;
+    }
+
+    public Object getFee() {
+        return fee;
+    }
+
+    public void setFee(Object fee) {
+        this.fee = fee;
+    }
+
+    public Object getPayType() {
+        return payType;
+    }
+
+    public void setPayType(Object payType) {
+        this.payType = payType;
+    }
+
+    public Object getPayWay() {
+        return payWay;
+    }
+
+    public void setPayWay(Object payWay) {
+        this.payWay = payWay;
+    }
+
+    public Object getGoodsWeight() {
+        return goodsWeight;
+    }
+
+    public void setGoodsWeight(Object goodsWeight) {
+        this.goodsWeight = goodsWeight;
+    }
+
+    public Object getGoodsVolume() {
+        return goodsVolume;
+    }
+
+    public void setGoodsVolume(Object goodsVolume) {
+        this.goodsVolume = goodsVolume;
+    }
+
+    public Object getGoodsType() {
+        return goodsType;
+    }
+
+    public void setGoodsType(Object goodsType) {
+        this.goodsType = goodsType;
+    }
+
+    public Object getLoadingTime() {
+        return loadingTime;
+    }
+
+    public void setLoadingTime(Object loadingTime) {
+        this.loadingTime = loadingTime;
+    }
+
+    public Object getUseCarType() {
+        return useCarType;
+    }
+
+    public void setUseCarType(Object useCarType) {
+        this.useCarType = useCarType;
+    }
+
+    public Object getImage1() {
+        return image1;
+    }
+
+    public void setImage1(Object image1) {
+        this.image1 = image1;
+    }
+
+    public Object getImage2() {
+        return image2;
+    }
+
+    public void setImage2(Object image2) {
+        this.image2 = image2;
+    }
+
+    public Object getRemark() {
+        return remark;
+    }
+
+    public void setRemark(Object remark) {
+        this.remark = remark;
     }
 
     public int getCreateBy() {
@@ -116,6 +262,78 @@ public class OrderBean {
         this.createTime = createTime;
     }
 
+    public Object getReceiveName() {
+        return receiveName;
+    }
+
+    public void setReceiveName(Object receiveName) {
+        this.receiveName = receiveName;
+    }
+
+    public String getReceiveAddressCode() {
+        return receiveAddressCode;
+    }
+
+    public void setReceiveAddressCode(String receiveAddressCode) {
+        this.receiveAddressCode = receiveAddressCode;
+    }
+
+    public String getReceiveAddress() {
+        return receiveAddress;
+    }
+
+    public void setReceiveAddress(String receiveAddress) {
+        this.receiveAddress = receiveAddress;
+    }
+
+    public String getReceiveMobile() {
+        return receiveMobile;
+    }
+
+    public void setReceiveMobile(String receiveMobile) {
+        this.receiveMobile = receiveMobile;
+    }
+
+    public String getReceivePosition() {
+        return receivePosition;
+    }
+
+    public void setReceivePosition(String receivePosition) {
+        this.receivePosition = receivePosition;
+    }
+
+    public String getCarLength() {
+        return carLength;
+    }
+
+    public void setCarLength(String carLength) {
+        this.carLength = carLength;
+    }
+
+    public String getCarModel() {
+        return carModel;
+    }
+
+    public void setCarModel(String carModel) {
+        this.carModel = carModel;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public Object getJdSubscriberId() {
+        return jdSubscriberId;
+    }
+
+    public void setJdSubscriberId(Object jdSubscriberId) {
+        this.jdSubscriberId = jdSubscriberId;
+    }
+
     public int getDriverId() {
         return driverId;
     }
@@ -124,92 +342,28 @@ public class OrderBean {
         this.driverId = driverId;
     }
 
-    public double getFee() {
-        return fee;
+    public Object getPayTime() {
+        return payTime;
     }
 
-    public void setFee(double fee) {
-        this.fee = fee;
+    public void setPayTime(Object payTime) {
+        this.payTime = payTime;
     }
 
-    public int getFeeType() {
-        return feeType;
+    public Object getTransferTime() {
+        return transferTime;
     }
 
-    public void setFeeType(int feeType) {
-        this.feeType = feeType;
+    public void setTransferTime(Object transferTime) {
+        this.transferTime = transferTime;
     }
 
-    public String getFinishTime() {
+    public Object getFinishTime() {
         return finishTime;
     }
 
-    public void setFinishTime(String finishTime) {
+    public void setFinishTime(Object finishTime) {
         this.finishTime = finishTime;
-    }
-
-    public String getGoodsType() {
-        return goodsType;
-    }
-
-    public void setGoodsType(String goodsType) {
-        this.goodsType = goodsType;
-    }
-
-    public int getGoodsVolume() {
-        return goodsVolume;
-    }
-
-    public void setGoodsVolume(int goodsVolume) {
-        this.goodsVolume = goodsVolume;
-    }
-
-    public int getGoodsWeight() {
-        return goodsWeight;
-    }
-
-    public void setGoodsWeight(int goodsWeight) {
-        this.goodsWeight = goodsWeight;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getImage1() {
-        return image1;
-    }
-
-    public void setImage1(String image1) {
-        this.image1 = image1;
-    }
-
-    public String getImage2() {
-        return image2;
-    }
-
-    public void setImage2(String image2) {
-        this.image2 = image2;
-    }
-
-    public String getJdSubscriberId() {
-        return jdSubscriberId;
-    }
-
-    public void setJdSubscriberId(String jdSubscriberId) {
-        this.jdSubscriberId = jdSubscriberId;
-    }
-
-    public String getLoadingTime() {
-        return loadingTime;
-    }
-
-    public void setLoadingTime(String loadingTime) {
-        this.loadingTime = loadingTime;
     }
 
     public int getMatchState() {
@@ -236,147 +390,83 @@ public class OrderBean {
         this.orderNo = orderNo;
     }
 
-    public String getPayTime() {
-        return payTime;
+    public Object getCommentImage1() {
+        return commentImage1;
     }
 
-    public void setPayTime(String payTime) {
-        this.payTime = payTime;
+    public void setCommentImage1(Object commentImage1) {
+        this.commentImage1 = commentImage1;
     }
 
-    public int getPayType() {
-        return payType;
+    public Object getCommentImage2() {
+        return commentImage2;
     }
 
-    public void setPayType(int payType) {
-        this.payType = payType;
+    public void setCommentImage2(Object commentImage2) {
+        this.commentImage2 = commentImage2;
     }
 
-    public int getPayWay() {
-        return payWay;
+    public Object getCommentImage3() {
+        return commentImage3;
     }
 
-    public void setPayWay(int payWay) {
-        this.payWay = payWay;
+    public void setCommentImage3(Object commentImage3) {
+        this.commentImage3 = commentImage3;
     }
 
-    public String getReceiveAddress() {
-        return receiveAddress;
+    public String getStateNameDriver() {
+        return stateNameDriver;
     }
 
-    public void setReceiveAddress(String receiveAddress) {
-        this.receiveAddress = receiveAddress;
+    public void setStateNameDriver(String stateNameDriver) {
+        this.stateNameDriver = stateNameDriver;
     }
 
-    public String getReceiveAddressCode() {
-        return receiveAddressCode;
+    public String getStateNameConsignor() {
+        return stateNameConsignor;
     }
 
-    public void setReceiveAddressCode(String receiveAddressCode) {
-        this.receiveAddressCode = receiveAddressCode;
+    public void setStateNameConsignor(String stateNameConsignor) {
+        this.stateNameConsignor = stateNameConsignor;
     }
 
-    public String getReceiveMobile() {
-        return receiveMobile;
+    public String getUseCarTypeName() {
+        return useCarTypeName;
     }
 
-    public void setReceiveMobile(String receiveMobile) {
-        this.receiveMobile = receiveMobile;
+    public void setUseCarTypeName(String useCarTypeName) {
+        this.useCarTypeName = useCarTypeName;
     }
 
-    public String getReceiveName() {
-        return receiveName;
+    public String getCarLengthName() {
+        return carLengthName;
     }
 
-    public void setReceiveName(String receiveName) {
-        this.receiveName = receiveName;
+    public void setCarLengthName(String carLengthName) {
+        this.carLengthName = carLengthName;
     }
 
-    public String getReceivePosition() {
-        return receivePosition;
+    public String getCarModelName() {
+        return carModelName;
     }
 
-    public void setReceivePosition(String receivePosition) {
-        this.receivePosition = receivePosition;
+    public void setCarModelName(String carModelName) {
+        this.carModelName = carModelName;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getReceiveAddressCodeName() {
+        return receiveAddressCodeName;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setReceiveAddressCodeName(String receiveAddressCodeName) {
+        this.receiveAddressCodeName = receiveAddressCodeName;
     }
 
-    public String getSendAddress() {
-        return sendAddress;
+    public String getSendAddressCodeName() {
+        return sendAddressCodeName;
     }
 
-    public void setSendAddress(String sendAddress) {
-        this.sendAddress = sendAddress;
-    }
-
-    public String getSendAddressCode() {
-        return sendAddressCode;
-    }
-
-    public void setSendAddressCode(String sendAddressCode) {
-        this.sendAddressCode = sendAddressCode;
-    }
-
-    public String getSendMobile() {
-        return sendMobile;
-    }
-
-    public void setSendMobile(String sendMobile) {
-        this.sendMobile = sendMobile;
-    }
-
-    public String getSendName() {
-        return sendName;
-    }
-
-    public void setSendName(String sendName) {
-        this.sendName = sendName;
-    }
-
-    public String getSendPosition() {
-        return sendPosition;
-    }
-
-    public void setSendPosition(String sendPosition) {
-        this.sendPosition = sendPosition;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getStateName() {
-        return stateName;
-    }
-
-    public void setStateName(String stateName) {
-        this.stateName = stateName;
-    }
-
-    public String getTransferTime() {
-        return transferTime;
-    }
-
-    public void setTransferTime(String transferTime) {
-        this.transferTime = transferTime;
-    }
-
-    public String getUseCarType() {
-        return useCarType;
-    }
-
-    public void setUseCarType(String useCarType) {
-        this.useCarType = useCarType;
+    public void setSendAddressCodeName(String sendAddressCodeName) {
+        this.sendAddressCodeName = sendAddressCodeName;
     }
 }

@@ -1,14 +1,9 @@
 package com.js.driver.rx;
 
 
-import android.content.Intent;
 import android.text.TextUtils;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.js.driver.App;
-import com.js.driver.manager.SpManager;
 import com.js.driver.manager.UserManager;
-import com.js.driver.ui.user.activity.LoginActivity;
 import com.xlgcx.http.HttpResponse;
 
 import io.reactivex.Observable;

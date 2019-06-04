@@ -5,10 +5,35 @@
     android:orientation="vertical"
     android:scrollbars="none">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            >
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/_000000"
+                android:layout_gravity="center"
+                android:maxLines="1"
+                android:gravity="center"
+                android:text="服务"
+                />
+
+        </FrameLayout>
 
 
         <com.youth.banner.Banner
