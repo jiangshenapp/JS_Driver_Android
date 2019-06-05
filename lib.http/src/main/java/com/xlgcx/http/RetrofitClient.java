@@ -48,8 +48,6 @@ public class RetrofitClient {
                 .readTimeout(60, TimeUnit.SECONDS)
                 .connectTimeout(20, TimeUnit.SECONDS)
                 .addInterceptor(new AuthInterceptor())
-//                .addInterceptor(new HeaderInterceptor())
-//                .addInterceptor(new ParamsInterceptor())
                 ;
         if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();

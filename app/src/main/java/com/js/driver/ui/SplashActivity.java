@@ -45,9 +45,8 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
                     public void hasPermission(List<String> granted, boolean isAll) {
                         if (isAll) {
                             MainActivity.action(mContext);
-                        } else {
-                            finish();
                         }
+                        finish();
                     }
 
                     @Override

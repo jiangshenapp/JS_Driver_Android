@@ -140,6 +140,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
 
     private void initRefresh() {
         mRefresh.autoRefresh();
+        mRefresh.setEnableLoadMore(false);
         mRefresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {

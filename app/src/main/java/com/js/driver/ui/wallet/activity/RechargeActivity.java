@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alipay.sdk.app.PayTask;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.google.gson.Gson;
 import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
@@ -23,7 +22,6 @@ import com.js.driver.di.module.ActivityModule;
 import com.js.driver.global.Const;
 import com.js.driver.model.bean.PayInfo;
 import com.js.driver.model.bean.PayRouter;
-import com.js.driver.model.bean.WxPayBean;
 import com.js.driver.ui.wallet.adapter.PayAdapter;
 import com.js.driver.ui.wallet.presenter.RechargePresenter;
 import com.js.driver.ui.wallet.presenter.contract.RechargeContract;
@@ -31,10 +29,6 @@ import com.js.driver.util.AppUtils;
 import com.js.driver.util.pay.PayResult;
 import com.js.driver.widget.adapter.Divider;
 import com.js.driver.wxapi.WXPayEntryActivity;
-import com.tencent.mm.opensdk.constants.Build;
-import com.tencent.mm.opensdk.modelpay.PayReq;
-import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.xlgcx.frame.view.BaseActivity;
 
 import java.util.List;
@@ -61,7 +55,6 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
     private List<PayRouter> mPayRouters;
     private int channelType = 0;
     private int routerId = 0;
-    private IWXAPI api;
 
     public static void action(Context context) {
         context.startActivity(new Intent(context, RechargeActivity.class));

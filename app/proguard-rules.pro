@@ -20,6 +20,15 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+-dontwarn android.support.**
+-keep public class * extends android.app.Activity      # 保持哪些类不被混淆
+-keep public class * extends android.app.Application   # 保持哪些类不被混淆
+-keep public class * extends android.app.Service       # 保持哪些类不被混淆
+-keep public class * extends android.content.BroadcastReceiver  # 保持哪些类不被混淆
+-keep public class * extends android.content.ContentProvider    # 保持哪些类不被混淆
+-keep public class * extends android.app.backup.BackupAgentHelper # 保持哪些类不被混淆
+-keep public class * extends android.preference.Preference        # 保持哪些类不被混淆
+
 -dontwarn sun.misc.**
 -dontwarn javax.lang.model.**
 -dontwarn com.amap.api.**
@@ -177,3 +186,6 @@
 -keep class com.tencent.mm.sdk.** {
    *;
 }
+
+-dontwarn android.net.**
+-keep class android.net.SSLCertificateSocketFactory{*;}

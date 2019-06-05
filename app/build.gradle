@@ -47,8 +47,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            signingConfig signingConfigs.debugConfigs
-            minifyEnabled false
+//            signingConfig signingConfigs.debugConfigs
+//            minifyEnabled true
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+
+            minifyEnabled true
+            signingConfig signingConfigs.releaseConfigs
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -80,14 +85,12 @@ dependencies {
     //ARouter
     implementation 'com.alibaba:arouter-api:1.4.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+
     implementation 'com.meituan.android.walle:library:1.1.6'
-    //ARouter
-    implementation 'com.alibaba:arouter-api:1.4.1'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
     implementation 'com.contrarywind:Android-PickerView:4.1.8'
     implementation files('libs/BaiduLBS_Android.jar')
-
     implementation 'com.hjq:xxpermissions:5.5'
-    implementation (name: 'alipaySdk-15.6.2-20190416165036', ext: 'aar')
-    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    implementation(name: 'alipaySdk-15.6.2-20190416165036', ext: 'aar')
+//    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.3.1'
+    implementation files('libs/libammsdk.jar')
 }

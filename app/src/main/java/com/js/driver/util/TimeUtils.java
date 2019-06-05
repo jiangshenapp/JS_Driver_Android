@@ -1,5 +1,7 @@
 package com.js.driver.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -19,6 +21,16 @@ public class TimeUtils {
     private static final String ONE_MONTH_AGO = "月前";
     private static final String ONE_YEAR_AGO = "年前";
 
+
+    public static String format(String time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            return format(sdf.parse(time));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
 
     public static String format(Date date) {
         long delta = new Date().getTime() - date.getTime();

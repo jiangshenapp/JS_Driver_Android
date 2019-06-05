@@ -47,6 +47,7 @@ public class BaseApplication extends MultiDexApplication {
         mApplicationDelegate.onCreate(this);
         instance = this;
         initCrash();
+        initARouter();
     }
 
 
@@ -65,6 +66,15 @@ public class BaseApplication extends MultiDexApplication {
         } else {
             CrashReport.initCrashReport(getApplicationContext(), Const.BUGLY_APP_ID, false);
         }
+    }
+
+
+    private void initARouter() {
+        if (BuildConfig.DEBUG){
+            ARouter.openDebug();
+            ARouter.openLog();
+        }
+        ARouter.init(this);
     }
 
 

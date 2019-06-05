@@ -140,7 +140,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void setActionBar() {
-        mToolbar.setVisibility(View.VISIBLE);
+        mToolbar.setVisibility(View.GONE);
     }
 
     @Override
