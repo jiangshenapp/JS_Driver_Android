@@ -119,7 +119,7 @@
 -keep class com.soundcloud.android.crop.** { *; }
 -dontwarn com.soundcloud.android.crop.**
 
--keep class com.js.shipper.model.** {*;}
+-keep class com.js.driver.model.** {*;}
 -keep class com.js.http.** {*;}
 
 -keepattributes *Annotation*
