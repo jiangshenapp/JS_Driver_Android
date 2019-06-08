@@ -52,7 +52,7 @@ public class WalletActivity extends BaseActivity<WalletPresenter> implements Wal
                 RechargeActivity.action(mContext);
                 break;
             case R.id.wallet_bail_layout://保证金
-                BailActivity.action(mContext);
+                BailActivity.action(mContext,mAccountInfo);
                 break;
             case R.id.bill_detail_layout://账单明细
                 BillActivity.action(mContext, 0);

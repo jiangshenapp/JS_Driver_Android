@@ -4,16 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:background="@color/white"
-        android:paddingStart="12dp"
-        >
+        android:paddingStart="12dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -21,37 +18,30 @@
             android:text="当前保证金："
             android:textColor="#FF000000"
             android:textSize="14sp"
-            android:layout_gravity="center_vertical"
-            />
-
+            android:layout_gravity="center_vertical" />
 
         <TextView
+            android:id="@+id/tv_deposit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="888元"
-            android:textColor="@color/_ECA73F"
-            android:textSize="17sp"
             android:layout_gravity="center_vertical"
-            />
-
-
+            android:text="0元"
+            android:textColor="@color/_ECA73F"
+            android:textSize="17sp" />
 
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/_F0F0F0"
-        />
-
+        android:background="@color/_F0F0F0" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:background="@color/white"
-        android:paddingStart="12dp"
-        >
+        android:paddingStart="12dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,52 +49,53 @@
             android:text="需缴纳保证金："
             android:textColor="#FF000000"
             android:textSize="14sp"
-            android:layout_gravity="center_vertical"
-            />
+            android:layout_gravity="center_vertical" />
 
         <TextView
+            android:id="@+id/tv_trade_deposit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="3888元"
-            android:textColor="@color/_ECA73F"
-            android:textSize="17sp"
             android:layout_gravity="center_vertical"
-            />
-
+            android:layout_weight="1"
+            android:text="0元"
+            android:textColor="@color/_ECA73F"
+            android:textSize="17sp" />
 
         <TextView
+            android:id="@+id/tv_explain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="违约说明"
-            android:textColor="@color/_000000"
-            android:textSize="14sp"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="12dp"
-            />
+            android:text="违约说明"
+            android:textColor="@color/_000000"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
+    <!--<include layout="@layout/include_wallet_pay_item"/>-->
 
-    <include layout="@layout/include_wallet_pay_item"/>
-
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        >
+    </androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        >
+        android:layout_marginTop="20dp">
 
         <CheckBox
+            android:id="@+id/cb_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@null"
-            android:background="@mipmap/ic_checkbox_default"
-            />
-
+            android:layout_gravity="center_vertical"
+            android:button="@drawable/selector_checkbox_agreement" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -112,20 +103,18 @@
             android:text="我已阅读并同意"
             android:textColor="#FFB4B4B4"
             android:textSize="12sp"
-            android:layout_marginStart="4dp"
-            />
-
+            android:layout_marginStart="4dp" />
 
         <TextView
+            android:id="@+id/tv_protocal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:text="《保证金协议》"
             android:textColor="#FFECA73F"
-            android:textSize="12sp"
-            android:layout_marginStart="4dp"
-            />
-    </LinearLayout>
+            android:textSize="12sp" />
 
+    </LinearLayout>
 
     <TextView
         android:id="@+id/wallet_pay"
@@ -138,7 +127,6 @@
         android:textSize="17sp"
         android:gravity="center"
         android:layout_marginTop="20dp"
-        android:background="@drawable/shape_btn_eca73f"
-        />
+        android:background="@drawable/shape_btn_eca73f" />
 
 </LinearLayout>

@@ -88,6 +88,10 @@
             android:launchMode="singleTop" />
 
         <activity
+            android:name=".ui.wallet.activity.RechargeBailActivity"
+            android:launchMode="singleTop" />
+
+        <activity
             android:name=".ui.wallet.activity.WithdrawActivity"
             android:launchMode="singleTop" />
 

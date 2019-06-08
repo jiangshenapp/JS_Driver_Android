@@ -19,6 +19,7 @@ import com.js.driver.ui.user.activity.ResetPwdActivity;
 import com.js.driver.ui.user.activity.UserCenterActivity;
 import com.js.driver.ui.wallet.activity.BailActivity;
 import com.js.driver.ui.wallet.activity.RechargeActivity;
+import com.js.driver.ui.wallet.activity.RechargeBailActivity;
 import com.js.driver.ui.wallet.activity.WalletActivity;
 import com.js.driver.ui.wallet.activity.WithdrawActivity;
 
@@ -34,6 +35,7 @@ public interface ActivityComponent {
 
     Activity getActivity();
 
+    void inject(RechargeBailActivity rechargeBailActivity);
 
     void inject(SplashActivity splashActivity);
 
