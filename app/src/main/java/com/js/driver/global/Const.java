@@ -5,11 +5,9 @@ package com.js.driver.global;
  */
 public class Const {
 
-
     public static final String APP_ID = "wxbba5c5b208ed8f31";
     public static final int BUSINESS_ID = 1;//业务id
     public static final int MERCHANT_ID = 1;//商户编号
-
 
     //channel type
     public static final int CHANNEL_ALI_PAY = 1;//支付宝app支付
@@ -26,10 +24,6 @@ public class Const {
     public static final int PAGE_NUM = 1;
     public static final int REFRESH = 0;
     public static final int MORE = 1;
-
-
-
-
 
     public static final String AuthStateStr[] = {"未提交", "认证中", "已认证", "认证失败"};
     public static final String AuthStateColor[] = {"#B4B4B4", "#0091FF", "#ECA73F", "#E02020"};

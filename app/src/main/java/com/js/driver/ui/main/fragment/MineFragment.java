@@ -16,6 +16,7 @@ import com.js.driver.R;
 import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
 import com.js.driver.manager.CommonGlideImageLoader;
+import com.js.driver.model.bean.AccountInfo;
 import com.js.driver.model.bean.MineMenu;
 import com.js.driver.model.bean.UserInfo;
 import com.js.driver.model.event.UserStatusChangeEvent;
@@ -106,6 +107,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     private void initData() {
         if (!TextUtils.isEmpty(App.getInstance().token)) { //判断token是否为空
             mPresenter.getUserInfo();
+            mPresenter.getAccountInfo();
         }
     }
 
@@ -219,6 +221,11 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
             authState.setText("未提交");
             return;
         }
+    }
+
+    @Override
+    public void onAccountInfo(AccountInfo accountInfo) {
+        mMoney.setText(String.valueOf(accountInfo.getBalance()));
     }
 
     @Subscribe

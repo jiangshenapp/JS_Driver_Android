@@ -9,9 +9,14 @@ import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
+import com.js.driver.model.bean.AccountInfo;
+import com.js.driver.model.event.AccountChangeEvent;
+import com.js.driver.model.event.LoginChangeEvent;
 import com.js.driver.ui.wallet.presenter.WalletPresenter;
 import com.js.driver.ui.wallet.presenter.contract.WalletContract;
 import com.xlgcx.frame.view.BaseActivity;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -21,7 +26,6 @@ import butterknife.OnClick;
  */
 public class WalletActivity extends BaseActivity<WalletPresenter> implements WalletContract.View {
 
-
     @BindView(R.id.wallet_money)
     TextView mMoney;
     @BindView(R.id.wallet_withdraw)
@@ -29,11 +33,13 @@ public class WalletActivity extends BaseActivity<WalletPresenter> implements Wal
     @BindView(R.id.wallet_bail)
     TextView mBail;
 
+    AccountInfo mAccountInfo;
+
     @OnClick({R.id.wallet_withdraw, R.id.wallet_recharge, R.id.wallet_bail_layout, R.id.bill_detail_layout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.wallet_withdraw://提现
-                WithdrawActivity.action(mContext);
+                WithdrawActivity.action(mContext, 2, mAccountInfo.getBalance());
                 break;
             case R.id.wallet_recharge://充值
                 RechargeActivity.action(mContext);
@@ -47,15 +53,22 @@ public class WalletActivity extends BaseActivity<WalletPresenter> implements Wal
         }
     }
 
-
+    @Subscribe
+    public void onEvent(AccountChangeEvent event) {
+        switch (event.index) {
+            case AccountChangeEvent.WALLET_CHANGE:
+                mPresenter.getAccountInfo();
+                break;
+        }
+    }
 
     public static void action(Context context) {
         context.startActivity(new Intent(context, WalletActivity.class));
     }
 
-
     @Override
     protected void init() {
+        mPresenter.getAccountInfo();
         initView();
     }
 
@@ -82,5 +95,10 @@ public class WalletActivity extends BaseActivity<WalletPresenter> implements Wal
         mTitle.setText("我的钱包");
     }
 
-
+    @Override
+    public void onAccountInfo(AccountInfo accountInfo) {
+        mAccountInfo = accountInfo;
+        mMoney.setText(String.valueOf(accountInfo.getBalance()));
+        mBail.setText(String.valueOf(accountInfo.getDriverDeposit()));
+    }
 }

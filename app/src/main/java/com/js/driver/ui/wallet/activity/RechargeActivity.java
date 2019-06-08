@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -42,12 +43,10 @@ import butterknife.OnClick;
  */
 public class RechargeActivity extends BaseActivity<RechargePresenter> implements RechargeContract.View, BaseQuickAdapter.OnItemClickListener {
 
-
     @BindView(R.id.recharge_money)
     EditText mMoney;
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
-
 
     private static final int SDK_PAY_FLAG = 99;
     private int type;
@@ -60,7 +59,6 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
         context.startActivity(new Intent(context, RechargeActivity.class));
     }
 
-
     @Override
     protected void init() {
         initView();
@@ -68,6 +66,7 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
     }
 
     private void initView() {
+        mMoney.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         initAdapter();
     }
 
@@ -121,7 +120,6 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
         }
     }
 
-
     public void aliPay(final String orderInfo) {
         Runnable payRunnable = new Runnable() {
             @Override
@@ -140,7 +138,6 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
         Thread payThread = new Thread(payRunnable);
         payThread.start();
     }
-
 
     /**
      * 支付宝支付业务：入参app_id
@@ -168,7 +165,6 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
         ;
     };
 
-
     @Override
     public void onPayOrder(PayInfo payInfo) {
         switch (channelType) {
@@ -179,7 +175,6 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
                 wxPay(payInfo.getOrderInfo());
                 break;
         }
-
     }
 
     private void wxPay(String orderInfo) {
@@ -200,9 +195,7 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
             payRouters.get(0).setChecked(true);
             mAdapter.setNewData(payRouters);
         }
-
     }
-
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -217,6 +210,5 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
             }
         }
         mAdapter.setNewData(payRouters);
-
     }
 }

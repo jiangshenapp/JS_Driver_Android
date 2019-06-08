@@ -3,7 +3,9 @@ package com.js.driver.ui.main.presenter;
 import android.text.TextUtils;
 
 import com.js.driver.App;
+import com.js.driver.api.PayApi;
 import com.js.driver.api.UserApi;
+import com.js.driver.model.bean.AccountInfo;
 import com.js.driver.model.bean.UserInfo;
 import com.js.driver.ui.main.presenter.contract.MineContract;
 import com.xlgcx.frame.mvp.RxPresenter;
@@ -41,6 +43,27 @@ public class MinePresenter extends RxPresenter<MineContract.View> implements Min
                         public void accept(UserInfo userInfo) throws Exception {
                             mView.finishRefresh();
                             mView.onUserInfo(userInfo);
+                        }
+                    }, new RxException<>(e -> {
+                        mView.finishRefresh();
+                        mView.toast(e.getMessage());
+                    }));
+            addDispose(disposable);
+        }
+    }
+
+    @Override
+    public void getAccountInfo() {
+        if (!TextUtils.isEmpty(App.getInstance().token)) {
+            Disposable disposable = mApiFactory.getApi(PayApi.class)
+                    .getBySubscriber()
+                    .compose(RxSchedulers.io_main())
+                    .compose(RxResult.handleResult())
+                    .subscribe(new Consumer<AccountInfo>() {
+                        @Override
+                        public void accept(AccountInfo accountInfo) throws Exception {
+                            mView.finishRefresh();
+                            mView.onAccountInfo(accountInfo);
                         }
                     }, new RxException<>(e -> {
                         mView.finishRefresh();

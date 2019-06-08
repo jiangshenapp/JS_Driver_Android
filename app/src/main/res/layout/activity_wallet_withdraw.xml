@@ -4,14 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:background="@color/white"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,21 +16,18 @@
             android:layout_marginTop="5dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/shape_wallet_input_money"
-            >
-
+            android:background="@drawable/shape_wallet_input_money">
 
             <EditText
                 android:id="@+id/withdraw_money"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:hint="输入充值金额"
-                android:textColor="@color/_B4B4B4"
-                android:textSize="14sp"
                 android:background="@null"
+                android:hint="输入充值金额"
                 android:paddingStart="10dp"
-                />
+                android:textColor="@color/_B4B4B4"
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -42,11 +36,9 @@
                 android:textColor="@color/_ECA73F"
                 android:textSize="14sp"
                 android:layout_marginEnd="10dp"
-                android:layout_gravity="center_vertical"
-                />
+                android:layout_gravity="center_vertical" />
 
         </LinearLayout>
-
 
         <TextView
             android:id="@+id/withdraw_money_max"
@@ -56,11 +48,9 @@
             android:text="当前最大提现金额：888元"
             android:textColor="@color/_ECA73F"
             android:textSize="12sp"
-            android:layout_marginStart="18dp"
-            />
+            android:layout_marginStart="18dp" />
 
     </LinearLayout>
-
 
     <LinearLayout
         android:id="@+id/item_alipay_layout"
@@ -68,8 +58,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:background="@color/white"
-        >
+        android:background="@color/white">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -98,15 +87,80 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/item_alipay_info_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="94dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:text="账户："
+                android:textColor="@color/_000000"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/alipay_no"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="请输入支付宝账户"
+                android:textColorHint="@color/_B4B4B4"
+                android:textSize="14sp"
+                android:layout_marginStart="5dp"
+                android:background="@null" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/_F0F0F0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="94dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:text="姓名："
+                android:textColor="@color/_000000"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/alipay_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="请输入支付宝账户姓名"
+                android:textColorHint="@color/_B4B4B4"
+                android:textSize="14sp"
+                android:layout_marginStart="5dp"
+                android:background="@null" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/item_wx_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal"
         android:background="@color/white"
-        >
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -135,15 +189,13 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:id="@+id/item_bank_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:background="@color/white"
-        >
+        android:background="@color/white">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -171,8 +223,7 @@
             android:src="@mipmap/ic_checkbox_default" />
 
     </LinearLayout>
-    
-    
+
     <LinearLayout
         android:id="@+id/item_bank_info_layout"
         android:layout_width="match_parent"
@@ -183,18 +234,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
             <TextView
-
                 android:layout_width="94dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical|right"
                 android:text="卡号："
                 android:textColor="@color/_000000"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/bank_number"
@@ -205,24 +253,19 @@
                 android:textColorHint="@color/_B4B4B4"
                 android:textSize="14sp"
                 android:layout_marginStart="5dp"
-                android:background="@null"
-                />
+                android:background="@null" />
 
         </LinearLayout>
-
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/_F0F0F0"
-            />
-
+            android:background="@color/_F0F0F0" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="94dp"
@@ -230,8 +273,7 @@
                 android:gravity="center_vertical|right"
                 android:text="开户行："
                 android:textColor="@color/_000000"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/bank_opening"
@@ -242,24 +284,19 @@
                 android:textColorHint="@color/_B4B4B4"
                 android:textSize="14sp"
                 android:layout_marginStart="5dp"
-                android:background="@null"
-                />
+                android:background="@null" />
 
         </LinearLayout>
-
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/_F0F0F0"
-            />
-
+            android:background="@color/_F0F0F0" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="94dp"
@@ -267,8 +304,7 @@
                 android:gravity="center_vertical|right"
                 android:text="支行："
                 android:textColor="@color/_000000"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/bank_sub"
@@ -279,13 +315,11 @@
                 android:textColorHint="@color/_B4B4B4"
                 android:textSize="14sp"
                 android:layout_marginStart="5dp"
-                android:background="@null"
-                />
+                android:background="@null" />
 
         </LinearLayout>
         
     </LinearLayout>
-
 
     <TextView
         android:id="@+id/wallet_withdraw"
@@ -298,7 +332,6 @@
         android:textSize="17sp"
         android:gravity="center"
         android:layout_marginTop="20dp"
-        android:background="@drawable/shape_btn_eca73f"
-        />
+        android:background="@drawable/shape_btn_eca73f" />
 
 </LinearLayout>

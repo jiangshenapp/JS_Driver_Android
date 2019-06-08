@@ -78,7 +78,7 @@ public class WXPayEntryActivity extends SimpleActivity implements IWXAPIEventHan
         request.timeStamp = wxPayBean.getTimestamp();
         request.sign = wxPayBean.getSign();
         boolean status = api.sendReq(request);
-        Toast.makeText(mContext, ""+status, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(mContext, ""+status, Toast.LENGTH_SHORT).show();
     }
 
     @Override
