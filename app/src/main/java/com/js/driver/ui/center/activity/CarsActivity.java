@@ -1,5 +1,7 @@
 package com.js.driver.ui.center.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -38,6 +40,13 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
 
     private CarsAdapter mAdapter;
     private List<CarBean> mCarBeans;
+
+
+
+    public static void action(Context context){
+        Intent intent = new Intent(context,CarsActivity.class);
+        context.startActivity(intent);
+    }
 
 
     @Override

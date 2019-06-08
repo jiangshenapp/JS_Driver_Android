@@ -19,6 +19,8 @@ import com.js.driver.manager.CommonGlideImageLoader;
 import com.js.driver.model.bean.MineMenu;
 import com.js.driver.model.bean.UserInfo;
 import com.js.driver.model.event.UserStatusChangeEvent;
+import com.js.driver.ui.center.activity.CarsActivity;
+import com.js.driver.ui.center.activity.DriversActivity;
 import com.js.driver.ui.main.adapter.MineMenuAdapter;
 import com.js.driver.ui.main.presenter.MinePresenter;
 import com.js.driver.ui.main.presenter.contract.MineContract;
@@ -240,10 +242,13 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         switch (position) {
             case 0://我的车辆
+                CarsActivity.action(mContext);
                 break;
             case 1://我的司机
+                DriversActivity.action(mContext);
                 break;
             case 2://我的路线
+
                 break;
             case 3://我的客服
                 break;
