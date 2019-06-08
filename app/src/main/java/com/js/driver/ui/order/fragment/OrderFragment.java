@@ -51,7 +51,6 @@ public class OrderFragment extends BaseFragment<OrderPresenter> implements Order
         return orderFragment;
     }
 
-
     @Override
     protected void initInject() {
         DaggerFragmentComponent.builder()

@@ -90,7 +90,6 @@ public class BillActivity extends SimpleActivity {
         mTabLayout.setupWithViewPager(mViewpager);
     }
 
-
     @Override
     public void setActionBar() {
         mTitle.setText("账单明细");

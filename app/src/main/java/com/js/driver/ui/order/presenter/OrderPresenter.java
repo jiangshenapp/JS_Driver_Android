@@ -23,7 +23,6 @@ public class OrderPresenter extends RxPresenter<OrderContract.View> implements O
 
     private ApiFactory mApiFactory;
 
-
     @Inject
     public OrderPresenter(ApiFactory mApiFactory) {
         this.mApiFactory = mApiFactory;

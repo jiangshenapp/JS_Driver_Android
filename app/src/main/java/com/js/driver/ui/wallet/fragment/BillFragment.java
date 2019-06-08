@@ -12,6 +12,7 @@ import com.js.driver.ui.wallet.presenter.BillPresenter;
 import com.js.driver.ui.wallet.presenter.contract.BillContract;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xlgcx.frame.view.BaseFragment;
 
@@ -35,7 +36,6 @@ public class BillFragment extends BaseFragment<BillPresenter> implements BillCon
     @BindView(R.id.refresh)
     SmartRefreshLayout mRefresh;
     private int type;
-
 
     private BillAdapter mAdapter;
     private List<BillBean> mBills;
@@ -70,9 +70,8 @@ public class BillFragment extends BaseFragment<BillPresenter> implements BillCon
     }
 
     private void initData() {
-        mBills = new ArrayList<>();
-        mBills.add(new BillBean());
-        mAdapter.setNewData(mBills);
+
+        mPresenter.getBillList(type);
     }
 
     private void initView() {
@@ -81,16 +80,10 @@ public class BillFragment extends BaseFragment<BillPresenter> implements BillCon
     }
 
     private void initRefresh() {
-        mRefresh.autoRefresh();
-        mRefresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
-            @Override
-            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-
-            }
-
+        mRefresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-
+                mPresenter.getBillList(type);
             }
         });
     }
@@ -106,5 +99,17 @@ public class BillFragment extends BaseFragment<BillPresenter> implements BillCon
         if (bundle != null) {
             type = bundle.getInt("type");
         }
+    }
+
+    @Override
+    public void onBillList(List<BillBean> billBeans) {
+        mBills = billBeans;
+        mAdapter.setNewData(mBills);
+    }
+
+    @Override
+    public void finishRefreshAndLoadMore() {
+        mRefresh.finishRefresh();
+        mRefresh.finishLoadMore();
     }
 }

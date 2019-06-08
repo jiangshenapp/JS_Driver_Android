@@ -1,6 +1,7 @@
 package com.js.driver.api;
 
 import com.js.driver.model.bean.AccountInfo;
+import com.js.driver.model.bean.BillBean;
 import com.js.driver.model.bean.PayInfo;
 import com.js.driver.model.bean.PayRouter;
 import com.js.driver.model.bean.UserInfo;
@@ -20,6 +21,12 @@ import retrofit2.http.Query;
  * Created by huyg on 2019-05-31.
  */
 public interface PayApi {
+
+    /**
+     * 账单明细
+     */
+    @GET("app/account/getTradeRecord")
+    Observable<HttpResponse<List<BillBean>>> getTradeRecord();
 
 
     /**
