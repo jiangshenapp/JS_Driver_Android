@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,6 +32,9 @@ import com.js.driver.util.pay.PayResult;
 import com.js.driver.widget.adapter.Divider;
 import com.js.driver.wxapi.WXPayEntryActivity;
 import com.xlgcx.frame.view.BaseActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 import java.util.Map;
@@ -152,9 +156,10 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
                     String resultStatus = payResult.getResultStatus();
 
                     if (TextUtils.equals(resultStatus, "9000")) {
-                        Toast.makeText(mContext, "支付成功", Toast.LENGTH_LONG);
+                        Toast.makeText(mContext, "支付成功", Toast.LENGTH_LONG).show();
+                        finish();
                     } else {
-                        Toast.makeText(mContext, "支付失败", Toast.LENGTH_LONG);
+                        Toast.makeText(mContext, "支付失败", Toast.LENGTH_LONG).show();
                     }
                     break;
                 default:
@@ -185,6 +190,14 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
         Intent intent = new Intent(mContext, WXPayEntryActivity.class);
         intent.putExtra("orderInfo",orderInfo);
         startActivityForResult(intent,100);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == 888) { //微信支付成功
+            finish();
+        }
     }
 
     @Override

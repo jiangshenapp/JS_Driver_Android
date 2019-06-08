@@ -24,29 +24,13 @@ import com.xlgcx.frame.view.SimpleActivity;
  */
 public class WXPayEntryActivity extends SimpleActivity implements IWXAPIEventHandler {
 
-
     private IWXAPI api;
-
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
         api.handleIntent(intent, this);
-    }
-
-    @Override
-    public void onReq(BaseReq baseReq) {
-        Log.d(getClass().getSimpleName(), baseReq.toString());
-    }
-
-    @Override
-    public void onResp(BaseResp baseResp) {
-        Log.d(getClass().getSimpleName(), "onPayFinish, errCode = " + baseResp.errCode);
-        if (baseResp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
-            Log.d(getClass().getSimpleName(), String.valueOf(baseResp.errStr));
-            Log.d(getClass().getSimpleName(), String.valueOf(baseResp.errCode));
-        }
     }
 
     @Override
@@ -86,5 +70,26 @@ public class WXPayEntryActivity extends SimpleActivity implements IWXAPIEventHan
         mToolbar.setVisibility(View.GONE);
     }
 
+    @Override
+    public void onReq(BaseReq req) {
+    }
 
+    @Override
+    public void onResp(BaseResp resp) {
+        Log.d(getClass().getSimpleName(), "微信支付errCode = " + resp.errCode);
+
+        if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
+            if (resp.errCode == 0) {
+                Toast.makeText(mContext, "支付成功", Toast.LENGTH_LONG).show();
+                setResult(888);
+                finish();
+            } else if (resp.errCode == -1) {
+                Toast.makeText(mContext, "支付失败", Toast.LENGTH_LONG).show();
+                finish();
+            } else if (resp.errCode == -2) {
+                Toast.makeText(mContext, "支付取消", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        }
+    }
 }

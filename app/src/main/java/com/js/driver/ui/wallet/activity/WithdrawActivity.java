@@ -14,13 +14,9 @@ import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
-import com.js.driver.model.event.AccountChangeEvent;
-import com.js.driver.model.event.LoginChangeEvent;
 import com.js.driver.ui.wallet.presenter.WithdrawPresenter;
 import com.js.driver.ui.wallet.presenter.contract.WithdrawContract;
 import com.xlgcx.frame.view.BaseActivity;
-
-import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -152,6 +148,5 @@ public class WithdrawActivity extends BaseActivity<WithdrawPresenter> implements
     public void onBalanceWithdraw() {
         toast("申请提现成功");
         backAction();
-        EventBus.getDefault().post(new AccountChangeEvent(AccountChangeEvent.WALLET_CHANGE));
     }
 }

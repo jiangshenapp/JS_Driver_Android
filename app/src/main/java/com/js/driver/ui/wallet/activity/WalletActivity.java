@@ -5,17 +5,18 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.model.bean.AccountInfo;
-import com.js.driver.model.event.AccountChangeEvent;
-import com.js.driver.model.event.LoginChangeEvent;
 import com.js.driver.ui.wallet.presenter.WalletPresenter;
 import com.js.driver.ui.wallet.presenter.contract.WalletContract;
 import com.xlgcx.frame.view.BaseActivity;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
@@ -35,6 +36,12 @@ public class WalletActivity extends BaseActivity<WalletPresenter> implements Wal
 
     AccountInfo mAccountInfo;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.getAccountInfo();
+    }
+
     @OnClick({R.id.wallet_withdraw, R.id.wallet_recharge, R.id.wallet_bail_layout, R.id.bill_detail_layout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -53,22 +60,12 @@ public class WalletActivity extends BaseActivity<WalletPresenter> implements Wal
         }
     }
 
-    @Subscribe
-    public void onEvent(AccountChangeEvent event) {
-        switch (event.index) {
-            case AccountChangeEvent.WALLET_CHANGE:
-                mPresenter.getAccountInfo();
-                break;
-        }
-    }
-
     public static void action(Context context) {
         context.startActivity(new Intent(context, WalletActivity.class));
     }
 
     @Override
     protected void init() {
-        mPresenter.getAccountInfo();
         initView();
     }
 
