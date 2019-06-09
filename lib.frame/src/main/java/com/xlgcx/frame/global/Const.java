@@ -5,7 +5,7 @@ package com.xlgcx.frame.global;
  */
 public class Const {
 
-    public static final String WX_APP_ID = "wxa1c709302475402e";
+    public static final String WX_APP_ID = "wxbba5c5b208ed8f31";
 
     public static final String BUGLY_APP_ID = "52a73eed58";
 

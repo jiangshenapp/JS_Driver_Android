@@ -30,7 +30,6 @@ import butterknife.BindView;
  */
 public class BillFragment extends BaseFragment<BillPresenter> implements BillContract.View {
 
-
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
     @BindView(R.id.refresh)
