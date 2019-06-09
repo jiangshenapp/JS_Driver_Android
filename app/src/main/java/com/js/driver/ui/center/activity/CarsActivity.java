@@ -105,6 +105,13 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // 设置ToolBar状态
+        menu.findItem(R.id.add_car).setVisible(true);
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_car:

@@ -132,9 +132,10 @@ public class DriversActivity extends BaseActivity<DriversPresenter> implements D
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
         List<DriverBean> driverBean = adapter.getData();
+
         switch (view.getId()){
             case R.id.item_driver_delete:
-
+                mPresenter.unbindingDriver(driverBean.get(position).getDriverId());
                 break;
         }
     }
@@ -154,5 +155,11 @@ public class DriversActivity extends BaseActivity<DriversPresenter> implements D
     public void finishRefreshAndLoadMore() {
         mRefresh.finishRefresh();
         mRefresh.finishLoadMore();
+    }
+
+    @Override
+    public void onUnbindingDriver() {
+        toast("解绑成功");
+        mPresenter.getDriverList();
     }
 }

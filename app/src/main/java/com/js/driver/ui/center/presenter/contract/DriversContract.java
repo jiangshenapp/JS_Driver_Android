@@ -13,11 +13,12 @@ public interface DriversContract {
 
     interface View extends IBaseView {
         void onDriverList(ListResponse<DriverBean> response);
-
         void finishRefreshAndLoadMore();
+        void onUnbindingDriver();
     }
 
     interface Presenter extends IPresenter<View> {
         void getDriverList();
+        void unbindingDriver(long driverId);
     }
 }
