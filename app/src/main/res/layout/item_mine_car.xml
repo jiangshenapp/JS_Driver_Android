@@ -23,35 +23,35 @@
         />
 
     <TextView
+        android:id="@+id/item_car_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="5dp"
         android:text="高栏货车4.2米/1.3方/1.0吨"
         android:textColor="@color/_6E6E6E"
         android:textSize="12sp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_car_number"
-        />
+        app:layout_constraintTop_toBottomOf="@id/item_car_number" />
 
     <TextView
+        android:id="@+id/item_car_state"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
         android:text="待审核"
         android:textColor="@color/_ECA73F"
         android:textSize="14sp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
+        android:id="@+id/item_car_img"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
-
-
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

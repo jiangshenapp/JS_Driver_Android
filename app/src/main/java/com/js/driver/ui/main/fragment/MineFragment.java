@@ -162,16 +162,16 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 OrdersActivity.action(mContext, 4);
                 break;
             case R.id.mine_circle_layout://我的圈子
-
+                toast("该功能暂未开通，敬请期待");
                 break;
             case R.id.mine_community_layout://我的社区
-
+                toast("该功能暂未开通，敬请期待");
                 break;
             case R.id.mine_invitation_layout://我的帖子
-
+                toast("该功能暂未开通，敬请期待");
                 break;
             case R.id.mine_draft_layout://我的草稿箱
-
+                toast("该功能暂未开通，敬请期待");
                 break;
             case R.id.mine_wallet_money_layout://我的钱包
                 WalletActivity.action(mContext);
@@ -258,10 +258,13 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 
                 break;
             case 3://我的客服
+                toast("该功能暂未开通，敬请期待");
                 break;
             case 4://我的发票
+                toast("该功能暂未开通，敬请期待");
                 break;
             case 5://推广达人
+                toast("该功能暂未开通，敬请期待");
                 break;
         }
     }

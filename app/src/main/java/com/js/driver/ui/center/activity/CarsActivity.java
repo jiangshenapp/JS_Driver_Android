@@ -10,6 +10,7 @@ import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.model.bean.CarBean;
+import com.js.driver.model.response.ListResponse;
 import com.js.driver.ui.center.adapter.CarsAdapter;
 import com.js.driver.ui.center.presenter.CarsPresenter;
 import com.js.driver.ui.center.presenter.contract.CarsContract;
@@ -32,7 +33,6 @@ import butterknife.BindView;
  */
 public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsContract.View {
 
-
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
     @BindView(R.id.refresh)
@@ -41,13 +41,10 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
     private CarsAdapter mAdapter;
     private List<CarBean> mCarBeans;
 
-
-
     public static void action(Context context){
         Intent intent = new Intent(context,CarsActivity.class);
         context.startActivity(intent);
     }
-
 
     @Override
     protected void init() {
@@ -56,10 +53,7 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
     }
 
     private void initData() {
-        mCarBeans = new ArrayList<>();
-        mCarBeans.add(new CarBean());
-        mCarBeans.add(new CarBean());
-        mAdapter.setNewData(mCarBeans);
+        mPresenter.getCarList();
     }
 
     private void initView() {
@@ -68,11 +62,10 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
     }
 
     private void initRefresh() {
-        mRefresh.autoRefresh();
         mRefresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-
+                mPresenter.getCarList();
             }
         });
     }
@@ -121,4 +114,15 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
         return true;
     }
 
+    @Override
+    public void onCarList(ListResponse<CarBean> response) {
+        mCarBeans = response.getRecords();
+        mAdapter.setNewData(mCarBeans);
+    }
+
+    @Override
+    public void finishRefreshAndLoadMore() {
+        mRefresh.finishRefresh();
+        mRefresh.finishLoadMore();
+    }
 }
