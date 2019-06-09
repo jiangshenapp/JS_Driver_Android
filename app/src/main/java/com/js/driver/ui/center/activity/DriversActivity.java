@@ -101,12 +101,13 @@ public class DriversActivity extends BaseActivity<DriversPresenter> implements D
     @Override
     public void setActionBar() {
         mTitle.setText("我的司机");
+        setSupportActionBar(mToolbar);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_center_driver, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
