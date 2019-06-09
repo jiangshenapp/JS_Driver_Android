@@ -3,7 +3,9 @@ package com.js.driver.ui.center.adapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.js.driver.R;
+import com.js.driver.manager.CommonGlideImageLoader;
 import com.js.driver.model.bean.DriverBean;
+import com.xlgcx.http.global.Const;
 
 import java.util.List;
 
@@ -21,5 +23,10 @@ public class DriversAdapter extends BaseQuickAdapter<DriverBean, BaseViewHolder>
     @Override
     protected void convert(BaseViewHolder helper, DriverBean item) {
         helper.addOnClickListener(R.id.item_driver_delete);
+        helper.setText(R.id.item_driver_name,item.getDriverName())
+                .setText(R.id.item_driver_phone,item.getDriverPhone())
+                .setText(R.id.item_driver_type,"驾照类型："+item.getDriverLevel());
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL + item.getAvatar()
+                , helper.getView(R.id.item_driver_img),mContext.getResources().getDrawable(R.mipmap.ic_center_driver_head_land));
     }
 }

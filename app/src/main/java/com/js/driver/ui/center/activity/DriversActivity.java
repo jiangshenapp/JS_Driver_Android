@@ -13,11 +13,14 @@ import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.model.bean.DriverBean;
 import com.js.driver.model.event.AddDriverEvent;
+import com.js.driver.model.response.ListResponse;
 import com.js.driver.ui.center.adapter.DriversAdapter;
 import com.js.driver.ui.center.presenter.DriversPresenter;
 import com.js.driver.ui.center.presenter.contract.DriversContract;
 import com.js.driver.widget.dialog.AddDriverFragment;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xlgcx.frame.view.BaseActivity;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -25,6 +28,7 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -34,22 +38,19 @@ import butterknife.BindView;
  */
 public class DriversActivity extends BaseActivity<DriversPresenter> implements DriversContract.View, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener {
 
-
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
     @BindView(R.id.refresh)
     SmartRefreshLayout mRefresh;
-
 
     private DriversAdapter mAdapter;
     private List<DriverBean> mDrivers;
 
 
     public static void action(Context context){
-        Intent intent = new Intent(context,CarsActivity.class);
+        Intent intent = new Intent(context,DriversActivity.class);
         context.startActivity(intent);
     }
-
 
     @Override
     protected void init() {
@@ -58,15 +59,21 @@ public class DriversActivity extends BaseActivity<DriversPresenter> implements D
     }
 
     private void initData() {
-        mDrivers = new ArrayList<>();
-        mDrivers.add(new DriverBean());
-        mDrivers.add(new DriverBean());
-        mDrivers.add(new DriverBean());
-        mAdapter.setNewData(mDrivers);
+        mPresenter.getDriverList();
     }
 
     private void initView() {
         initRecycler();
+        initRefresh();
+    }
+
+    private void initRefresh() {
+        mRefresh.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                mPresenter.getDriverList();
+            }
+        });
     }
 
     private void initRecycler() {
@@ -132,9 +139,20 @@ public class DriversActivity extends BaseActivity<DriversPresenter> implements D
         }
     }
 
-
     @Subscribe
     public void onEvent(AddDriverEvent event){
 
+    }
+
+    @Override
+    public void onDriverList(ListResponse<DriverBean> response) {
+        mDrivers = response.getRecords();
+        mAdapter.setNewData(mDrivers);
+    }
+
+    @Override
+    public void finishRefreshAndLoadMore() {
+        mRefresh.finishRefresh();
+        mRefresh.finishLoadMore();
     }
 }
