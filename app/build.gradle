@@ -28,14 +28,14 @@ android {
         releaseConfigs {
             storeFile file("key")
             keyAlias "key"
-            storePassword "android"
-            keyPassword "android"
+            storePassword "jsdriver"
+            keyPassword "jsdriver"
         }
         debugConfigs {
             storeFile file("key")
             keyAlias "key"
-            storePassword "android"
-            keyPassword "android"
+            storePassword "jsdriver"
+            keyPassword "jsdriver"
         }
     }
 
@@ -47,14 +47,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-//            signingConfig signingConfigs.debugConfigs
-//            minifyEnabled true
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
-
+            signingConfig signingConfigs.debugConfigs
             minifyEnabled false
-            signingConfig signingConfigs.releaseConfigs
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
         }
     }
 }
