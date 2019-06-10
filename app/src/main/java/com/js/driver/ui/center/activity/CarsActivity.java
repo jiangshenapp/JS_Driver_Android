@@ -96,13 +96,6 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
     @Override
     public void setActionBar() {
         mTitle.setText("我的车辆");
-        setSupportActionBar(mToolbar);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                backAction();
-            }
-        });
     }
 
     @Override
