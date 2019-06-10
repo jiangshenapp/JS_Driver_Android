@@ -129,7 +129,8 @@ public class RechargeBailActivity extends BaseActivity<RechargeBailPresenter> im
                     toast("缴纳保证金需要大于0元");
                     return;
                 }
-                mPresenter.payOrder(channelType, mAccountInfo.getTradeDeposit(), routerId);
+                //交易类型, 1账户充值, 5运费支付，10运力端保证金，11货主端保证金
+                mPresenter.payOrder(10, channelType, mAccountInfo.getTradeDeposit(), routerId);
                 break;
         }
     }

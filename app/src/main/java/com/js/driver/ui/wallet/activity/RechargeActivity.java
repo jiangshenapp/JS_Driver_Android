@@ -119,7 +119,8 @@ public class RechargeActivity extends BaseActivity<RechargePresenter> implements
                     toast("金钱输入有误");
                     return;
                 }
-                mPresenter.payOrder(channelType, Double.parseDouble(money), routerId);
+                //交易类型, 1账户充值, 5运费支付，10运力端保证金，11货主端保证金
+                mPresenter.payOrder(1, channelType, Double.parseDouble(money), routerId);
                 break;
         }
     }

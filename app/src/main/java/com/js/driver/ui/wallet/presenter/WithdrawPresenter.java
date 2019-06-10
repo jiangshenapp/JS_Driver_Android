@@ -27,9 +27,9 @@ public class WithdrawPresenter extends RxPresenter<WithdrawContract.View> implem
     }
 
     @Override
-    public void balanceWithdraw(int withdrawType, int withdrawChannel, String bankCard, String khh, String zh, String zfbzh, String zfbzhxm) {
+    public void balanceWithdraw(int withdrawType, int withdrawChannel, String bankCard, String khh, String zh, String zfbzh, String zfbmc) {
         Disposable disposable = mApiFactory.getApi(PayApi.class)
-                .balanceWithdraw(withdrawType, withdrawChannel, bankCard, khh, zh, zfbzh, zfbzhxm)
+                .balanceWithdraw(withdrawType, withdrawChannel, bankCard, khh, zh, zfbzh, zfbmc)
                 .compose(RxSchedulers.io_main())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override

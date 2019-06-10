@@ -15,6 +15,6 @@ public interface WithdrawContract {
     interface Presenter extends IPresenter<View> {
         void balanceWithdraw(int withdrawType, int withdrawChannel,
                              String bankCard, String khh, String zh,
-                             String zfbzh, String zfbzhxm);
+                             String zfbzh, String zfbmc);
     }
 }

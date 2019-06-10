@@ -21,7 +21,7 @@ public interface RechargeContract {
     }
 
     interface Presenter extends IPresenter<View> {
-        void payOrder(int channelType, double money, int routeId);
+        void payOrder(int tradeType, int channelType, double money, int routeId);
 
         void getPayRouter();
     }

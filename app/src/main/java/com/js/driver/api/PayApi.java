@@ -26,7 +26,7 @@ public interface PayApi {
      * 账单明细
      */
     @GET("app/account/getTradeRecord")
-    Observable<HttpResponse<List<BillBean>>> getTradeRecord();
+    Observable<HttpResponse<List<BillBean>>> getTradeRecord(@Query("type") long type);
 
 
     /**
@@ -47,14 +47,14 @@ public interface PayApi {
                                                @Field("khh") String khh,
                                                  @Field("zh") String zh,
                                                  @Field("zfbzh") String zfbzh,
-                                                 @Field("zfbzhxm") String zfbzhxm);
+                                                 @Field("zfbmc") String zfbmc);
 
     /**
      * 账户充值
      */
     @FormUrlEncoded
     @POST("app/account/recharge")
-    Observable<HttpResponse<PayInfo>> recharge(@Field("businessId") int businessId,
+    Observable<HttpResponse<PayInfo>> recharge(@Field("tradeType") int tradeType,
                                                @Field("channelType") int channelType,
                                                @Field("money") double money,
                                                @Field("routeId") int routeId);
