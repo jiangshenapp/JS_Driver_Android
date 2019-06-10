@@ -16,6 +16,7 @@ import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.manager.CommonGlideImageLoader;
 import com.js.driver.model.bean.OrderBean;
+import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.order.presenter.OrderDetailPresenter;
 import com.js.driver.ui.order.presenter.contract.OrderDetailContract;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -107,14 +108,25 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             case R.id.detail_img3_layout:
                 break;
             case R.id.detail_order_navigate:
+                switch (status) {
+                    case 2:
+                        mPresenter.refuseOrder(orderId);
+                        break;
+                }
                 break;
             case R.id.detail_order_positive:
+                switch (status) {
+                    case 2:
+                        mPresenter.receiveOrder(orderId);
+                        break;
+                }
                 break;
         }
     }
 
 
     private long orderId;
+    private int status;
 
     public static void action(Context context, long orderId) {
         Intent intent = new Intent(context, OrderDetailActivity.class);
@@ -170,6 +182,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     @Override
     public void onOrderDetail(OrderBean orderBean) {
         if (orderBean != null) {
+            status = orderBean.getState();
 //            CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext,orderBean.get);
             mSendName.setText(orderBean.getSendName());
             mOrderNumber.setText("订单编号：" + orderBean.getOrderNo());
@@ -214,6 +227,29 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     @Override
     public void finishRefresh() {
         mRefresh.finishRefresh();
+    }
+
+    @Override
+    public void onReceiveOrder(boolean isOk) {
+        if (isOk) {
+            toast("接单成功");
+            OrdersActivity.action(mContext, 0);
+            finish();
+        } else {
+            toast("接单失败");
+        }
+    }
+
+    @Override
+    public void onRefuseOrder(boolean isOk) {
+        if (isOk) {
+            toast("拒绝成功");
+            MainActivity.action(mContext);
+            finish();
+        } else {
+            toast("拒绝失败");
+        }
+
     }
 
 

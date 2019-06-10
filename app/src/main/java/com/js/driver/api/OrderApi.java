@@ -107,7 +107,7 @@ public interface OrderApi {
      * @return
      */
     @POST("app/driver/order/receive/{id}")
-    Observable<BaseHttpResponse> receive(@Path("id") long id);
+    Observable<HttpResponse<Boolean>> receive(@Path("id") long id);
 
 
     /**
@@ -116,7 +116,7 @@ public interface OrderApi {
      * @return
      */
     @POST("app/driver/order/refuse/{id}")
-    Observable<BaseHttpResponse> refuse(@Path("id") long id);
+    Observable<HttpResponse<Boolean>> refuse(@Path("id") long id);
 
 
     /**

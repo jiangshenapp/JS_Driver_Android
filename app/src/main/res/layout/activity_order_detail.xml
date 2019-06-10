@@ -722,7 +722,7 @@
                 android:gravity="center"
                 android:text="拒绝接单"
                 android:textColor="@color/_000000"
-                android:textSize="14sp" />
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/detail_order_positive"
@@ -733,7 +733,7 @@
                 android:gravity="center"
                 android:text="立即接单"
                 android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textSize="17sp" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -14,7 +14,9 @@ public interface OrderDetailContract {
 
         void finishRefresh();
 
+        void onReceiveOrder(boolean isOk);
 
+        void onRefuseOrder(boolean isOk);
 
     }
 

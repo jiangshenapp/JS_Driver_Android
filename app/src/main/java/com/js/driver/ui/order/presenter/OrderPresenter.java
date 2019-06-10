@@ -31,7 +31,7 @@ public class OrderPresenter extends RxPresenter<OrderContract.View> implements O
 
     @Override
     public void getOrderList(int current, int size, int status) {
-        Disposable disposable = mApiFactory.getApi(OrderApi.class).getOrderList(current,size,new OrderStatus(size))
+        Disposable disposable = mApiFactory.getApi(OrderApi.class).getOrderList(current,size,new OrderStatus(status))
                 .compose(RxSchedulers.io_main())
                 .compose(RxResult.handleResult())
                 .subscribe(new Consumer<ListResponse<OrderBean>>() {

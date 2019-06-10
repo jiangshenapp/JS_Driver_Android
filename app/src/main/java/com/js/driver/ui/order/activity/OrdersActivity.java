@@ -33,7 +33,7 @@ public class OrdersActivity extends SimpleActivity {
         intent.putExtra("type",type);
         context.startActivity(intent);
     }
-
+    //2待接单，3待确认，4待货主付款，5待接货, 6待送达，7待货主评价，8已完成，9已取消，10已关闭）
     private String[] titles = {"全部", "待接单", "待确认","待接货","待送达"};
     private int type;//0:全部,1待接单,2待确认,3待接货,4待送达
     private List<Fragment> mFragments;
@@ -64,10 +64,10 @@ public class OrdersActivity extends SimpleActivity {
     private void initFragment() {
         mFragments = new ArrayList<>();
         mFragments.add(OrderFragment.newInstance(0));
-        mFragments.add(OrderFragment.newInstance(1));
         mFragments.add(OrderFragment.newInstance(2));
         mFragments.add(OrderFragment.newInstance(3));
-        mFragments.add(OrderFragment.newInstance(4));
+        mFragments.add(OrderFragment.newInstance(5));
+        mFragments.add(OrderFragment.newInstance(6));
     }
 
     private void initViewPager() {
