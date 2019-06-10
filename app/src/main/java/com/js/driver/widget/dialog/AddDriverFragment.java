@@ -72,28 +72,16 @@ public class AddDriverFragment extends DialogFragment {
     @OnClick({R.id.positive, R.id.negative})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.positive:
+            case R.id.negative:
                 String phone = mPhone.getText().toString().trim();
-                String name = mName.getText().toString().trim();
-                String type = mType.getText().toString().trim();
                 if (TextUtils.isEmpty(phone)) {
                     UIUtil.toast("请输入手机号");
                     return;
                 }
-
-                if (TextUtils.isEmpty(name)) {
-                    UIUtil.toast("请输入姓名");
-                    return;
-                }
-
-                if (TextUtils.isEmpty(type)) {
-                    UIUtil.toast("请输入驾照类型");
-                    return;
-                }
-                EventBus.getDefault().post(new AddDriverEvent(name, phone, type));
+                EventBus.getDefault().post(new AddDriverEvent(phone));
                 dismiss();
                 break;
-            case R.id.negative:
+            case R.id.positive:
                 dismiss();
                 break;
         }
