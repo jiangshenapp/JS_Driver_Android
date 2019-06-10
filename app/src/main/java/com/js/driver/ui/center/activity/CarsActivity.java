@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.js.driver.App;
 import com.js.driver.R;
@@ -95,20 +96,19 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
     @Override
     public void setActionBar() {
         mTitle.setText("我的车辆");
+        setSupportActionBar(mToolbar);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backAction();
+            }
+        });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_center_car, menu);
         return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        // 设置ToolBar状态
-        menu.findItem(R.id.add_car).setVisible(true);
-        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override

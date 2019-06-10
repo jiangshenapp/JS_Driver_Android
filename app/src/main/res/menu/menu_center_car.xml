@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.js.driver.ui.center.activity.CarsActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/add_car"
-        android:orderInCategory="100"
         android:title="添加车辆"
         app:showAsAction="ifRoom" />
 </menu>
