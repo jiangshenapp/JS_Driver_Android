@@ -37,7 +37,7 @@ public interface CarApi {
     /**
      * 车辆详情
      */
-    @POST("/app/car/get/{id}")
+    @POST("app/car/get/{id}")
     Observable<HttpResponse<CarBean>> getCarDetail(@Path("id") long id);
 
 
@@ -51,6 +51,6 @@ public interface CarApi {
     /**
      * 解绑车辆
      */
-    @POST("/app/car/unbinding/{id}")
+    @POST("app/car/unbinding/{id}")
     Observable<BaseHttpResponse> unbindingCar(@Path("id") long id);
 }

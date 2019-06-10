@@ -6,15 +6,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.model.bean.CarBean;
+import com.js.driver.model.bean.OrderBean;
 import com.js.driver.model.response.ListResponse;
 import com.js.driver.ui.center.adapter.CarsAdapter;
 import com.js.driver.ui.center.presenter.CarsPresenter;
 import com.js.driver.ui.center.presenter.contract.CarsContract;
+import com.js.driver.ui.order.activity.OrderDetailActivity;
 import com.js.driver.widget.adapter.Divider;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -32,7 +35,7 @@ import butterknife.BindView;
 /**
  * Created by huyg on 2019/4/29.
  */
-public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsContract.View {
+public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsContract.View, BaseQuickAdapter.OnItemClickListener {
 
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
@@ -48,9 +51,14 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
+    }
+
+    @Override
     protected void init() {
         initView();
-        initData();
     }
 
     private void initData() {
@@ -76,6 +84,7 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
         mRecycler.setAdapter(mAdapter);
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_center_cars), LinearLayoutManager.VERTICAL));
+        mAdapter.setOnItemClickListener(this);
     }
 
     @Override
@@ -108,7 +117,7 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_car:
-                AddCarActivity.action(mContext);
+                AddCarActivity.action(mContext,1,0);
                 break;
         }
         return true;
@@ -124,5 +133,14 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
     public void finishRefreshAndLoadMore() {
         mRefresh.finishRefresh();
         mRefresh.finishLoadMore();
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        List<CarBean> carBeans = adapter.getData();
+        CarBean carBean = carBeans.get(position);
+        if (carBean != null) {
+            AddCarActivity.action(this,2,carBean.getId());
+        }
     }
 }

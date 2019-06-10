@@ -19,6 +19,8 @@ public class Const {
     public static final int AUTH_DRIVER_CARD = 3;
     public static final int AUTH_BUSINESS_LICENSE = 4;
     public static final int UPLOAD_HEADIMG = 5;
+    public static final int AUTH_CAR_LICENSE = 6;
+    public static final int AUTH_CAR_HEAD = 7;
 
     public static final int PAGE_SIZE = 10;
     public static final int PAGE_NUM = 1;
@@ -28,4 +30,12 @@ public class Const {
     public static final String AuthStateStr[] = {"未提交", "认证中", "已认证", "认证失败"};
     public static final String AuthStateColor[] = {"#B4B4B4", "#0091FF", "#ECA73F", "#E02020"};
     public static final String CarStateColor[] = {"#ECA73F", "#4A90E2", "#D0021B", "#ECA73F"};
+
+    public static final int CODE_REQ = 999;
+    public static final int CODE_RESULT = 888;
+
+    public static final int DICT_LENGTH = 1;
+    public static final String DICT_LENGTH_NAME = "carLength";
+    public static final int DICT_CAR_TYPE = 2;
+    public static final String DICT_CAR_TYPE_NAME ="carModel";
 }
