@@ -7,6 +7,7 @@ import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
+import com.js.driver.model.bean.CarBean;
 import com.js.driver.ui.center.presenter.AddCarPresenter;
 import com.js.driver.ui.center.presenter.contract.AddCarContract;
 import com.xlgcx.frame.view.BaseActivity;
@@ -16,17 +17,15 @@ import com.xlgcx.frame.view.BaseActivity;
  */
 public class AddCarActivity extends BaseActivity<AddCarPresenter> implements AddCarContract.View {
 
-
     public static void action(Context context){
         context.startActivity(new Intent(context,AddCarActivity.class));
     }
+
     @Override
     protected void init() {
         initView();
         initData();
     }
-
-
 
     private void initView() {
 
@@ -35,8 +34,7 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
     private void initData() {
 
     }
-
-
+    
     @Override
     protected void initInject() {
         DaggerActivityComponent.builder()
@@ -54,5 +52,20 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
     @Override
     public void setActionBar() {
         mTitle.setText("添加车辆");
+    }
+
+    @Override
+    public void onCarDetail(CarBean carBean) {
+
+    }
+
+    @Override
+    public void onBindingCar() {
+
+    }
+
+    @Override
+    public void onUnbindingCar() {
+
     }
 }

@@ -1,9 +1,14 @@
 package com.js.driver.ui.center.presenter;
 
 import com.js.driver.api.CarApi;
+import com.js.driver.api.DriverApi;
 import com.js.driver.api.OrderApi;
+import com.js.driver.api.UserApi;
 import com.js.driver.model.bean.CarBean;
+import com.js.driver.model.bean.DriverBean;
 import com.js.driver.model.bean.OrderBean;
+import com.js.driver.model.request.CarRequest;
+import com.js.driver.model.request.DriverVerifiedRequest;
 import com.js.driver.model.request.OrderStatus;
 import com.js.driver.model.response.ListResponse;
 import com.js.driver.rx.RxException;
@@ -12,6 +17,7 @@ import com.js.driver.rx.RxSchedulers;
 import com.js.driver.ui.center.presenter.contract.CarsContract;
 import com.xlgcx.frame.mvp.RxPresenter;
 import com.xlgcx.http.ApiFactory;
+import com.xlgcx.http.BaseHttpResponse;
 
 import javax.inject.Inject;
 
