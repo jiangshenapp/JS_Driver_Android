@@ -14,7 +14,6 @@ public interface CarsContract {
 
     interface View extends IBaseView {
         void onCarList(ListResponse<CarBean> response);
-
         void finishRefreshAndLoadMore();
     }
 

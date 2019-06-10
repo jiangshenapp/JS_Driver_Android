@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.js.driver.App;
 import com.js.driver.R;
@@ -96,7 +97,6 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
     public void setActionBar() {
         mTitle.setText("我的车辆");
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

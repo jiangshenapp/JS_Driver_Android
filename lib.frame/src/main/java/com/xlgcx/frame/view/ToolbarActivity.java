@@ -63,6 +63,7 @@ public abstract class ToolbarActivity extends RxAppCompatActivity {
             View contentView = LayoutInflater.from(this).inflate(layoutResID, null);
             containerLayout.addView(contentView);
             mToolbar.setNavigationIcon(R.drawable.ic_user_info_back);
+            setSupportActionBar(mToolbar);
             mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -2,6 +2,7 @@ package com.js.driver.api;
 
 import com.js.driver.model.bean.BillBean;
 import com.js.driver.model.bean.CarBean;
+import com.js.driver.model.bean.DriverBean;
 import com.js.driver.model.request.CarRequest;
 import com.js.driver.model.request.DriverVerifiedRequest;
 import com.js.driver.model.response.ListResponse;
@@ -27,15 +28,6 @@ public interface CarApi {
 
 
     /**
-     * 添加车辆
-     * @param data
-     * @return
-     */
-    @POST("app/car/add")
-    Observable<BaseHttpResponse> addCar(@Body CarRequest data);
-
-
-    /**
      * 车辆列表
      */
     @POST("app/car/list")
@@ -46,7 +38,14 @@ public interface CarApi {
      * 车辆详情
      */
     @POST("/app/car/get/{id}")
-    Observable<BaseHttpResponse> getCar(@Path("id") long id);
+    Observable<HttpResponse<CarBean>> getCarDetail(@Path("id") long id);
+
+
+    /**
+     * 绑定车辆
+     */
+    @POST("app/car/add")
+    Observable<BaseHttpResponse> bindingCar(@Body CarRequest data);
 
 
     /**

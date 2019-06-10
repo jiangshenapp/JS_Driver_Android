@@ -25,7 +25,6 @@ import com.xlgcx.frame.view.BaseActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -45,6 +44,7 @@ public class DriversActivity extends BaseActivity<DriversPresenter> implements D
 
     private DriversAdapter mAdapter;
     private List<DriverBean> mDrivers;
+    private AddDriverFragment driverFragment;
 
 
     public static void action(Context context){
@@ -101,13 +101,12 @@ public class DriversActivity extends BaseActivity<DriversPresenter> implements D
     @Override
     public void setActionBar() {
         mTitle.setText("我的司机");
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_center_driver, menu);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
@@ -121,7 +120,7 @@ public class DriversActivity extends BaseActivity<DriversPresenter> implements D
     }
 
     private void showDialog() {
-        AddDriverFragment driverFragment = new AddDriverFragment();
+        driverFragment = new AddDriverFragment();
         driverFragment.show(getSupportFragmentManager(),"Add");
     }
 
@@ -133,16 +132,22 @@ public class DriversActivity extends BaseActivity<DriversPresenter> implements D
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
         List<DriverBean> driverBean = adapter.getData();
+
         switch (view.getId()){
             case R.id.item_driver_delete:
-
+                mPresenter.unbindingDriver(driverBean.get(position).getDriverId());
                 break;
         }
     }
 
     @Subscribe
     public void onEvent(AddDriverEvent event){
-
+        if (event.type == 1) {
+            mPresenter.findDriverByMobile(event.driverPhone);
+        }
+        if (event.type == 2) {
+            mPresenter.bindingDriver(event.driverId);
+        }
     }
 
     @Override
@@ -155,5 +160,23 @@ public class DriversActivity extends BaseActivity<DriversPresenter> implements D
     public void finishRefreshAndLoadMore() {
         mRefresh.finishRefresh();
         mRefresh.finishLoadMore();
+    }
+
+    @Override
+    public void onFindDriverByMobile(DriverBean driverBean) {
+        driverFragment.setDriverBean(driverBean);
+    }
+
+    @Override
+    public void onBindingDriver() {
+        toast("绑定成功");
+        mPresenter.getDriverList();
+        driverFragment.dismiss();
+    }
+
+    @Override
+    public void onUnbindingDriver() {
+        toast("解绑成功");
+        mPresenter.getDriverList();
     }
 }

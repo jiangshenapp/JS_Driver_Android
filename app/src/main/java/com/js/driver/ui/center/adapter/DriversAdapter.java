@@ -26,7 +26,7 @@ public class DriversAdapter extends BaseQuickAdapter<DriverBean, BaseViewHolder>
         helper.setText(R.id.item_driver_name,item.getDriverName())
                 .setText(R.id.item_driver_phone,item.getDriverPhone())
                 .setText(R.id.item_driver_type,"驾照类型："+item.getDriverLevel());
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, Const.IMG_URL + item.getAvatar()
-                , helper.getView(R.id.item_driver_img),mContext.getResources().getDrawable(R.mipmap.ic_center_driver_head_land));
+        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, Const.IMG_URL + item.getAvatar()
+                , helper.getView(R.id.item_driver_avatar), mContext.getResources().getDrawable(R.mipmap.ic_center_driver_head_land));
     }
 }

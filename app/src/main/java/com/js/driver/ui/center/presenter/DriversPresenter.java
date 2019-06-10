@@ -2,6 +2,8 @@ package com.js.driver.ui.center.presenter;
 
 import com.js.driver.api.CarApi;
 import com.js.driver.api.DriverApi;
+import com.js.driver.api.PayApi;
+import com.js.driver.model.bean.AccountInfo;
 import com.js.driver.model.bean.CarBean;
 import com.js.driver.model.bean.DriverBean;
 import com.js.driver.model.response.ListResponse;
@@ -11,6 +13,7 @@ import com.js.driver.rx.RxSchedulers;
 import com.js.driver.ui.center.presenter.contract.DriversContract;
 import com.xlgcx.frame.mvp.RxPresenter;
 import com.xlgcx.http.ApiFactory;
+import com.xlgcx.http.BaseHttpResponse;
 
 import javax.inject.Inject;
 
@@ -42,6 +45,79 @@ public class DriversPresenter extends RxPresenter<DriversContract.View> implemen
                     }
                 },new RxException<>(e->{
                     mView.finishRefreshAndLoadMore();
+                }));
+        addDispose(disposable);
+    }
+
+    @Override
+    public void findDriverByMobile(String mobile) {
+        Disposable disposable = mApiFactory.getApi(DriverApi.class)
+                .findDriverByMobile(mobile)
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .subscribe(new Consumer<DriverBean>() {
+                    @Override
+                    public void accept(DriverBean driverBean) throws Exception {
+                        mView.onFindDriverByMobile(driverBean);
+                    }
+                }, new RxException<>(e -> {
+                    mView.toast(e.getMessage());
+                }));
+        addDispose(disposable);
+    }
+
+    @Override
+    public void bindingDriver(long driverId) {
+        Disposable disposable = mApiFactory.getApi(DriverApi.class)
+                .bindingDriver(driverId)
+                .compose(RxSchedulers.io_main())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<BaseHttpResponse>() {
+                    @Override
+                    public void accept(BaseHttpResponse response) throws Exception {
+                        mView.closeProgress();
+                        if (response.isSuccess()){
+                            mView.onBindingDriver();
+                        } else {
+                            mView.toast(response.getMsg());
+                        }
+                    }
+                }, new RxException<>(e -> {
+                    mView.closeProgress();
+                    mView.toast(e.getMessage());
+                }));
+        addDispose(disposable);
+    }
+
+    @Override
+    public void unbindingDriver(long driverId) {
+        Disposable disposable = mApiFactory.getApi(DriverApi.class)
+                .unbindingDriver(driverId)
+                .compose(RxSchedulers.io_main())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<BaseHttpResponse>() {
+                    @Override
+                    public void accept(BaseHttpResponse response) throws Exception {
+                        mView.closeProgress();
+                        if (response.isSuccess()){
+                            mView.onUnbindingDriver();
+                        } else {
+                            mView.toast(response.getMsg());
+                        }
+                    }
+                }, new RxException<>(e -> {
+                    mView.closeProgress();
+                    mView.toast(e.getMessage());
                 }));
         addDispose(disposable);
     }
