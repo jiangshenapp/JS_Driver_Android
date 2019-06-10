@@ -69,6 +69,7 @@ public abstract class ToolbarActivity extends RxAppCompatActivity {
                     backAction();
                 }
             });
+
             setActionBar();
         }
     }
