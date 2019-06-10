@@ -13,9 +13,16 @@ public interface OrderDetailContract {
         void onOrderDetail(OrderBean orderBean);
 
         void finishRefresh();
+
+
+
     }
 
     interface Presenter extends IPresenter<View> {
         void getOrderDetail(long id);
+
+        void receiveOrder(long id);
+
+        void refuseOrder(long id);
     }
 }

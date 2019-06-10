@@ -82,7 +82,7 @@ public class OrderFragment extends BaseFragment<OrderPresenter> implements Order
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 type = Const.MORE;
-                int num = (int) Math.ceil((mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
+                int num = (int) Math.ceil(((float)mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
                 mPresenter.getOrderList(num, Const.PAGE_SIZE, type);
             }
 

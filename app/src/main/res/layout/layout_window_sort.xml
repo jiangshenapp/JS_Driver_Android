@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
+    >
+    
+    <TextView
+        android:id="@+id/item_sort_default"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="默认排序"
+        android:textColor="#FF000000"
+        android:textSize="14sp"
+        android:gravity="center_vertical"
+        />
+
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/_F5F5F5"
+        />
+
+
+    <TextView
+        android:id="@+id/item_sort_distance"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="距离排序"
+        android:textColor="#FF000000"
+        android:textSize="14sp"
+        android:gravity="center_vertical"
+        />
+
+</LinearLayout>

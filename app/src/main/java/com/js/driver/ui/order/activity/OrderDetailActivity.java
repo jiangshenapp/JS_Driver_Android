@@ -3,6 +3,7 @@ package com.js.driver.ui.order.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,6 +41,8 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     TextView mSendIntroduce;
     @BindView(R.id.detail_order_number)
     TextView mOrderNumber;
+    @BindView(R.id.detail_order_status)
+    TextView mOrderStatus;
     @BindView(R.id.detail_send_address)
     TextView mSendAddress;
     @BindView(R.id.detail_send_city)
@@ -81,14 +84,12 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     @BindView(R.id.detail_order_navigate)
     TextView mOrderNavigate;
     @BindView(R.id.detail_order_positive)
-    TextView mOrderPositive;
-    @BindView(R.id.detail_order_finish)
     TextView mOrderFinish;
     @BindView(R.id.refresh)
     SmartRefreshLayout mRefresh;
 
 
-    @OnClick({R.id.detail_send_phone, R.id.detail_send_wechat, R.id.detail_send_navigate, R.id.detail_arrive_navigate, R.id.detail_img1_layout, R.id.detail_img2_layout, R.id.detail_img3_layout, R.id.detail_order_navigate, R.id.detail_order_positive, R.id.detail_order_finish})
+    @OnClick({R.id.detail_send_phone, R.id.detail_send_wechat, R.id.detail_send_navigate, R.id.detail_arrive_navigate, R.id.detail_img1_layout, R.id.detail_img2_layout, R.id.detail_img3_layout, R.id.detail_order_navigate, R.id.detail_order_positive})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.detail_send_phone://打电话
@@ -108,8 +109,6 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             case R.id.detail_order_navigate:
                 break;
             case R.id.detail_order_positive:
-                break;
-            case R.id.detail_order_finish:
                 break;
         }
     }
@@ -173,8 +172,41 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         if (orderBean != null) {
 //            CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext,orderBean.get);
             mSendName.setText(orderBean.getSendName());
-            mOrderNumber.setText(orderBean.getOrderNo());
-            mSendAddress.setText(orderBean.getSendAddress());
+            mOrderNumber.setText("订单编号：" + orderBean.getOrderNo());
+            mOrderStatus.setText(orderBean.getStateName());
+            mSendAddress.setText(orderBean.getSendAddressCodeName());
+            mSendCity.setText(orderBean.getSendAddress());
+            mArriveAddress.setText(orderBean.getReceiveAddress());
+            mArriveCity.setText(orderBean.getReceiveAddressCodeName());
+            mLoadingTime.setText(orderBean.getLoadingTime());
+            mCarInfo.setText(orderBean.getGoodsVolume() + "方/" + orderBean.getGoodsWeight() + "吨");
+            mGoodsType.setText(orderBean.getGoodsTypeName());
+            mCarUseType.setText(orderBean.getUseCarTypeName());
+            switch (orderBean.getPayWay()) {
+                case 1:
+                    mPayMethod.setText("线上支付");
+                    break;
+                case 2:
+                    mPayMethod.setText("线下支付");
+                    break;
+            }
+
+            switch (orderBean.getPayType()) {
+                case 1:
+                    mPayMethod.setText("到付");
+                    break;
+                case 2:
+                    mPayMethod.setText("现付");
+                    break;
+            }
+            if (!TextUtils.isEmpty(orderBean.getRemark())) {
+                mOrderRemark.setVisibility(View.VISIBLE);
+                mOrderRemark.setText(orderBean.getRemark());
+            } else {
+                mOrderRemark.setVisibility(View.GONE);
+            }
+            mArriveName.setText(orderBean.getReceiveName());
+            mArrivePhone.setText(orderBean.getReceiveMobile());
 
         }
     }

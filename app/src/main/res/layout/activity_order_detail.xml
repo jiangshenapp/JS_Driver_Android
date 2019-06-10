@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.scwang.smartrefresh.layout.SmartRefreshLayout
-    android:id="@+id/refresh"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/refresh"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,12 +20,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:background="@color/white"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/detail_avatar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_marginStart="12dp"
                     android:src="@mipmap/ic_center_shipper_head_land" />
 
@@ -35,7 +35,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginStart="12dp"
+                    >
 
                     <TextView
                         android:id="@+id/detail_send_name"
@@ -75,17 +77,45 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/detail_order_number"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
-                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
                 android:background="@color/white"
-                android:gravity="center_vertical"
-                android:paddingStart="12dp"
-                android:text="订单编号：HZ-20190283482-0001"
-                android:textColor="@color/_B4B4B4"
-                android:textSize="12sp" />
+                android:layout_marginTop="6dp"
+                >
+
+                <TextView
+                    android:id="@+id/detail_order_number"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:text="订单编号：HZ-20190283482-0001"
+                    android:textColor="@color/_B4B4B4"
+                    android:textSize="12sp" />
+
+
+                <TextView
+                    android:id="@+id/detail_order_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="12dp"
+                    android:text="发布中"
+                    android:textColor="@color/_ECA73F"
+                    android:textSize="12sp" />
+
+
+            </LinearLayout>
+
+
 
 
             <LinearLayout
@@ -98,6 +128,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
+                    android:background="@color/white"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -166,6 +197,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
+                    android:background="@color/white"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -263,6 +295,11 @@
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/_F0F0F0" />
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -290,6 +327,11 @@
                         android:textSize="14sp" />
 
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/_F0F0F0" />
 
 
                 <LinearLayout
@@ -362,6 +404,10 @@
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/_F0F0F0" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -433,6 +479,12 @@
 
                 </LinearLayout>
 
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/_F0F0F0" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
@@ -463,16 +515,17 @@
 
 
             <TextView
+                android:id="@+id/detail_order_remark"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="5dp"
-                android:text="简介说明"
+                android:background="@color/white"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
                 android:textColor="#FF666666"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/detail_order_remark"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -555,7 +608,8 @@
                 android:layout_marginTop="8dp"
                 android:text="回执"
                 android:textColor="@color/_B4B4B4"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:visibility="gone" />
 
 
             <LinearLayout
@@ -564,7 +618,8 @@
                 android:orientation="horizontal"
                 android:paddingStart="12dp"
                 android:paddingTop="5dp"
-                android:paddingEnd="12dp">
+                android:paddingEnd="12dp"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:id="@+id/detail_img1_layout"
@@ -656,7 +711,6 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
@@ -681,20 +735,6 @@
                 android:textColor="@color/white"
                 android:textSize="14sp" />
         </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/detail_order_finish"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/_ECA73F"
-            android:gravity="center"
-            android:text="我已送达"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

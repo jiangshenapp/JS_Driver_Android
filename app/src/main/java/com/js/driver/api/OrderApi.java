@@ -124,6 +124,6 @@ public interface OrderApi {
      * @param id
      * @return
      */
-    @GET("app/order/get/{id}")
+    @POST("app/order/get/{id}")
     Observable<HttpResponse<OrderBean>> getOrderDetail(@Path("id") long id);
 }

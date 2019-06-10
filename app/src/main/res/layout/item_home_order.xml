@@ -130,7 +130,6 @@
                     android:id="@+id/item_loading_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="装货时间：今天全天"
                     android:textColor="@color/_000000"
                     android:textSize="12sp" />
 
@@ -139,7 +138,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="距离您：23km"
                     android:textColor="@color/_4A90E2"
                     android:textSize="12sp" />
 

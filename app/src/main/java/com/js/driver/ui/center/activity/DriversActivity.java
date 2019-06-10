@@ -101,7 +101,7 @@ public class DriversActivity extends BaseActivity<DriversPresenter> implements D
     @Override
     public void setActionBar() {
         mTitle.setText("我的司机");
-        setSupportActionBar(mToolbar);
+
     }
 
     @Override

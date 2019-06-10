@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
+
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        >
+
+
+        <TextView
+            android:id="@+id/window_city"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="选择：浙江"
+            android:textColor="#FF000000"
+            android:textSize="14sp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="12dp"
+            />
+
+        <TextView
+            android:id="@+id/window_upper"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="返回上一级"
+            android:textColor="#FFECA73F"
+            android:textSize="14sp"
+            android:gravity="center_vertical"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="12dp"
+            android:visibility="gone"
+            />
+
+
+    </FrameLayout>
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    <View
+        android:id="@+id/blank"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/_f2f2f2"
+        />
+
+
+</LinearLayout>
