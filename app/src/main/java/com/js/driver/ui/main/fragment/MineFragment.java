@@ -193,13 +193,13 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         if (!TextUtils.isEmpty(userInfo.getNickName())) {
             mUserName.setText(userInfo.getNickName());
         } else {
-            mUserName.setText("未设置");
+            mUserName.setText("");
         }
 
         if (!TextUtils.isEmpty(userInfo.getMobile())) {
             mUserPhone.setText(userInfo.getMobile());
         } else {
-            mUserPhone.setText("未设置");
+            mUserPhone.setText("");
         }
 
         if (userInfo.getDriverVerified() == 3 || userInfo.getParkVerified() == 3) {
