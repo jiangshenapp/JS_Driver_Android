@@ -21,9 +21,21 @@ public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder helper, OrderBean item) {
-        helper.setText(R.id.item_waybill_order_number,"订单编号："+item.getOrderNo())
-                .setText(R.id.item_waybill_send_address,item.getSendAddress())
-                .setText(R.id.item_waybill_arrive_address,item.getReceiveAddress())
-                .setText(R.id.item_waybill_money,"￥"+item.getFee());
+        helper.setText(R.id.item_waybill_order_number, "订单编号：" + item.getOrderNo())
+                .setText(R.id.item_waybill_send_address, item.getSendAddress())
+                .setText(R.id.item_waybill_arrive_address, item.getReceiveAddress())
+                .setText(R.id.item_waybill_money, "￥" + item.getFee())
+                .setText(R.id.item_waybill_order_status, item.getStateName())
+                .setText(R.id.item_waybill_car_info, item.getGoodsVolume() + "方/"
+                        + item.getGoodsWeight() + "吨");
+        switch (item.getFeeType()) {
+            case 1:
+                helper.setText(R.id.item_waybill_money, "￥" + item.getFee());
+                break;
+            case 2:
+                helper.setText(R.id.item_waybill_money, "电议");
+                break;
+        }
+
     }
 }

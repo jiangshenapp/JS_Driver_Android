@@ -19,6 +19,7 @@ import com.js.driver.ui.order.activity.OrderDetailActivity;
 import com.js.driver.ui.order.adapter.OrderAdapter;
 import com.js.driver.ui.order.presenter.OrderPresenter;
 import com.js.driver.ui.order.presenter.contract.OrderContract;
+import com.js.driver.widget.adapter.Divider;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -73,8 +74,8 @@ public class OrderFragment extends BaseFragment<OrderPresenter> implements Order
     }
 
     private void initBundle() {
-       Bundle bundle =  getArguments();
-       status = bundle.getInt("status");
+        Bundle bundle = getArguments();
+        status = bundle.getInt("status");
     }
 
 
@@ -89,7 +90,7 @@ public class OrderFragment extends BaseFragment<OrderPresenter> implements Order
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 type = Const.MORE;
-                int num = (int) Math.ceil(((float)mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
+                int num = (int) Math.ceil(((float) mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
                 mPresenter.getOrderList(num, Const.PAGE_SIZE, status);
             }
 
@@ -105,6 +106,7 @@ public class OrderFragment extends BaseFragment<OrderPresenter> implements Order
         mAdapter = new OrderAdapter(R.layout.item_waybill, mOrders);
         mRecycler.setAdapter(mAdapter);
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
+        mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_order), LinearLayoutManager.VERTICAL));
         mAdapter.setOnItemClickListener(this);
     }
 

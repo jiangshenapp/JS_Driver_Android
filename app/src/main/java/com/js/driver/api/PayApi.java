@@ -26,7 +26,7 @@ public interface PayApi {
      * 账单明细
      */
     @GET("app/account/getTradeRecord")
-    Observable<HttpResponse<List<BillBean>>> getTradeRecord();
+    Observable<HttpResponse<List<BillBean>>> getTradeRecord(@Query("type") int type);
 
 
     /**

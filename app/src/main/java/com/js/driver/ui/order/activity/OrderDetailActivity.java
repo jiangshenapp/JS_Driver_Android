@@ -85,7 +85,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     @BindView(R.id.detail_order_navigate)
     TextView mOrderNavigate;
     @BindView(R.id.detail_order_positive)
-    TextView mOrderFinish;
+    TextView mOrderPosition;
     @BindView(R.id.refresh)
     SmartRefreshLayout mRefresh;
 
@@ -112,12 +112,18 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                     case 2:
                         mPresenter.refuseOrder(orderId);
                         break;
+                    case 3:
+                        mPresenter.cancelConfirmOrder(orderId);
+                        break;
                 }
                 break;
             case R.id.detail_order_positive:
                 switch (status) {
                     case 2:
                         mPresenter.receiveOrder(orderId);
+                        break;
+                    case 3:
+                        mPresenter.confirmOrder(orderId);
                         break;
                 }
                 break;
@@ -220,7 +226,17 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             }
             mArriveName.setText(orderBean.getReceiveName());
             mArrivePhone.setText(orderBean.getReceiveMobile());
-
+            //2待接单，3待确认，4待货主付款，5待接货, 6待送达，7待货主评价，8已完成，9已取消，10已关闭
+            switch (status) {
+                case 2:
+                    mOrderPosition.setText("立即接单");
+                    mOrderNavigate.setText("拒绝接单");
+                    break;
+                case 3:
+                    mOrderPosition.setText("立即确认");
+                    mOrderNavigate.setText("拒绝接单");
+                    break;
+            }
         }
     }
 
@@ -250,6 +266,26 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             toast("拒绝失败");
         }
 
+    }
+
+    @Override
+    public void onConfirmOrder(boolean isOk) {
+        if (isOk) {
+            toast("确认成功");
+            finish();
+        } else {
+            toast("确认失败");
+        }
+    }
+
+    @Override
+    public void onCancelConfirmOrder(boolean isOk) {
+        if (isOk) {
+            toast("确认取消成功");
+            finish();
+        } else {
+            toast("确认取消失败");
+        }
     }
 
 

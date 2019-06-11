@@ -18,6 +18,10 @@ public interface OrderDetailContract {
 
         void onRefuseOrder(boolean isOk);
 
+        void onConfirmOrder(boolean isOk);
+
+        void onCancelConfirmOrder(boolean isOk);
+
     }
 
     interface Presenter extends IPresenter<View> {
@@ -26,5 +30,9 @@ public interface OrderDetailContract {
         void receiveOrder(long id);
 
         void refuseOrder(long id);
+
+        void confirmOrder(long id);
+
+        void cancelConfirmOrder(long id);
     }
 }

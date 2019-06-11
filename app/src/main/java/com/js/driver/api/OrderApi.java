@@ -126,4 +126,21 @@ public interface OrderApi {
      */
     @POST("app/order/get/{id}")
     Observable<HttpResponse<OrderBean>> getOrderDetail(@Path("id") long id);
+
+
+    /**
+     * 取消确认
+     * @param id
+     * @return
+     */
+    @POST("app/driver/order/cancelConfirm/{id}")
+    Observable<HttpResponse<Boolean>> cancelConfirmOrder(@Path("id") long id);
+
+
+
+
+    @POST("app/driver/order/confirm/{id}")
+    Observable<HttpResponse<Boolean>> confirmOrder(@Path("id") long id);
+
+
 }

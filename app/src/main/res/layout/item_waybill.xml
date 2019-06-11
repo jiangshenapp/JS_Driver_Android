@@ -18,7 +18,6 @@
             android:id="@+id/item_waybill_order_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="订单编号：HZ-291820398484-0001"
             android:textColor="@color/_B4B4B4"
             android:textSize="12sp"
             android:layout_gravity="start|center_vertical"
@@ -129,7 +128,6 @@
             android:id="@+id/item_waybill_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="￥8888.00"
             android:textColor="#FFD0021B"
             android:textSize="17sp"
             android:layout_marginEnd="12dp"
@@ -148,6 +146,7 @@
             android:layout_marginEnd="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/item_waybill_money"
+            android:visibility="gone"
             />
 
 
