@@ -35,9 +35,9 @@ public class RechargePresenter extends RxPresenter<RechargeContract.View> implem
 
 
     @Override
-    public void payOrder(int channelType, double money, int routeId) {
+    public void payOrder(int tradeType, int channelType, double money, int routeId) {
         Disposable disposable = mApiFactory.getApi(PayApi.class)
-                .recharge(Const.BUSINESS_ID, channelType, money, routeId)
+                .recharge(tradeType, channelType, money, routeId)
                 .compose(RxSchedulers.io_main())
                 .compose(RxResult.handleResult())
                 .doOnSubscribe(new Consumer<Disposable>() {
