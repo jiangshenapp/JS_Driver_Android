@@ -6,6 +6,7 @@ import com.js.driver.di.ActivityScope;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.ui.SplashActivity;
 import com.js.driver.ui.center.activity.AddCarActivity;
+import com.js.driver.ui.center.activity.AddRouteActivity;
 import com.js.driver.ui.center.activity.CarsActivity;
 import com.js.driver.ui.center.activity.DriversActivity;
 import com.js.driver.ui.center.activity.FeedBackActivity;
@@ -76,5 +77,7 @@ public interface ActivityComponent {
     void inject(RoutesActivity routesActivity);
 
     void inject(RoutesDetailActivity routesDetailActivity);
+
+    void inject(AddRouteActivity addRouteActivity);
 }
 

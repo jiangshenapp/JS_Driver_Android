@@ -17,6 +17,7 @@
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:gravity="fill_horizontal|center_vertical"
+            android:textColor="@color/_000000"
             android:text="出发地" />
 
         <TextView
@@ -24,6 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
+            android:textColor="@color/_000000"
             android:text="浙江" />
 
     </LinearLayout>
@@ -42,6 +44,7 @@
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:gravity="fill_horizontal|center_vertical"
+            android:textColor="@color/_000000"
             android:text="目的地" />
 
         <TextView
@@ -49,6 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
+            android:textColor="@color/_000000"
             android:text="宁波" />
 
     </LinearLayout>
@@ -67,6 +71,7 @@
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:gravity="fill_horizontal|center_vertical"
+            android:textColor="@color/_000000"
             android:text="车长" />
 
         <TextView
@@ -74,6 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
+            android:textColor="@color/_000000"
             android:text="3.1米" />
 
     </LinearLayout>
@@ -92,6 +98,7 @@
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:gravity="fill_horizontal|center_vertical"
+            android:textColor="@color/_000000"
             android:text="车型" />
 
         <TextView
@@ -99,6 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
+            android:textColor="@color/_000000"
             android:text="板车" />
 
     </LinearLayout>
@@ -117,6 +125,7 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:gravity="fill_horizontal|center_vertical"
+            android:textColor="@color/_000000"
             android:text="简介" />
 
         <TextView
@@ -125,6 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical"
+            android:textColor="@color/_000000"
             android:text="" />
 
     </LinearLayout>

@@ -120,7 +120,7 @@ public class RoutesActivity extends BaseActivity<RoutesPresenter> implements Rou
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_route:
-                toast("添加路线");
+                AddRouteActivity.action(mContext,1);
                 break;
         }
         return true;
@@ -132,7 +132,7 @@ public class RoutesActivity extends BaseActivity<RoutesPresenter> implements Rou
 
         switch (view.getId()) {
             case R.id.item_route_edit:
-                toast("编辑路线");
+                AddRouteActivity.action(mContext,2,routeBean.get(position).getId());
                 break;
             case R.id.item_route_delete:
                 mPresenter.removeRoute(routeBean.get(position).getId());
@@ -159,12 +159,5 @@ public class RoutesActivity extends BaseActivity<RoutesPresenter> implements Rou
     public void onRemoveRoute() {
         toast("路线删除成功");
         mPresenter.getRouteList();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

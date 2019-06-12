@@ -3,6 +3,7 @@ package com.js.driver.api;
 import com.js.driver.model.bean.CarBean;
 import com.js.driver.model.bean.DriverBean;
 import com.js.driver.model.bean.RouteBean;
+import com.js.driver.model.request.CarRequest;
 import com.js.driver.model.request.FindOrder;
 import com.js.driver.model.request.RouteRequest;
 import com.js.driver.model.response.ListResponse;
@@ -59,4 +60,18 @@ public interface RouteApi {
     @POST("app/line/enable")
     Observable<BaseHttpResponse> enableLine(@Query("lineId") long driverId,
                                             @Query("enable") long enable);
+
+
+    /**
+     * 添加线路
+     */
+    @POST("app/line/add")
+    Observable<BaseHttpResponse> addLine(@Body RouteRequest data);
+
+
+    /**
+     * 编辑线路
+     */
+    @POST("app/line/edit")
+    Observable<BaseHttpResponse> editLine(@Body RouteRequest data);
 }

@@ -28,6 +28,9 @@ public class RouteRequest {
     private String startAddressCode;
     private String useCarType;
     private String remark;
+    private int id;
+    private int state;
+    private int classic;
 
     public RouteRequest() {
 
@@ -51,6 +54,18 @@ public class RouteRequest {
         this.carModel = carModel;
         this.startAddressCode = startAddressCode;
         this.remark = remark;
+    }
+
+    //编辑
+    public RouteRequest(String arriveAddressCode, String carLength, String carModel, String startAddressCode, String remark, int id, int state, int classic) {
+        this.arriveAddressCode = arriveAddressCode;
+        this.carLength = carLength;
+        this.carModel = carModel;
+        this.startAddressCode = startAddressCode;
+        this.remark = remark;
+        this.id = id;
+        this.state = state;
+        this.classic = classic;
     }
 
     public String getArriveAddressCode() {
