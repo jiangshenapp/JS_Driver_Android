@@ -23,6 +23,7 @@ public class DriversAdapter extends BaseQuickAdapter<DriverBean, BaseViewHolder>
     @Override
     protected void convert(BaseViewHolder helper, DriverBean item) {
         helper.addOnClickListener(R.id.item_driver_delete);
+        helper.addOnClickListener(R.id.content);
         helper.setText(R.id.item_driver_name,item.getDriverName())
                 .setText(R.id.item_driver_phone,item.getDriverPhone())
                 .setText(R.id.item_driver_type,"驾照类型："+item.getDriverLevel());

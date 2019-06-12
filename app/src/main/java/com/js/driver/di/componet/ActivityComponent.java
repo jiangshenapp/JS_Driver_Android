@@ -9,6 +9,8 @@ import com.js.driver.ui.center.activity.AddCarActivity;
 import com.js.driver.ui.center.activity.CarsActivity;
 import com.js.driver.ui.center.activity.DriversActivity;
 import com.js.driver.ui.center.activity.FeedBackActivity;
+import com.js.driver.ui.center.activity.RoutesActivity;
+import com.js.driver.ui.center.activity.RoutesDetailActivity;
 import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.order.activity.OrderDetailActivity;
 import com.js.driver.ui.user.activity.DriverVerifiedActivity;
@@ -70,5 +72,9 @@ public interface ActivityComponent {
     void inject(ResetPwdActivity addCarActivity);
 
     void inject(FeedBackActivity feedBackActivity);
+
+    void inject(RoutesActivity routesActivity);
+
+    void inject(RoutesDetailActivity routesDetailActivity);
 }
 

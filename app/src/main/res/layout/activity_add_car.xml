@@ -79,13 +79,15 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
                 android:layout_weight="1"
                 android:background="@null"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:gravity="end|center_vertical"
-                android:singleLine="true"
+                android:textColor="@color/_000000"
                 android:textColorHint="@color/_B4B4B4"
+                android:singleLine="true"
                 android:textSize="14sp" />
 
             <ImageView
@@ -124,12 +126,14 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
                 android:layout_weight="1"
                 android:background="@null"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:gravity="end|center_vertical"
                 android:singleLine="true"
+                android:textColor="@color/_000000"
                 android:textColorHint="@color/_B4B4B4"
                 android:textSize="14sp" />
 
