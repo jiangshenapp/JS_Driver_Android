@@ -128,17 +128,18 @@ public class RoutesActivity extends BaseActivity<RoutesPresenter> implements Rou
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-        List<RouteBean> routeBean = adapter.getData();
+        List<RouteBean> routeBeans = adapter.getData();
+        RouteBean routeBean = routeBeans.get(position);
 
         switch (view.getId()) {
             case R.id.item_route_edit:
-                AddRouteActivity.action(mContext,2,routeBean.get(position).getId());
+                AddRouteActivity.action(mContext,2,routeBean);
                 break;
             case R.id.item_route_delete:
-                mPresenter.removeRoute(routeBean.get(position).getId());
+                mPresenter.removeRoute(routeBean.getId());
                 break;
             case R.id.content:
-                RoutesDetailActivity.action(mContext, routeBean.get(position).getId());
+                RoutesDetailActivity.action(mContext, routeBean.getId());
                 break;
         }
     }

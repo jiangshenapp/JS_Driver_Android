@@ -74,14 +74,15 @@ public class AddRouteActivity extends BaseActivity<AddRoutePresenter> implements
 
     private CityWindow mStartWindow;
     private CityWindow mEndWindow;
+    private String startAddressCode;
+    private String endAddressCode;
 
     private ItemWindow mTypeWindow;
     private ItemWindow mLengthWindow;
     private String typeStr;
     private String lengthStr;
 
-    private RouteBean mRouteBean;
-    public static long mId;
+    public static RouteBean mRouteBean;
     public static int mType; //1、添加路线  2、编辑路线
 
     public static void action(Context context, int type) {
@@ -89,10 +90,10 @@ public class AddRouteActivity extends BaseActivity<AddRoutePresenter> implements
         mType = type;
     }
 
-    public static void action(Context context, int type, long id) {
+    public static void action(Context context, int type, RouteBean routeBean) {
         context.startActivity(new Intent(context, AddRouteActivity.class));
         mType = type;
-        mId = id;
+        mRouteBean = routeBean;
     }
 
     @Override
@@ -103,9 +104,16 @@ public class AddRouteActivity extends BaseActivity<AddRoutePresenter> implements
     }
 
     private void initData() {
-        mRouteBean = new RouteBean();
         mDictPresenter.getDictByType(Const.DICT_CAR_TYPE_NAME);
         mDictPresenter.getDictByType(Const.DICT_LENGTH_NAME);
+
+        if (mType == 2) {
+            tvAddressStart.setText(mRouteBean.getStartAddressCodeName());
+            tvAddressEnd.setText(mRouteBean.getArriveAddressCodeName());
+            etCarLength.setText(mRouteBean.getCarLengthName());
+            etCarModel.setText(mRouteBean.getCarModelName());
+            etCarDesc.setText(mRouteBean.getRemark());
+        }
     }
 
     private void initView() {
@@ -140,12 +148,14 @@ public class AddRouteActivity extends BaseActivity<AddRoutePresenter> implements
 
     @Override
     public void onAddLine() {
-
+        toast("保存成功");
+        finish();
     }
 
     @Override
     public void onEditLine() {
-
+        toast("保存成功");
+        finish();
     }
 
     @OnClick({R.id.tv_address_start, R.id.tv_address_end, R.id.ll_car_length, R.id.et_car_length,
@@ -167,6 +177,35 @@ public class AddRouteActivity extends BaseActivity<AddRoutePresenter> implements
                 mTypeWindow.showAsDropDown(tvTop, 0, 0);
                 break;
             case R.id.tv_submit:
+                if (TextUtils.isEmpty(tvAddressStart.getText())
+                || tvAddressStart.getText().equals("+选择")) {
+                    toast("请选择出发地");
+                    return;
+                }
+                if (TextUtils.isEmpty(tvAddressEnd.getText())
+                        || tvAddressEnd.getText().equals("+选择")) {
+                    toast("请选择目的地");
+                    return;
+                }
+                if (TextUtils.isEmpty(etCarLength.getText())) {
+                    toast("请选择车长");
+                    return;
+                }
+                if (TextUtils.isEmpty(etCarModel.getText())) {
+                    toast("请选择车型");
+                    return;
+                }
+                if (TextUtils.isEmpty(etCarDesc.getText())) {
+                    toast("请输入简介");
+                    return;
+                }
+
+                if (mType == 1) { //添加
+                    mPresenter.addLine(endAddressCode, lengthStr, typeStr, startAddressCode, etCarDesc.getText().toString());
+                } else { //编辑
+                    mPresenter.editLine(endAddressCode, lengthStr, typeStr, startAddressCode, etCarDesc.getText().toString()
+                    ,mRouteBean.getId(),mRouteBean.getState(),mRouteBean.getClassic());
+                }
 
                 break;
         }
@@ -181,7 +220,7 @@ public class AddRouteActivity extends BaseActivity<AddRoutePresenter> implements
                 } else {
                     tvAddressStart.setText(event.areaBean.getName());
                 }
-
+                startAddressCode = event.areaBean.getCode();
                 break;
             case 1:
                 if (!TextUtils.isEmpty(event.areaBean.getAlias())) {
@@ -189,6 +228,7 @@ public class AddRouteActivity extends BaseActivity<AddRoutePresenter> implements
                 } else {
                     tvAddressEnd.setText(event.areaBean.getName());
                 }
+                endAddressCode = event.areaBean.getCode();
                 break;
         }
     }
