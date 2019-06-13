@@ -214,6 +214,12 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
     }
 
     @Override
+    public void onReBindingCar() {
+        toast("重新提交成功，请等待审核结果");
+        finish();
+    }
+
+    @Override
     public void onUnbindingCar() {
         toast("解绑成功");
         finish();
@@ -295,7 +301,7 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
                     carVolume, "0", String.valueOf(mCarLengthBean.getId()), carNo, carWeight);
         }
         if (tvSubmit.getText().toString().equals("重新提交")) {
-            mPresenter.bindingCar(mCarBean.getImage1(), String.valueOf(mCarModelBean.getId()), mCarBean.getImage2(),
+            mPresenter.reBindingCar(mCarBean.getId(), mCarBean.getImage1(), String.valueOf(mCarModelBean.getId()), mCarBean.getImage2(),
                     carVolume, "2", String.valueOf(mCarLengthBean.getId()), carNo, carWeight);
         }
     }

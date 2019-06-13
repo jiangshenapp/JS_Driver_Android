@@ -100,4 +100,32 @@ public class AddCarPresenter extends RxPresenter<AddCarContract.View> implements
                 }));
         addDispose(disposable);
     }
+
+    @Override
+    public void reBindingCar(long id, String image1, String carModelId, String image2, String capacityVolume, String state, String carLengthId, String cphm, String capacityTonnage) {
+        Disposable disposable = mApiFactory.getApi(CarApi.class)
+                .reBindingCar(id, new CarRequest(image1, carModelId, image2, capacityVolume, state, carLengthId, cphm, capacityTonnage))
+                .compose(RxSchedulers.io_main())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<BaseHttpResponse>() {
+                    @Override
+                    public void accept(BaseHttpResponse response) throws Exception {
+                        mView.closeProgress();
+                        if (response.isSuccess()){
+                            mView.onReBindingCar();
+                        } else {
+                            mView.toast(response.getMsg());
+                        }
+                    }
+                }, new RxException<>(e -> {
+                    mView.closeProgress();
+                    mView.toast(e.getMessage());
+                }));
+        addDispose(disposable);
+    }
 }

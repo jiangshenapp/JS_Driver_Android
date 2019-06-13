@@ -53,4 +53,11 @@ public interface CarApi {
      */
     @POST("app/car/unbinding/{id}")
     Observable<BaseHttpResponse> unbindingCar(@Path("id") long id);
+
+
+    /**
+     * 重新提交车辆
+     */
+    @POST("app/car/reAudit/{id}")
+    Observable<BaseHttpResponse> reBindingCar(@Path("id") long id, @Body CarRequest data);
 }
