@@ -11,6 +11,7 @@ import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.model.bean.AccountInfo;
+import com.js.driver.ui.center.activity.AddRouteActivity;
 import com.js.driver.ui.wallet.presenter.BailPresenter;
 import com.js.driver.ui.wallet.presenter.contract.BailContract;
 import com.xlgcx.frame.view.BaseActivity;
@@ -31,13 +32,19 @@ public class BailActivity extends BaseActivity<BailPresenter> implements BailCon
     public static AccountInfo mAccountInfo;
 
     public static void action(Context context, AccountInfo accountInfo) {
-        context.startActivity(new Intent(context, BailActivity.class));
-        mAccountInfo = accountInfo;
+        Intent intent = new Intent(context, BailActivity.class);
+        intent.putExtra("accountInfo", accountInfo);
+        context.startActivity(intent);
     }
 
     @Override
     protected void init() {
+        initIntent();
         mMoney.setText(String.valueOf(mAccountInfo.getDriverDeposit()));
+    }
+
+    private void initIntent() {
+        mAccountInfo = getIntent().getParcelableExtra("accountInfo");
     }
 
     @Override

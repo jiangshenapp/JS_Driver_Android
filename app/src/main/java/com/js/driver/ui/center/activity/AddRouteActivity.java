@@ -23,6 +23,8 @@ import com.js.driver.presenter.DictPresenter;
 import com.js.driver.presenter.contract.DictContract;
 import com.js.driver.ui.center.presenter.AddRoutePresenter;
 import com.js.driver.ui.center.presenter.contract.AddRouteContract;
+import com.js.driver.ui.main.activity.MainActivity;
+import com.js.driver.ui.order.activity.OrderDetailActivity;
 import com.js.driver.widget.window.CityWindow;
 import com.js.driver.widget.window.ItemWindow;
 import com.xlgcx.frame.view.BaseActivity;
@@ -86,21 +88,31 @@ public class AddRouteActivity extends BaseActivity<AddRoutePresenter> implements
     public static int mType; //1、添加路线  2、编辑路线
 
     public static void action(Context context, int type) {
-        context.startActivity(new Intent(context, AddRouteActivity.class));
-        mType = type;
+        Intent intent = new Intent(context, AddRouteActivity.class);
+        intent.putExtra("type", type);
+        context.startActivity(intent);
     }
 
     public static void action(Context context, int type, RouteBean routeBean) {
-        context.startActivity(new Intent(context, AddRouteActivity.class));
-        mType = type;
-        mRouteBean = routeBean;
+        Intent intent = new Intent(context, AddRouteActivity.class);
+        intent.putExtra("type", type);
+        intent.putExtra("routeBean", routeBean);
+        context.startActivity(intent);
     }
 
     @Override
     protected void init() {
+        initIntent();
         mDictPresenter.attachView(this);
         initView();
         initData();
+    }
+
+    private void initIntent() {
+        mType = getIntent().getIntExtra("type", 0);
+        if (mType == 2) {
+            mRouteBean = getIntent().getParcelableExtra("routeBean");
+        }
     }
 
     private void initData() {

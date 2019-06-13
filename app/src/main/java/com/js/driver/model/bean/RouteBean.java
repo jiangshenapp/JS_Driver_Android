@@ -1,5 +1,8 @@
 package com.js.driver.model.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * author : hzb
  * e-mail : hanzhanbing@evcoming.com
@@ -7,7 +10,7 @@ package com.js.driver.model.bean;
  * desc   :
  * version: 3.0.0
  */
-public class RouteBean {
+public class RouteBean implements Parcelable {
 
     /**
      * id : 12
@@ -172,4 +175,64 @@ public class RouteBean {
     public void setStartAddressCode(String startAddressCode) {
         this.startAddressCode = startAddressCode;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    protected RouteBean(Parcel in) {
+        id = in.readInt();
+        state = in.readInt();
+        cphm = in.readString();
+        driverPhone = in.readString();
+        classic = in.readInt();
+        carLengthName = in.readString();
+        startAddressCodeName = in.readString();
+        carLength = in.readString();
+        carModel = in.readString();
+        carModelName = in.readString();
+        subscriberId = in.readInt();
+        remark = in.readString();
+        arriveAddressCodeName = in.readString();
+        driverName = in.readString();
+        arriveAddressCode = in.readString();
+        startAddressCode = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        // 序列化过程：必须按成员变量声明的顺序进行封装
+        dest.writeInt(id);
+        dest.writeInt(state);
+        dest.writeString(cphm);
+        dest.writeString(driverPhone);
+        dest.writeInt(classic);
+        dest.writeString(carLengthName);
+        dest.writeString(startAddressCodeName);
+        dest.writeString(carLength);
+        dest.writeString(carModel);
+        dest.writeString(carModelName);
+        dest.writeInt(subscriberId);
+        dest.writeString(remark);
+        dest.writeString(arriveAddressCodeName);
+        dest.writeString(driverName);
+        dest.writeString(arriveAddressCode);
+        dest.writeString(startAddressCode);
+    }
+
+    // 反序列过程：必须实现Parcelable.Creator接口，并且对象名必须为CREATOR
+    // 读取Parcel里面数据时必须按照成员变量声明的顺序，Parcel数据来源上面writeToParcel方法，读出来的数据供逻辑层使用
+    public static final Creator<RouteBean> CREATOR = new Creator<RouteBean>() {
+
+        @Override
+        public RouteBean createFromParcel(Parcel in) {
+            return new RouteBean(in);
+        }
+
+        @Override
+        public RouteBean[] newArray(int size) {
+            return new RouteBean[size];
+        }
+    };
 }

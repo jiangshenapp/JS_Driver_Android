@@ -47,13 +47,19 @@ public class RoutesDetailActivity extends BaseActivity<RoutesDetailPresenter> im
     private RouteBean mRouteBean;
 
     public static void action(Context context, long id) {
-        context.startActivity(new Intent(context, RoutesDetailActivity.class));
-        mId = id;
+        Intent intent = new Intent(context, RoutesDetailActivity.class);
+        intent.putExtra("id", id);
+        context.startActivity(intent);
     }
 
     @Override
     protected void init() {
+        initIntent();
         mPresenter.getRouteDetail(mId);
+    }
+
+    private void initIntent() {
+        mId = getIntent().getLongExtra("id", 0);
     }
 
     @Override

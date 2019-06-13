@@ -41,6 +41,7 @@ import com.js.driver.presenter.contract.DictContract;
 import com.js.driver.presenter.contract.FileContract;
 import com.js.driver.ui.center.presenter.AddCarPresenter;
 import com.js.driver.ui.center.presenter.contract.AddCarContract;
+import com.js.driver.ui.order.activity.OrderDetailActivity;
 import com.xlgcx.frame.view.BaseActivity;
 
 import java.io.File;
@@ -108,20 +109,27 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
     private TakePhoto takePhoto;
     private CarBean mCarBean;
     private int authState;
-    public static long mId;
-    public static int mType; //1、添加车辆  2、车辆详情
+    private long mId;
+    private int mType; //1、添加车辆  2、车辆详情
 
     public static void action(Context context, int type, long id) {
-        context.startActivity(new Intent(context, AddCarActivity.class));
-        mType = type;
-        mId = id;
+        Intent intent = new Intent(context, AddCarActivity.class);
+        intent.putExtra("type", type);
+        intent.putExtra("id", id);
+        context.startActivity(intent);
     }
 
     @Override
     protected void init() {
+        initIntent();
         mDictPresenter.attachView(this);
         mFilePresenter.attachView(this);
         initData();
+    }
+
+    private void initIntent() {
+        mType = getIntent().getIntExtra("type", 0);
+        mId = getIntent().getLongExtra("id", 0);
     }
 
     private void initData() {
