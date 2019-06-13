@@ -1,12 +1,15 @@
 package com.js.driver.ui.center.presenter;
 
 import com.js.driver.api.CarApi;
+import com.js.driver.api.DriverApi;
+import com.js.driver.api.RouteApi;
 import com.js.driver.model.bean.CarBean;
-import com.js.driver.model.request.CarRequest;
+import com.js.driver.model.bean.RouteBean;
 import com.js.driver.rx.RxException;
 import com.js.driver.rx.RxResult;
 import com.js.driver.rx.RxSchedulers;
-import com.js.driver.ui.center.presenter.contract.AddCarContract;
+import com.js.driver.ui.center.presenter.contract.RoutesContract;
+import com.js.driver.ui.center.presenter.contract.RoutesDetailContract;
 import com.xlgcx.frame.mvp.RxPresenter;
 import com.xlgcx.http.ApiFactory;
 import com.xlgcx.http.BaseHttpResponse;
@@ -17,27 +20,31 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 /**
- * Created by huyg on 2019/4/29.
+ * author : hzb
+ * e-mail : hanzhanbing@evcoming.com
+ * time   : 2019/06/12
+ * desc   :
+ * version: 3.0.0
  */
-public class AddCarPresenter extends RxPresenter<AddCarContract.View> implements AddCarContract.Presenter {
+public class RoutesDetailPresenter extends RxPresenter<RoutesDetailContract.View> implements RoutesDetailContract.Presenter {
 
     private ApiFactory mApiFactory;
 
     @Inject
-    public AddCarPresenter(ApiFactory apiFactory) {
+    public RoutesDetailPresenter(ApiFactory apiFactory) {
         this.mApiFactory = apiFactory;
     }
 
     @Override
-    public void getCarDetail(long id) {
-        Disposable disposable = mApiFactory.getApi(CarApi.class)
-                .getCarDetail(id)
+    public void getRouteDetail(long id) {
+        Disposable disposable = mApiFactory.getApi(RouteApi.class)
+                .getRouteDetail(id)
                 .compose(RxSchedulers.io_main())
                 .compose(RxResult.handleResult())
-                .subscribe(new Consumer<CarBean>() {
+                .subscribe(new Consumer<RouteBean>() {
                     @Override
-                    public void accept(CarBean carBean) throws Exception {
-                        mView.onCarDetail(carBean);
+                    public void accept(RouteBean routeBean) throws Exception {
+                        mView.onRouteDetail(routeBean);
                     }
                 }, new RxException<>(e -> {
                     mView.toast(e.getMessage());
@@ -46,9 +53,9 @@ public class AddCarPresenter extends RxPresenter<AddCarContract.View> implements
     }
 
     @Override
-    public void bindingCar(String image1, String carModelId, String image2, String capacityVolume, String state, String carLengthId, String cphm, String capacityTonnage) {
-        Disposable disposable = mApiFactory.getApi(CarApi.class)
-                .bindingCar(new CarRequest(image1, carModelId, image2, capacityVolume, state, carLengthId, cphm, capacityTonnage))
+    public void applyClassicLine(long id) {
+        Disposable disposable = mApiFactory.getApi(RouteApi.class)
+                .applyClassicLine(id)
                 .compose(RxSchedulers.io_main())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
@@ -61,7 +68,7 @@ public class AddCarPresenter extends RxPresenter<AddCarContract.View> implements
                     public void accept(BaseHttpResponse response) throws Exception {
                         mView.closeProgress();
                         if (response.isSuccess()){
-                            mView.onBindingCar();
+                            mView.onApplyClassicLine();
                         } else {
                             mView.toast(response.getMsg());
                         }
@@ -74,9 +81,9 @@ public class AddCarPresenter extends RxPresenter<AddCarContract.View> implements
     }
 
     @Override
-    public void unbindingCar(long id) {
-        Disposable disposable = mApiFactory.getApi(CarApi.class)
-                .unbindingCar(id)
+    public void enableLine(long lineId, long enable) {
+        Disposable disposable = mApiFactory.getApi(RouteApi.class)
+                .enableLine(lineId, enable)
                 .compose(RxSchedulers.io_main())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
@@ -89,35 +96,7 @@ public class AddCarPresenter extends RxPresenter<AddCarContract.View> implements
                     public void accept(BaseHttpResponse response) throws Exception {
                         mView.closeProgress();
                         if (response.isSuccess()){
-                            mView.onUnbindingCar();
-                        } else {
-                            mView.toast(response.getMsg());
-                        }
-                    }
-                }, new RxException<>(e -> {
-                    mView.closeProgress();
-                    mView.toast(e.getMessage());
-                }));
-        addDispose(disposable);
-    }
-
-    @Override
-    public void reBindingCar(long id, String image1, String carModelId, String image2, String capacityVolume, String state, String carLengthId, String cphm, String capacityTonnage) {
-        Disposable disposable = mApiFactory.getApi(CarApi.class)
-                .reBindingCar(id, new CarRequest(image1, carModelId, image2, capacityVolume, state, carLengthId, cphm, capacityTonnage))
-                .compose(RxSchedulers.io_main())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        mView.showProgress();
-                    }
-                })
-                .subscribe(new Consumer<BaseHttpResponse>() {
-                    @Override
-                    public void accept(BaseHttpResponse response) throws Exception {
-                        mView.closeProgress();
-                        if (response.isSuccess()){
-                            mView.onReBindingCar();
+                            mView.onEnableLine();
                         } else {
                             mView.toast(response.getMsg());
                         }

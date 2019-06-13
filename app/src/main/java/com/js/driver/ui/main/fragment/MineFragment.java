@@ -1,5 +1,6 @@
 package com.js.driver.ui.main.fragment;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.js.driver.model.bean.UserInfo;
 import com.js.driver.model.event.UserStatusChangeEvent;
 import com.js.driver.ui.center.activity.CarsActivity;
 import com.js.driver.ui.center.activity.DriversActivity;
+import com.js.driver.ui.center.activity.RoutesActivity;
 import com.js.driver.ui.main.adapter.MineMenuAdapter;
 import com.js.driver.ui.main.presenter.MinePresenter;
 import com.js.driver.ui.main.presenter.contract.MineContract;
@@ -255,7 +257,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 DriversActivity.action(mContext);
                 break;
             case 2://我的路线
-
+                RoutesActivity.action(mContext);
                 break;
             case 3://我的客服
                 toast("该功能暂未开通，敬请期待");

@@ -20,7 +20,7 @@ public class DictAdapter extends BaseQuickAdapter<DictBean, BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder helper, DictBean item) {
-        helper.setText(R.id.item_dict, item.getValue());
+        helper.setText(R.id.item_dict, item.getLabel());
         if (item.isChecked()) {
             helper.setBackgroundRes(R.id.item_dict, R.drawable.shape_city_checked);
         } else {

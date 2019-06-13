@@ -8,6 +8,7 @@ import android.widget.FrameLayout;
 import com.js.driver.R;
 import com.js.driver.model.event.LoginChangeEvent;
 import com.js.driver.ui.main.activity.MainActivity;
+import com.js.driver.ui.order.activity.OrderDetailActivity;
 import com.js.driver.ui.user.fragment.CodeLoginFragment;
 import com.js.driver.ui.user.fragment.PwdLoginFragment;
 import com.xlgcx.frame.view.SimpleActivity;
@@ -34,12 +35,12 @@ public class LoginActivity extends SimpleActivity {
     private PwdLoginFragment mPwdLoginFragment;
     private List<Fragment> mFragments;
     private Fragment mCurrentFragment;
-    public static boolean mBackHome;
-
+    private boolean mBackHome;
 
     public static void action(Context context, boolean backHome) {
-        context.startActivity(new Intent(context, LoginActivity.class));
-        mBackHome = backHome;
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.putExtra("backHome", backHome);
+        context.startActivity(intent);
     }
 
     @Override
@@ -58,7 +59,12 @@ public class LoginActivity extends SimpleActivity {
 
     @Override
     protected void init() {
+        initIntent();
         initView();
+    }
+
+    private void initIntent() {
+        mBackHome = getIntent().getBooleanExtra("backHome",false);
     }
 
     private void initView() {

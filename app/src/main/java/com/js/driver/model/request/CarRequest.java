@@ -20,6 +20,7 @@ public class CarRequest {
      * capacityTonnage : 3
      */
 
+    private long id;
     private String image1;
     private String carModelId;
     private String image2;
@@ -29,6 +30,7 @@ public class CarRequest {
     private String cphm;
     private String capacityTonnage;
 
+    //添加车辆
     public CarRequest(String image1, String carModelId, String image2, String capacityVolume, String state, String carLengthId, String cphm, String capacityTonnage) {
         this.image1 = image1;
         this.carModelId = carModelId;
@@ -38,6 +40,27 @@ public class CarRequest {
         this.carLengthId = carLengthId;
         this.cphm = cphm;
         this.capacityTonnage = capacityTonnage;
+    }
+
+    //重新提交车辆
+    public CarRequest(long id, String image1, String carModelId, String image2, String capacityVolume, String state, String carLengthId, String cphm, String capacityTonnage) {
+        this.id = id;
+        this.image1 = image1;
+        this.carModelId = carModelId;
+        this.image2 = image2;
+        this.capacityVolume = capacityVolume;
+        this.state = state;
+        this.carLengthId = carLengthId;
+        this.cphm = cphm;
+        this.capacityTonnage = capacityTonnage;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getImage1() {

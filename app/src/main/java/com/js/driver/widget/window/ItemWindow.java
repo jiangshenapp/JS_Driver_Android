@@ -1,6 +1,8 @@
 package com.js.driver.widget.window;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +13,22 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.google.gson.Gson;
 import com.js.driver.R;
+import com.js.driver.model.bean.AreaBean;
+import com.js.driver.model.bean.ChinaArea;
+import com.js.driver.model.bean.CityInfo;
 import com.js.driver.model.bean.DictBean;
+import com.js.driver.model.event.CitySelectEvent;
 import com.js.driver.model.event.DictSelectEvent;
+import com.js.driver.widget.window.adapter.CityAdapter;
 import com.js.driver.widget.window.adapter.DictAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,7 +85,7 @@ public class ItemWindow extends PopupWindow implements BaseQuickAdapter.OnItemCl
         setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         setFocusable(true);//内容可点击
-        setOutsideTouchable(false); //点击外部popupWindow消失
+        setOutsideTouchable(true); //点击外部popupWindow消失
         setBackgroundDrawable(null);
         initView();
     }

@@ -127,6 +127,18 @@
             android:name=".ui.center.activity.CarsActivity"
             android:launchMode="singleTop" />
 
+        <activity
+            android:name=".ui.center.activity.RoutesActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.center.activity.RoutesDetailActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.center.activity.AddRouteActivity"
+            android:launchMode="singleTop" />
+
         <activity android:name=".ui.center.activity.AddCarActivity"
             android:launchMode="singleTop"
             />

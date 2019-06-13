@@ -67,17 +67,23 @@ public class RechargeBailActivity extends BaseActivity<RechargeBailPresenter> im
     private int channelType = 0;
     private int routerId = 0;
 
-    public static AccountInfo mAccountInfo;
+    private AccountInfo mAccountInfo;
 
     public static void action(Context context, AccountInfo accountInfo) {
-        context.startActivity(new Intent(context, RechargeBailActivity.class));
-        mAccountInfo = accountInfo;
+        Intent intent = new Intent(context, RechargeBailActivity.class);
+        intent.putExtra("accountInfo", accountInfo);
+        context.startActivity(intent);
     }
 
     @Override
     protected void init() {
+        initIntent();
         initView();
         initData();
+    }
+
+    private void initIntent() {
+        mAccountInfo = getIntent().getParcelableExtra("accountInfo");
     }
 
     private void initView() {

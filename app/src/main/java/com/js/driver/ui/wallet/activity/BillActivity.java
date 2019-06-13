@@ -34,7 +34,6 @@ public class BillActivity extends SimpleActivity {
     private String[] titles = {"全部", "余额", "保证金"};
     private int type;//0:全部,1余额,2保证金
 
-
     public static void action(Context context, int type) {
         Intent intent = new Intent(context, BillActivity.class);
         intent.putExtra("type", type);

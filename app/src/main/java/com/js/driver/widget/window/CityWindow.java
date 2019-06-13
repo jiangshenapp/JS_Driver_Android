@@ -2,6 +2,7 @@ package com.js.driver.widget.window;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,8 @@ import com.js.driver.model.bean.AreaBean;
 import com.js.driver.model.bean.ChinaArea;
 import com.js.driver.model.bean.CityInfo;
 import com.js.driver.model.event.CitySelectEvent;
+import com.js.driver.util.UIUtil;
+import com.js.driver.widget.adapter.DividerGridItemDecoration;
 import com.js.driver.widget.window.adapter.CityAdapter;
 
 import org.greenrobot.eventbus.EventBus;
@@ -26,6 +29,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.EventListener;
 import java.util.List;
 
 import butterknife.BindView;
