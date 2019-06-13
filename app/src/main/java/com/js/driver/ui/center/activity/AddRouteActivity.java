@@ -84,8 +84,8 @@ public class AddRouteActivity extends BaseActivity<AddRoutePresenter> implements
     private String typeStr;
     private String lengthStr;
 
-    public static RouteBean mRouteBean;
-    public static int mType; //1、添加路线  2、编辑路线
+    private RouteBean mRouteBean;
+    private int mType; //1、添加路线  2、编辑路线
 
     public static void action(Context context, int type) {
         Intent intent = new Intent(context, AddRouteActivity.class);

@@ -29,7 +29,7 @@ public class BailActivity extends BaseActivity<BailPresenter> implements BailCon
     @BindView(R.id.bail_money)
     TextView mMoney;
 
-    public static AccountInfo mAccountInfo;
+    private AccountInfo mAccountInfo;
 
     public static void action(Context context, AccountInfo accountInfo) {
         Intent intent = new Intent(context, BailActivity.class);

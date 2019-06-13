@@ -35,8 +35,7 @@ public class LoginActivity extends SimpleActivity {
     private PwdLoginFragment mPwdLoginFragment;
     private List<Fragment> mFragments;
     private Fragment mCurrentFragment;
-    public static boolean mBackHome;
-
+    private boolean mBackHome;
 
     public static void action(Context context, boolean backHome) {
         Intent intent = new Intent(context, LoginActivity.class);

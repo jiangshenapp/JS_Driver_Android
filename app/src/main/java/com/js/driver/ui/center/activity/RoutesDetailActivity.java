@@ -28,7 +28,6 @@ import butterknife.OnClick;
  */
 public class RoutesDetailActivity extends BaseActivity<RoutesDetailPresenter> implements RoutesDetailContract.View {
 
-    public static long mId;
     @BindView(R.id.tv_address_start)
     TextView tvAddressStart;
     @BindView(R.id.tv_address_end)
@@ -44,6 +43,7 @@ public class RoutesDetailActivity extends BaseActivity<RoutesDetailPresenter> im
     @BindView(R.id.tv_apply)
     TextView tvApply;
 
+    private long mId;
     private RouteBean mRouteBean;
 
     public static void action(Context context, long id) {

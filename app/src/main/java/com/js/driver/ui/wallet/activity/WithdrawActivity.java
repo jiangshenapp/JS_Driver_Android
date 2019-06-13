@@ -53,8 +53,8 @@ public class WithdrawActivity extends BaseActivity<WithdrawPresenter> implements
     @BindView(R.id.item_bank_layout)
     LinearLayout itemBankLayout;
 
-    public static int mWithdrawType; //1、运力端保证金，2、账户余额
-    public static double moneyMax; //最大提现金额
+    private int mWithdrawType; //1、运力端保证金，2、账户余额
+    private double moneyMax; //最大提现金额
     private int mWithdrawChannel; //1、支付宝 2、银行卡
 
     public static void action(Context context, int withdrawType, double money) {

@@ -67,7 +67,7 @@ public class RechargeBailActivity extends BaseActivity<RechargeBailPresenter> im
     private int channelType = 0;
     private int routerId = 0;
 
-    public static AccountInfo mAccountInfo;
+    private AccountInfo mAccountInfo;
 
     public static void action(Context context, AccountInfo accountInfo) {
         Intent intent = new Intent(context, RechargeBailActivity.class);
