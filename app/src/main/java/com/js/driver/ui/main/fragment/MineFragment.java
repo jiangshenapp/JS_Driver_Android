@@ -1,6 +1,5 @@
 package com.js.driver.ui.main.fragment;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
@@ -107,10 +106,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     }
 
     private void initData() {
-        if (!TextUtils.isEmpty(App.getInstance().token)) { //判断token是否为空
-            mPresenter.getUserInfo();
-            mPresenter.getAccountInfo();
-        }
+        mPresenter.getUserInfo();
+        mPresenter.getAccountInfo();
     }
 
     private void initView() {

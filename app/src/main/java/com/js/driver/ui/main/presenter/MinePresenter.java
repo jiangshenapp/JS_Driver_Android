@@ -54,22 +54,20 @@ public class MinePresenter extends RxPresenter<MineContract.View> implements Min
 
     @Override
     public void getAccountInfo() {
-        if (!TextUtils.isEmpty(App.getInstance().token)) {
-            Disposable disposable = mApiFactory.getApi(PayApi.class)
-                    .getBySubscriber()
-                    .compose(RxSchedulers.io_main())
-                    .compose(RxResult.handleResult())
-                    .subscribe(new Consumer<AccountInfo>() {
-                        @Override
-                        public void accept(AccountInfo accountInfo) throws Exception {
-                            mView.finishRefresh();
-                            mView.onAccountInfo(accountInfo);
-                        }
-                    }, new RxException<>(e -> {
+        Disposable disposable = mApiFactory.getApi(PayApi.class)
+                .getBySubscriber()
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .subscribe(new Consumer<AccountInfo>() {
+                    @Override
+                    public void accept(AccountInfo accountInfo) throws Exception {
                         mView.finishRefresh();
-                        mView.toast(e.getMessage());
-                    }));
-            addDispose(disposable);
-        }
+                        mView.onAccountInfo(accountInfo);
+                    }
+                }, new RxException<>(e -> {
+                    mView.finishRefresh();
+                    mView.toast(e.getMessage());
+                }));
+        addDispose(disposable);
     }
 }

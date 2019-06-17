@@ -49,6 +49,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     private MineFragment mMineFragment;
     private List<Fragment> mFragments;
 
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        mViewpager.setCurrentItem(0);
+    }
+
     public static void action(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
     }
@@ -160,10 +167,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 break;
             case R.id.navigation_mine:
                 mViewpager.setCurrentItem(4);
-                if (TextUtils.isEmpty(App.getInstance().token)){
-                    LoginActivity.action(mContext,true);
-                }
-//                UserManager.getUserManager().isLogin(true, true);
                 break;
         }
         return true;

@@ -35,6 +35,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
+        <meta-data android:name="android.max_aspect"
+            android:value="2.1" />
+
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

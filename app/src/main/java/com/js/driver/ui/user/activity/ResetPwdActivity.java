@@ -99,6 +99,7 @@ public class ResetPwdActivity extends BaseActivity<ResetPwdPresenter> implements
 
     @Override
     public void onResetPwd() {
-        LoginActivity.action(this,false);
+        LoginActivity.action(this);
+        finish();
     }
 }

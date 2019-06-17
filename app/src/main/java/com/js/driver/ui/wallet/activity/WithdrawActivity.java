@@ -155,6 +155,6 @@ public class WithdrawActivity extends BaseActivity<WithdrawPresenter> implements
     @Override
     public void onBalanceWithdraw() {
         toast("申请提现成功");
-        backAction();
+        finish();
     }
 }

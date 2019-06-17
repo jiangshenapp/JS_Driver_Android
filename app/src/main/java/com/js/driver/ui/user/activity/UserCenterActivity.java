@@ -157,7 +157,8 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
                 clearCache();
                 break;
             case R.id.logout://登出
-                UserManager.getUserManager().logout();
+                UserManager.getUserManager().logout(mContext);
+                finish();
                 break;
         }
     }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.js.driver.R;
 import com.js.driver.model.event.LoginChangeEvent;
 import com.js.driver.ui.main.activity.MainActivity;
@@ -25,7 +26,7 @@ import butterknife.BindView;
 /**
  * Created by huyg on 2019/4/21.
  */
-
+@Route(path = "/user/login")
 public class LoginActivity extends SimpleActivity {
 
     @BindView(R.id.login_frame)
@@ -35,21 +36,10 @@ public class LoginActivity extends SimpleActivity {
     private PwdLoginFragment mPwdLoginFragment;
     private List<Fragment> mFragments;
     private Fragment mCurrentFragment;
-    private boolean mBackHome;
 
-    public static void action(Context context, boolean backHome) {
+    public static void action(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
-        intent.putExtra("backHome", backHome);
         context.startActivity(intent);
-    }
-
-    @Override
-    public void backAction() {
-        if (mBackHome) {
-            MainActivity.action(this);
-        } else {
-            finish();
-        }
     }
 
     @Override
@@ -59,13 +49,9 @@ public class LoginActivity extends SimpleActivity {
 
     @Override
     protected void init() {
-        initIntent();
         initView();
     }
 
-    private void initIntent() {
-        mBackHome = getIntent().getBooleanExtra("backHome",false);
-    }
 
     private void initView() {
         initFragment();

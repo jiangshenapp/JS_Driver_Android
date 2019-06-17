@@ -154,7 +154,8 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
     @Override
     public void onRegister() {
-        LoginActivity.action(this,false);
+        LoginActivity.action(this);
+        finish();
     }
 
     @Override

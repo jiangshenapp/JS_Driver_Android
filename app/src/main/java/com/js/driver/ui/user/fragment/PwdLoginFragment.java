@@ -97,6 +97,6 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
     public void onLogin(String token) {
         App.getInstance().putToken(token);
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));
-        MainActivity.action(mContext);
+        getActivity().finish();
     }
 }
