@@ -110,6 +110,14 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         mPresenter.getAccountInfo();
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            initData();
+        }
+    }
+
     private void initView() {
         initRecycler();
         initRefresh();

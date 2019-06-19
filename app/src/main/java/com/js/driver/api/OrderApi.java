@@ -2,6 +2,7 @@ package com.js.driver.api;
 
 import com.js.driver.model.bean.OrderBean;
 import com.js.driver.model.request.FindOrder;
+import com.js.driver.model.request.OrderDistribution;
 import com.js.driver.model.request.OrderStatus;
 import com.js.driver.model.response.ListResponse;
 import com.xlgcx.http.BaseHttpResponse;
@@ -72,7 +73,8 @@ public interface OrderApi {
      * @return
      */
     @POST("app/driver/order/distribution/{id}")
-    Observable<BaseHttpResponse> distribution(@Path("id") long id);
+    Observable<BaseHttpResponse> distribution(@Path("id") long id,
+                                              @Body OrderDistribution orderDistribution);
 
 
     /**

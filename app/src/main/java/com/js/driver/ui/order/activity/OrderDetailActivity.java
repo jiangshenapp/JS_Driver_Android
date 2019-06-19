@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -115,6 +116,8 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                     case 3:
                         mPresenter.cancelConfirmOrder(orderId);
                         break;
+                    case 5:
+                        break;
                 }
                 break;
             case R.id.detail_order_positive:
@@ -124,6 +127,8 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                         break;
                     case 3:
                         mPresenter.confirmOrder(orderId);
+                        break;
+                    case 5:
                         break;
                 }
                 break;
@@ -235,6 +240,10 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 case 3:
                     mOrderPosition.setText("立即确认");
                     mOrderNavigate.setText("拒绝接单");
+                    break;
+                case 5:
+                    mOrderPosition.setText("开始配送");
+                    mOrderNavigate.setText("拒绝配送");
                     break;
             }
         }

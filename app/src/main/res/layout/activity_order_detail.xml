@@ -18,6 +18,7 @@
 
 
             <LinearLayout
+                android:id="@+id/status_receiver_layout"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@color/white"
@@ -28,22 +29,21 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="12dp"
+                    android:layout_gravity="center_vertical"
                     android:src="@mipmap/ic_center_shipper_head_land" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:orientation="vertical"
-                    android:layout_marginStart="12dp"
-                    >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/detail_send_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="张女士"
                         android:textColor="@color/_000000"
                         android:textSize="14sp" />
 
@@ -52,7 +52,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="介绍文字text"
                         android:textColor="@color/_B4B4B4"
                         android:textSize="12sp" />
 
@@ -78,24 +77,25 @@
             </LinearLayout>
 
 
+
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
-                android:orientation="horizontal"
-                android:background="@color/white"
                 android:layout_marginTop="6dp"
-                >
+                android:background="@color/white"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/detail_order_number"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
+                    android:layout_weight="1"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:paddingStart="12dp"
-                    android:text="订单编号：HZ-20190283482-0001"
                     android:textColor="@color/_B4B4B4"
                     android:textSize="12sp" />
 
@@ -105,17 +105,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
+                    android:layout_marginEnd="12dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
-                    android:layout_marginEnd="12dp"
-                    android:text="发布中"
                     android:textColor="@color/_ECA73F"
                     android:textSize="12sp" />
 
 
             </LinearLayout>
-
-
 
 
             <LinearLayout
@@ -150,7 +147,6 @@
                             android:id="@+id/detail_send_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="行政服务中心"
                             android:textColor="@color/_000000"
                             android:textSize="15sp" />
 
@@ -159,7 +155,6 @@
                             android:id="@+id/detail_send_city"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="北京市 朝阳区"
                             android:textColor="@color/_B4B4B4"
                             android:textSize="12sp" />
 
@@ -171,7 +166,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="距离：35km"
                         android:textColor="@color/_B4B4B4"
                         android:textSize="12sp" />
 
@@ -219,7 +213,6 @@
                             android:id="@+id/detail_arrive_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="行政服务中心"
                             android:textColor="@color/_000000"
                             android:textSize="15sp" />
 
@@ -228,7 +221,6 @@
                             android:id="@+id/detail_arrive_city"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="北京市 朝阳区"
                             android:textColor="@color/_B4B4B4"
                             android:textSize="12sp" />
 
@@ -240,7 +232,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="距离：35km"
                         android:textColor="@color/_B4B4B4"
                         android:textSize="12sp" />
 
@@ -289,7 +280,6 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical|end"
                         android:lines="1"
-                        android:text="2019-03-03 10:00"
                         android:textColor="@color/_666666"
                         android:textSize="14sp" />
 
@@ -322,7 +312,6 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical|end"
                         android:lines="1"
-                        android:text="高栏货车4.2米/1.3方/1.0吨"
                         android:textColor="@color/_666666"
                         android:textSize="14sp" />
 
@@ -361,7 +350,6 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical|end"
                             android:lines="1"
-                            android:text="普货"
                             android:textColor="@color/_666666"
                             android:textSize="14sp" />
 
@@ -396,7 +384,6 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical|end"
                             android:lines="1"
-                            android:text="整车"
                             android:textColor="@color/_666666"
                             android:textSize="14sp" />
 
@@ -436,7 +423,6 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical|end"
                             android:lines="1"
-                            android:text="线上支付"
                             android:textColor="@color/_666666"
                             android:textSize="14sp" />
 
@@ -471,7 +457,6 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical|end"
                             android:lines="1"
-                            android:text="面议"
                             android:textColor="@color/_666666"
                             android:textSize="14sp" />
 
@@ -506,7 +491,6 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical|end"
                         android:lines="1"
-                        android:text="到付"
                         android:textColor="@color/_666666"
                         android:textSize="14sp" />
 
@@ -518,13 +502,12 @@
                 android:id="@+id/detail_order_remark"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:layout_marginTop="6dp"
                 android:background="@color/white"
                 android:paddingStart="12dp"
                 android:paddingTop="6dp"
                 android:textColor="#FF666666"
-                android:textSize="14sp"
-                android:layout_marginTop="6dp"
-                />
+                android:textSize="14sp" />
 
             <TextView
 
@@ -563,7 +546,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center_vertical"
                         android:layout_marginEnd="12dp"
-                        android:text="张**"
                         android:textColor="@color/_B8B8B8"
                         android:textSize="14sp" />
 
@@ -594,7 +576,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center_vertical"
                         android:layout_marginEnd="12dp"
-                        android:text="188 **** 3453"
                         android:textColor="@color/_B8B8B8"
                         android:textSize="14sp" />
 
@@ -722,7 +703,6 @@
                 android:layout_weight="2"
                 android:background="@color/white"
                 android:gravity="center"
-                android:text="拒绝接单"
                 android:textColor="@color/_000000"
                 android:textSize="17sp" />
 
@@ -733,7 +713,6 @@
                 android:layout_weight="3"
                 android:background="@color/_ECA73F"
                 android:gravity="center"
-                android:text="立即接单"
                 android:textColor="@color/white"
                 android:textSize="17sp" />
         </LinearLayout>

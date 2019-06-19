@@ -23,10 +23,6 @@ public class AuthInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request originalRequest = chain.request();//获取请求
         Request tokenRequest = null;
-        if (TextUtils.isEmpty(HttpApp.getApp().token)) {//对 token 进行判空，如果为空，则不进行修改
-            ARouter.getInstance().build("/user/login").navigation();
-            return chain.proceed(originalRequest);
-        }
         tokenRequest = originalRequest.newBuilder()//往请求头中添加 token 字段
                 .header("token", HttpApp.getApp().token)
                 .build();
