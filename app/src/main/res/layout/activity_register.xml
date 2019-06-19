@@ -23,7 +23,6 @@
         android:layout_marginTop="35dp"
         android:background="@null"
         android:hint="请输入11位有效的手机号"
-        android:text="15737936517"
         android:inputType="phone"
         android:maxLength="11"
         android:textColor="@color/_000000"
@@ -42,7 +41,6 @@
         android:layout_marginTop="21dp"
         android:background="@null"
         android:hint="请设置6-16位密码（字母、数字）"
-        android:text="000000"
         android:inputType="textPassword"
         android:textColor="@color/_000000"
         android:textSize="17sp" />
@@ -66,8 +64,8 @@
             android:layout_marginTop="20dp"
             android:background="@null"
             android:hint="请输入验证码"
-            android:text="123456"
             android:textColor="@color/_000000"
+            android:inputType="number"
             android:textSize="17sp" />
 
         <TextView

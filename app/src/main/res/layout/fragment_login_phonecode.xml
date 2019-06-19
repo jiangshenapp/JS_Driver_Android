@@ -70,6 +70,7 @@
             android:layout_marginTop="20dp"
             android:background="@null"
             android:hint="请输入验证码"
+            android:inputType="number"
             android:textColor="@color/_000000"
             android:textSize="17sp" />
 
