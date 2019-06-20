@@ -5,21 +5,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import com.baidu.mapapi.model.LatLng;
+import com.google.gson.Gson;
 import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
+import com.js.driver.global.Const;
 import com.js.driver.manager.CommonGlideImageLoader;
 import com.js.driver.model.bean.OrderBean;
+import com.js.driver.model.request.OrderDistribution;
 import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.order.presenter.OrderDetailPresenter;
 import com.js.driver.ui.order.presenter.contract.OrderDetailContract;
+import com.js.driver.util.MapUtils;
+import com.mylhyl.circledialog.CircleDialog;
+import com.mylhyl.circledialog.callback.ConfigDialog;
+import com.mylhyl.circledialog.params.DialogParams;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -98,9 +108,23 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 break;
             case R.id.detail_send_wechat://微信
                 break;
-            case R.id.detail_send_navigate://发货地址导航
+            case R.id.detail_send_navigate:
+                if (App.getInstance().mLocation == null) {
+                    toast("定位失败");
+                    return;
+                }
+                Gson gson = new Gson();
+                LatLng latLng = new LatLng(App.getInstance().mLocation.getLatitude(), App.getInstance().mLocation.getLongitude());
+                showSelectDialog(latLng, gson.fromJson(mOrderBean.getSendPosition(), LatLng.class), mOrderBean.getSendAddress());
                 break;
-            case R.id.detail_arrive_navigate://到货地址导航
+            case R.id.detail_arrive_navigate:
+                if (App.getInstance().mLocation == null) {
+                    toast("定位失败");
+                    return;
+                }
+                Gson gson1 = new Gson();
+                LatLng latLng1 = new LatLng(App.getInstance().mLocation.getLatitude(), App.getInstance().mLocation.getLongitude());
+                showSelectDialog(latLng1, gson1.fromJson(mOrderBean.getReceivePosition(), LatLng.class), mOrderBean.getReceiveAddress());
                 break;
             case R.id.detail_img1_layout:
                 break;
@@ -116,8 +140,14 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                     case 3:
                         mPresenter.cancelConfirmOrder(orderId);
                         break;
-                    case 5:
+                    case 4:
+
                         break;
+                    case 5:
+
+                        mPresenter.cancelDistribution(orderId);
+                        break;
+
                 }
                 break;
             case R.id.detail_order_positive:
@@ -129,6 +159,10 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                         mPresenter.confirmOrder(orderId);
                         break;
                     case 5:
+                        DistributionActivity.action(OrderDetailActivity.this);
+                        break;
+                    case 6:
+                        mPresenter.completeDistribution(orderId);
                         break;
                 }
                 break;
@@ -138,6 +172,9 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
 
     private long orderId;
     private int status;
+    private int carId;
+    private OrderBean mOrderBean;
+    private String[] items = {"百度地图", "高德地图"};
 
     public static void action(Context context, long orderId) {
         Intent intent = new Intent(context, OrderDetailActivity.class);
@@ -193,6 +230,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     @Override
     public void onOrderDetail(OrderBean orderBean) {
         if (orderBean != null) {
+            mOrderBean = orderBean;
             status = orderBean.getState();
 //            CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext,orderBean.get);
             mSendName.setText(orderBean.getSendName());
@@ -204,14 +242,14 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             mArriveCity.setText(orderBean.getReceiveAddressCodeName());
             mLoadingTime.setText(orderBean.getLoadingTime());
             mCarInfo.setText(orderBean.getGoodsVolume() + "方/" + orderBean.getGoodsWeight() + "吨");
-            mGoodsType.setText(orderBean.getGoodsTypeName());
-            mCarUseType.setText(orderBean.getUseCarTypeName());
+            mGoodsType.setText(orderBean.getGoodsType());
+            mCarUseType.setText(orderBean.getUseCarType());
             switch (orderBean.getPayWay()) {
                 case 1:
-                    mPayMethod.setText("线上支付");
+                    mPayType.setText("线上支付");
                     break;
                 case 2:
-                    mPayMethod.setText("线下支付");
+                    mPayType.setText("线下支付");
                     break;
             }
 
@@ -223,6 +261,16 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                     mPayMethod.setText("现付");
                     break;
             }
+
+            switch (orderBean.getFeeType()) {
+                case 1:
+                    mPayMoney.setText(String.valueOf(orderBean.getFee()));
+                    break;
+                case 2:
+                    mPayMoney.setText("电议");
+                    break;
+            }
+
             if (!TextUtils.isEmpty(orderBean.getRemark())) {
                 mOrderRemark.setVisibility(View.VISIBLE);
                 mOrderRemark.setText(orderBean.getRemark());
@@ -241,9 +289,21 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                     mOrderPosition.setText("立即确认");
                     mOrderNavigate.setText("拒绝接单");
                     break;
+                case 4:
+                    mOrderPosition.setText("等待货主支付");
+                    mOrderNavigate.setText("取消接货");
+                    break;
                 case 5:
                     mOrderPosition.setText("开始配送");
                     mOrderNavigate.setText("拒绝配送");
+                    break;
+                case 6:
+                    mOrderNavigate.setVisibility(View.GONE);
+                    mOrderPosition.setText("我已送达");
+                    break;
+                case 7:
+                    mOrderNavigate.setVisibility(View.GONE);
+                    mOrderPosition.setText("上传回执");
                     break;
             }
         }
@@ -257,8 +317,8 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     @Override
     public void onReceiveOrder(boolean isOk) {
         if (isOk) {
-            toast("接单成功");
             OrdersActivity.action(mContext, 0);
+            toast("接单成功");
             finish();
         } else {
             toast("接单失败");
@@ -280,8 +340,8 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     @Override
     public void onConfirmOrder(boolean isOk) {
         if (isOk) {
+            mPresenter.getOrderDetail(orderId);
             toast("确认成功");
-            finish();
         } else {
             toast("确认失败");
         }
@@ -290,6 +350,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     @Override
     public void onCancelConfirmOrder(boolean isOk) {
         if (isOk) {
+            OrdersActivity.action(mContext, 0);
             toast("确认取消成功");
             finish();
         } else {
@@ -297,5 +358,78 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         }
     }
 
+    @Override
+    public void onDistribution(boolean isOk) {
+        if (isOk) {
+            mPresenter.getOrderDetail(orderId);
+            toast("分配成功");
+        } else {
+            toast("分配失败");
+        }
+    }
 
+    @Override
+    public void onCancelDistribution(boolean isOk) {
+        if (isOk) {
+            mPresenter.getOrderDetail(orderId);
+            toast("取消分配成功");
+        } else {
+            toast("取消分配失败");
+        }
+    }
+
+    @Override
+    public void onCompleteDistribution(boolean isOk) {
+        if (isOk) {
+            mPresenter.getOrderDetail(orderId);
+            toast("配送成功");
+        } else {
+            toast("配送失败");
+        }
+    }
+
+    @Override
+    public void onCancelReceive(boolean isOk) {
+        if (isOk) {
+            OrdersActivity.action(mContext, 0);
+            toast("取消成功");
+            finish();
+        } else {
+            toast("取消失败");
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Const.CODE_REQ) {
+            if (data != null) {
+                carId = data.getIntExtra("carId", 0);
+                mPresenter.distribution(orderId, new OrderDistribution(0, carId));
+            }
+        }
+    }
+
+    public void showSelectDialog(LatLng start, LatLng end, String dName) {
+        new CircleDialog.Builder(this)
+                .configDialog(new ConfigDialog() {
+                    @Override
+                    public void onConfig(DialogParams params) {
+                        params.animStyle = R.style.dialogWindowAnim;
+                    }
+                })
+                .setItems(items, new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        if (position == 0) { //百度地图
+                            MapUtils.startBaidu(mContext, start, end, dName);
+                        } else {//高德地图
+                            MapUtils.startGaode(mContext, start, end, dName);
+                        }
+                    }
+                })
+                .setNegative("取消", null)
+                .show();
+    }
 }

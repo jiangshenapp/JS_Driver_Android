@@ -116,7 +116,7 @@
 
         <activity
             android:name=".ui.order.activity.OrdersActivity"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTask" />
 
         <activity
             android:name=".ui.order.activity.OrderDetailActivity"
@@ -154,11 +154,18 @@
             android:launchMode="singleTop"
             />
 
+        <activity android:name=".ui.order.activity.DistributionActivity"
+            android:launchMode="singleTop"
+            />
+
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop">
         </activity>
+
+
+
 
         <service
             android:name=".service.LocationService"

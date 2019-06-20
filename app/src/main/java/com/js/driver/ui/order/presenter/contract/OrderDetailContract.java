@@ -27,7 +27,9 @@ public interface OrderDetailContract {
 
         void onCancelDistribution(boolean isOk);
 
+        void onCompleteDistribution(boolean isOk);
 
+        void onCancelReceive(boolean isOk);
 
     }
 
@@ -45,5 +47,9 @@ public interface OrderDetailContract {
         void distribution(long id, OrderDistribution orderDistribution);
 
         void cancelDistribution(long id);
+
+        void completeDistribution(long id);
+
+        void cancelReceive(long id);
     }
 }

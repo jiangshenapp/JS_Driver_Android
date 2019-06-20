@@ -139,11 +139,93 @@ public class OrderDetailPresenter extends RxPresenter<OrderDetailContract.View> 
 
     @Override
     public void distribution(long id, OrderDistribution orderDistribution) {
-
+        Disposable disposable = mApiFactory.getApi(OrderApi.class).distribution(id,orderDistribution)
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        mView.closeProgress();
+                        mView.onDistribution(aBoolean);
+                    }
+                }, new RxException<>(e -> {
+                    mView.closeProgress();
+                }));
+        addDispose(disposable);
     }
 
     @Override
     public void cancelDistribution(long id) {
+        Disposable disposable = mApiFactory.getApi(OrderApi.class).cancelDistribution(id)
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        mView.closeProgress();
+                        mView.onCancelDistribution(aBoolean);
+                    }
+                }, new RxException<>(e -> {
+                    mView.closeProgress();
+                }));
+        addDispose(disposable);
+    }
 
+    @Override
+    public void completeDistribution(long id) {
+        Disposable disposable = mApiFactory.getApi(OrderApi.class).completeDistribution(id)
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        mView.closeProgress();
+                        mView.onCompleteDistribution(aBoolean);
+                    }
+                }, new RxException<>(e -> {
+                    mView.closeProgress();
+                }));
+        addDispose(disposable);
+    }
+
+    @Override
+    public void cancelReceive(long id) {
+        Disposable disposable = mApiFactory.getApi(OrderApi.class).cancelReceive(id)
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        mView.closeProgress();
+                        mView.onCancelReceive(aBoolean);
+                    }
+                }, new RxException<>(e -> {
+                    mView.closeProgress();
+                }));
+        addDispose(disposable);
     }
 }

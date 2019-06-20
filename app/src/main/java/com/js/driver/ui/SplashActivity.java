@@ -1,6 +1,7 @@
 package com.js.driver.ui;
 
 import android.content.Intent;
+import android.view.View;
 
 import com.hjq.permissions.OnPermission;
 import com.hjq.permissions.Permission;
@@ -72,6 +73,6 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
 
     @Override
     public void setActionBar() {
-
+        mToolbar.setVisibility(View.GONE);
     }
 }

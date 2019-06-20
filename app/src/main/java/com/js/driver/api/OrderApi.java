@@ -30,14 +30,14 @@ public interface OrderApi {
      * @return
      */
     @POST("app/driver/order/cancelDistribution/{id}")
-    Observable<BaseHttpResponse> cancelDistribution(@Path("id") long id);
+    Observable<HttpResponse<Boolean>> cancelDistribution(@Path("id") long id);
 
 
     /**
      * 取消接货
      */
     @POST("/app/driver/order/cancelReceive/{id}")
-    Observable<BaseHttpResponse> cancelReceive(@Path("id") long id);
+    Observable<HttpResponse<Boolean>> cancelReceive(@Path("id") long id);
 
 
     /**
@@ -55,7 +55,7 @@ public interface OrderApi {
      * @return
      */
     @POST("app/driver/order/completeDistribution/{id}")
-    Observable<BaseHttpResponse> completeDistribution(@Path("id") long id);
+    Observable<HttpResponse<Boolean>> completeDistribution(@Path("id") long id);
 
 
     /**
@@ -73,7 +73,7 @@ public interface OrderApi {
      * @return
      */
     @POST("app/driver/order/distribution/{id}")
-    Observable<BaseHttpResponse> distribution(@Path("id") long id,
+    Observable<HttpResponse<Boolean>> distribution(@Path("id") long id,
                                               @Body OrderDistribution orderDistribution);
 
 
@@ -143,6 +143,7 @@ public interface OrderApi {
 
     @POST("app/driver/order/confirm/{id}")
     Observable<HttpResponse<Boolean>> confirmOrder(@Path("id") long id);
+
 
 
 }

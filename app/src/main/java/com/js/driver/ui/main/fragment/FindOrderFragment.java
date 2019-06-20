@@ -11,15 +11,21 @@ import com.js.driver.R;
 import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
 import com.js.driver.global.Const;
+import com.js.driver.model.bean.DictBean;
 import com.js.driver.model.bean.OrderBean;
 import com.js.driver.model.event.CitySelectEvent;
+import com.js.driver.model.event.SortEvent;
 import com.js.driver.model.response.ListResponse;
+import com.js.driver.presenter.DictPresenter;
+import com.js.driver.presenter.contract.DictContract;
 import com.js.driver.ui.main.adapter.FindOrderAdapter;
 import com.js.driver.ui.main.presenter.FindOrderPresenter;
 import com.js.driver.ui.main.presenter.contract.FindOrderContract;
 import com.js.driver.ui.order.activity.OrderDetailActivity;
 import com.js.driver.ui.order.activity.OrdersActivity;
 import com.js.driver.widget.window.CityWindow;
+import com.js.driver.widget.window.FilterWindow;
+import com.js.driver.widget.window.SortWindow;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -34,13 +40,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.greenrobot.eventbus.Subscribe;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
  * Created by huyg on 2019/4/1.
  */
-public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implements FindOrderContract.View, BaseQuickAdapter.OnItemClickListener {
+public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implements FindOrderContract.View, BaseQuickAdapter.OnItemClickListener, DictContract.View {
 
 
     @BindView(R.id.recycler)
@@ -68,10 +76,10 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
                 mEndWindow.showAsDropDown(mCondition, 0, 0);
                 break;
             case R.id.sort:
-
+                mSortWindow.showAsDropDown(mCondition, 0, 0);
                 break;
             case R.id.filter:
-
+                mFilterWindow.showAsDropDown(mCondition, 0, 0);
                 break;
             case R.id.waybill:
                 OrdersActivity.action(mContext, 0);
@@ -85,6 +93,12 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
     private int type;
     private CityWindow mStartWindow;
     private CityWindow mEndWindow;
+    private FilterWindow mFilterWindow;
+    private SortWindow mSortWindow;
+    private int sort;
+
+    @Inject
+    DictPresenter mDictPresenter;
 
     public static FindOrderFragment newInstance() {
         return new FindOrderFragment();
@@ -107,10 +121,19 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
     @Override
     protected void init() {
         initView();
+        initData();
+    }
+
+    private void initData() {
+        mDictPresenter.getDictByType(Const.DICT_CAR_TYPE_NAME);
+        mDictPresenter.getDictByType(Const.DICT_LENGTH_NAME);
+        mDictPresenter.getDictByType(Const.DICT_USE_CAR_TYPE_NAME);
     }
 
 
+
     private void initView() {
+        mDictPresenter.attachView(this);
         initRecycler();
         initRefresh();
         initCityWindow();
@@ -119,6 +142,8 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
     private void initCityWindow() {
         mStartWindow = new CityWindow(mContext, 0);
         mEndWindow = new CityWindow(mContext, 1);
+        mFilterWindow = new FilterWindow(mContext);
+        mSortWindow = new SortWindow(mContext);
     }
 
 
@@ -201,4 +226,25 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
         mPresenter.findOrders(num, (int)Const.PAGE_SIZE, mSendAddress.getText().toString(),mEndAddress.getText().toString());
     }
 
+    @Subscribe
+    public void onEvent(SortEvent sortEvent) {
+        sort = sortEvent.type;
+        mSort.setText(sort == 1 ? "默认排序" : "距离排序");
+        getOrders(Const.PAGE_NUM);
+    }
+
+    @Override
+    public void onDictByType(String type, List<DictBean> dictBeans) {
+        switch (type) {
+            case Const.DICT_CAR_TYPE_NAME:
+                mFilterWindow.setTypes(dictBeans);
+                break;
+            case Const.DICT_LENGTH_NAME:
+                mFilterWindow.setCarLengths(dictBeans);
+                break;
+            case Const.DICT_USE_CAR_TYPE_NAME:
+                mFilterWindow.setCarTypes(dictBeans);
+                break;
+        }
+    }
 }

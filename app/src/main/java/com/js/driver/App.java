@@ -1,6 +1,7 @@
 package com.js.driver;
 
 import com.baidu.location.BDLocation;
+import com.baidu.mapapi.SDKInitializer;
 import com.facebook.stetho.Stetho;
 import com.google.gson.Gson;
 import com.js.driver.di.componet.AppComponent;
@@ -33,6 +34,7 @@ public class App extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         mApp = this;
+        SDKInitializer.initialize(this);
         Stetho.initializeWithDefaults(this);
         initDaggerComponent();
         getUserInfo();

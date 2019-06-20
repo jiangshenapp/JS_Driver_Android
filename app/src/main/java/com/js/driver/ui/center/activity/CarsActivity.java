@@ -1,5 +1,6 @@
 package com.js.driver.ui.center.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
@@ -11,6 +12,7 @@ import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
+import com.js.driver.global.Const;
 import com.js.driver.model.bean.CarBean;
 import com.js.driver.model.bean.OrderBean;
 import com.js.driver.model.response.ListResponse;
@@ -30,6 +32,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 
 /**
@@ -44,10 +47,22 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
 
     private CarsAdapter mAdapter;
     private List<CarBean> mCarBeans;
+    private boolean isJump;
 
-    public static void action(Context context){
-        Intent intent = new Intent(context,CarsActivity.class);
+    public static void action(Context context) {
+        Intent intent = new Intent(context, CarsActivity.class);
         context.startActivity(intent);
+    }
+
+
+    public static void action(Activity context, boolean isJump) {
+        Intent intent = new Intent(context, CarsActivity.class);
+        intent.putExtra("isJump", isJump);
+        context.startActivityForResult(intent, Const.CODE_REQ);
+    }
+
+    private void initIntent() {
+        isJump = getIntent().getBooleanExtra("isJump", true);
     }
 
     @Override
@@ -58,6 +73,7 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
 
     @Override
     protected void init() {
+        initIntent();
         initView();
     }
 
@@ -117,7 +133,7 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_car:
-                AddCarActivity.action(mContext,1,0);
+                AddCarActivity.action(mContext, 1, 0);
                 break;
         }
         return true;
@@ -139,8 +155,14 @@ public class CarsActivity extends BaseActivity<CarsPresenter> implements CarsCon
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         List<CarBean> carBeans = adapter.getData();
         CarBean carBean = carBeans.get(position);
-        if (carBean != null) {
-            AddCarActivity.action(this,2,carBean.getId());
+        if (isJump) {
+            AddCarActivity.action(this, 2, carBean.getId());
+        } else {
+            Intent intent = new Intent();
+            intent.putExtra("car", carBean);
+            setResult(Const.CODE_RESULT, intent);
+            finish();
         }
+
     }
 }
