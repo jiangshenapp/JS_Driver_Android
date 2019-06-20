@@ -82,6 +82,7 @@ public class DriversActivity extends BaseActivity<DriversPresenter> implements D
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.addItemDecoration(new Divider(getResources().getDrawable(R.drawable.divider_lines), LinearLayoutManager.VERTICAL));
         mRecycler.setAdapter(mAdapter);
+        mAdapter.setEmptyView(R.layout.layout_data_empty,mRecycler);
         mAdapter.setOnItemChildClickListener(this);
     }
 

@@ -15,6 +15,7 @@ import com.js.driver.model.bean.DictBean;
 import com.js.driver.model.bean.OrderBean;
 import com.js.driver.model.event.CitySelectEvent;
 import com.js.driver.model.event.SortEvent;
+import com.js.driver.model.request.LineAppFind;
 import com.js.driver.model.response.ListResponse;
 import com.js.driver.presenter.DictPresenter;
 import com.js.driver.presenter.contract.DictContract;
@@ -66,6 +67,7 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
     @BindView(R.id.filter)
     TextView mFilter;
 
+
     @OnClick({R.id.send_address, R.id.end_address, R.id.sort, R.id.filter,R.id.waybill})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -96,6 +98,9 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
     private FilterWindow mFilterWindow;
     private SortWindow mSortWindow;
     private int sort;
+    private LineAppFind lineAppFind = new LineAppFind();
+    private String arriveAddressCode = "0";
+    private String startAddressCode = "0";
 
     @Inject
     DictPresenter mDictPresenter;
@@ -151,6 +156,7 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
         mAdapter = new FindOrderAdapter(R.layout.item_home_order, orders);
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.setAdapter(mAdapter);
+        mAdapter.setEmptyView(R.layout.layout_data_empty,mRecycler);
         mAdapter.setOnItemClickListener(this);
     }
 
@@ -204,6 +210,7 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
     public void onEvent(CitySelectEvent event) {
         switch (event.type) {
             case 0:
+                startAddressCode = event.areaBean.getCode();
                 if (!TextUtils.isEmpty(event.areaBean.getAlias())) {
                     mSendAddress.setText(event.areaBean.getAlias());
                 } else {
@@ -212,6 +219,7 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
 
                 break;
             case 1:
+                arriveAddressCode = event.areaBean.getCode();
                 if (!TextUtils.isEmpty(event.areaBean.getAlias())) {
                     mEndAddress.setText(event.areaBean.getAlias());
                 } else {
@@ -223,7 +231,19 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
     }
 
     private void getOrders(int num){
-        mPresenter.findOrders(num, (int)Const.PAGE_SIZE, mSendAddress.getText().toString(),mEndAddress.getText().toString());
+        if ("发货地".equals(mSendAddress.getText().toString())) {
+            lineAppFind.setStartAddressCode("0");
+        } else {
+            lineAppFind.setStartAddressCode(startAddressCode);
+        }
+        if ("收货地".equals(mEndAddress.getText().toString())) {
+            lineAppFind.setArriveAddressCode("0");
+        } else {
+            lineAppFind.setArriveAddressCode(arriveAddressCode);
+        }
+
+        lineAppFind.setSort(sort);
+        mPresenter.findOrders(num, (int)Const.PAGE_SIZE, lineAppFind);
     }
 
     @Subscribe

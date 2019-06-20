@@ -2,6 +2,7 @@ package com.js.driver.api;
 
 import com.js.driver.model.bean.OrderBean;
 import com.js.driver.model.request.FindOrder;
+import com.js.driver.model.request.LineAppFind;
 import com.js.driver.model.request.OrderDistribution;
 import com.js.driver.model.request.OrderStatus;
 import com.js.driver.model.response.ListResponse;
@@ -87,7 +88,7 @@ public interface OrderApi {
     @POST("app/driver/order/find")
     Observable<HttpResponse<ListResponse<OrderBean>>> find(@Query("current") int current,
                                                            @Query("size") int size,
-                                                           @Body FindOrder findOrder);
+                                                           @Body LineAppFind lineAppFind);
 
 
     /**

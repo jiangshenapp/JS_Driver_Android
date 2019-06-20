@@ -156,6 +156,10 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                         mPresenter.receiveOrder(orderId);
                         break;
                     case 3:
+                        if (mOrderBean.getFeeType()==2){
+                            toast("价格不可为电议 ，请联系货主修改！");
+                            return;
+                        }
                         mPresenter.confirmOrder(orderId);
                         break;
                     case 5:

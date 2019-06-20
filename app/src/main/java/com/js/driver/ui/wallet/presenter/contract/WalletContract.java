@@ -11,6 +11,7 @@ public interface WalletContract {
 
     interface View extends IBaseView {
         void onAccountInfo(AccountInfo accountInfo);
+        void finishRefresh();
     }
 
     interface Presenter extends IPresenter<View> {

@@ -12,7 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.js.driver.R;
 import com.js.driver.model.bean.DictBean;
+import com.js.driver.model.event.FilterEvent;
 import com.js.driver.widget.window.adapter.DictAdapter;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -109,6 +112,34 @@ public class FilterWindow extends PopupWindow{
                 dismiss();
                 break;
             case R.id.submit:
+                StringBuilder carTypeStr = new StringBuilder();
+                for (DictBean dictBean : mCarTypeDict) {
+                    carTypeStr.append(dictBean.getValue());
+                    carTypeStr.append(",");
+                }
+                if (carTypeStr.length() > 0) {
+                    carTypeStr.deleteCharAt(carTypeStr.length() - 1);
+                }
+
+                StringBuilder lengthStr = new StringBuilder();
+                for (DictBean dictBean : mLengthDict) {
+                    lengthStr.append(dictBean.getValue());
+                    lengthStr.append(",");
+                }
+                if (lengthStr.length() > 0) {
+                    lengthStr.deleteCharAt(carTypeStr.length() - 1);
+                }
+
+                StringBuilder typeStr = new StringBuilder();
+                for (DictBean dictBean : mCarTypeDict) {
+                    typeStr.append(dictBean.getValue());
+                    typeStr.append(",");
+                }
+                if (typeStr.length() > 0) {
+                    typeStr.deleteCharAt(carTypeStr.length() - 1);
+                }
+
+                EventBus.getDefault().post(new FilterEvent(carTypeStr.toString(), lengthStr.toString(), typeStr.toString()));
                 dismiss();
                 break;
         }

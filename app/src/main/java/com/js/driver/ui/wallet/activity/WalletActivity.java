@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.js.driver.App;
@@ -14,6 +15,9 @@ import com.js.driver.di.module.ActivityModule;
 import com.js.driver.model.bean.AccountInfo;
 import com.js.driver.ui.wallet.presenter.WalletPresenter;
 import com.js.driver.ui.wallet.presenter.contract.WalletContract;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xlgcx.frame.view.BaseActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -33,6 +37,8 @@ public class WalletActivity extends BaseActivity<WalletPresenter> implements Wal
     TextView walletWithdraw;
     @BindView(R.id.wallet_bail)
     TextView mBail;
+    @BindView(R.id.refresh)
+    SmartRefreshLayout mRefresh;
 
     AccountInfo mAccountInfo;
 
@@ -70,7 +76,13 @@ public class WalletActivity extends BaseActivity<WalletPresenter> implements Wal
     }
 
     private void initView() {
-
+        mRefresh.setEnableLoadMore(false);
+        mRefresh.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                mPresenter.getAccountInfo();
+            }
+        });
     }
 
     @Override
@@ -97,5 +109,10 @@ public class WalletActivity extends BaseActivity<WalletPresenter> implements Wal
         mAccountInfo = accountInfo;
         mMoney.setText(String.valueOf(accountInfo.getBalance()));
         mBail.setText(String.valueOf(accountInfo.getDriverDeposit()));
+    }
+
+    @Override
+    public void finishRefresh() {
+        mRefresh.finishRefresh();
     }
 }

@@ -3,6 +3,7 @@ package com.js.driver.ui.main.presenter;
 import com.js.driver.api.OrderApi;
 import com.js.driver.model.bean.OrderBean;
 import com.js.driver.model.request.FindOrder;
+import com.js.driver.model.request.LineAppFind;
 import com.js.driver.model.response.ListResponse;
 import com.js.driver.rx.RxException;
 import com.js.driver.rx.RxResult;
@@ -29,10 +30,10 @@ public class FindOrderPresenter extends RxPresenter<FindOrderContract.View> impl
     }
 
     @Override
-    public void findOrders(int current, int size, String startAddress, String arriveAddress) {
+    public void findOrders(int current, int size, LineAppFind lineAppFind) {
         Disposable disposable = mApiFactory.getApi(OrderApi.class).find(current,
                 size,
-                new FindOrder(arriveAddress, startAddress))
+                lineAppFind)
                 .compose(RxSchedulers.io_main())
                 .compose(RxResult.handleResult())
                 .subscribe(new Consumer<ListResponse<OrderBean>>() {

@@ -1,5 +1,7 @@
 package com.js.driver.ui.main.adapter;
 
+import android.text.TextUtils;
+
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -45,10 +47,15 @@ public class FindOrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder
             helper.setText(R.id.item_order_money, "电议");
         }
         helper.setText(R.id.item_order_create_time, TimeUtils.format(item.getCreateTime()) + "发布");
-        if ( App.getInstance().mLocation==null){
+        if (App.getInstance().mLocation == null) {
             return;
         }
-        double distance = DistanceUtil.getDistance(new Gson().fromJson(item.getSendPosition(), LatLng.class),new LatLng(App.getInstance().mLocation.getLatitude(),App.getInstance().mLocation.getLongitude()));
-        helper.setText(R.id.item_distance,"距离您"+(distance > 1000 ? df.format(distance / 1000) + " Km" : ((int) distance) + "米"));
+        try {
+            double distance = DistanceUtil.getDistance(new Gson().fromJson(item.getSendPosition(), LatLng.class), new LatLng(App.getInstance().mLocation.getLatitude(), App.getInstance().mLocation.getLongitude()));
+            helper.setText(R.id.item_distance, "距离您" + (distance > 1000 ? df.format(distance / 1000) + " Km" : ((int) distance) + "米"));
+        }catch (Exception e){
+
+        }
+
     }
 }

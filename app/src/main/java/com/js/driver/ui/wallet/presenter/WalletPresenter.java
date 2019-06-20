@@ -39,9 +39,11 @@ public class WalletPresenter extends RxPresenter<WalletContract.View> implements
                     .subscribe(new Consumer<AccountInfo>() {
                         @Override
                         public void accept(AccountInfo accountInfo) throws Exception {
+                            mView.finishRefresh();
                             mView.onAccountInfo(accountInfo);
                         }
                     }, new RxException<>(e -> {
+                        mView.finishRefresh();
                         mView.toast(e.getMessage());
                     }));
             addDispose(disposable);
