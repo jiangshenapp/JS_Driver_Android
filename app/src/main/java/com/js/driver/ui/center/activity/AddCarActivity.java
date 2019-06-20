@@ -157,7 +157,11 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
 
     @Override
     public void setActionBar() {
-        mTitle.setText("添加车辆");
+        if (mType == 1) {
+            mTitle.setText("添加车辆");
+        } else {
+            mTitle.setText("车辆详情");
+        }
     }
 
     @Override
