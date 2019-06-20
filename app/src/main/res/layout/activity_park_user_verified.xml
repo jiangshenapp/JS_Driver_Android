@@ -78,7 +78,7 @@
                     android:layout_marginStart="12dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:hint="服务中心/车代点/网点"
+                    android:hint=""
                     android:focusable="false"
                     android:focusableInTouchMode="false"
                     android:singleLine="true"
