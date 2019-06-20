@@ -30,7 +30,7 @@
         android:layout_marginTop="50dp"
         android:background="@null"
         android:hint="请输入新密码"
-        android:text="000000"
+        android:text=""
         android:inputType="textPassword"
         android:textColor="@color/_000000"
         android:textSize="17sp" />
@@ -48,7 +48,7 @@
         android:layout_marginTop="20dp"
         android:background="@null"
         android:hint="再次输入新密码"
-        android:text="000000"
+        android:text=""
         android:inputType="textPassword"
         android:textColor="@color/_000000"
         android:textSize="17sp" />

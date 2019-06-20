@@ -141,6 +141,7 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
 
     @Override
     public void onLogin(String token) {
+        toast("登录成功");
         App.getInstance().putToken(token);
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));
         getActivity().finish();
