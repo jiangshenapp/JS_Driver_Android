@@ -99,6 +99,8 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     TextView mOrderPosition;
     @BindView(R.id.refresh)
     SmartRefreshLayout mRefresh;
+    @BindView(R.id.control_layout)
+    LinearLayout mControlLayout;
 
 
     @OnClick({R.id.detail_send_phone, R.id.detail_send_wechat, R.id.detail_send_navigate, R.id.detail_arrive_navigate, R.id.detail_img1_layout, R.id.detail_img2_layout, R.id.detail_img3_layout, R.id.detail_order_navigate, R.id.detail_order_positive})
@@ -284,6 +286,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             mArriveName.setText(orderBean.getReceiveName());
             mArrivePhone.setText(orderBean.getReceiveMobile());
             //2待接单，3待确认，4待货主付款，5待接货, 6待送达，7待货主评价，8已完成，9已取消，10已关闭
+            mControlLayout.setVisibility(View.VISIBLE);
             switch (status) {
                 case 2:
                     mOrderPosition.setText("立即接单");
@@ -308,6 +311,9 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 case 7:
                     mOrderNavigate.setVisibility(View.GONE);
                     mOrderPosition.setText("上传回执");
+                    break;
+                case 9:
+                    mControlLayout.setVisibility(View.GONE);
                     break;
             }
         }
