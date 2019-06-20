@@ -351,7 +351,7 @@ public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPrese
             return;
         }
         if (TextUtils.isEmpty(companyType)) {
-            toast("请选择服务中心/车代点/网点");
+            toast("请选择机构类型");
             return;
         }
         if (TextUtils.isEmpty(idcard)) {
@@ -376,7 +376,17 @@ public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPrese
             return;
         }
 
-        mPresenter.submitParkUserVerified(name, "1", idcard, address, detailAddress, mAuthInfo.getBusinessLicenceImage());
+        String type = "1";
+        if (companyType.equals("服务中心")) {
+            type = "1";
+        }
+        if (companyType.equals("车代点")) {
+            type = "2";
+        }
+        if (companyType.equals("网点")) {
+            type = "3";
+        }
+        mPresenter.submitParkUserVerified(name, type, idcard, address, detailAddress, mAuthInfo.getBusinessLicenceImage());
     }
 
     @Override
