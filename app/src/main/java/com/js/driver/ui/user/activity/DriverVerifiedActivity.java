@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -51,6 +50,7 @@ import com.xlgcx.frame.view.BaseActivity;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -76,6 +76,8 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
     ImageView mAuthBody;
     @BindView(R.id.auth_driver_card)
     ImageView mAuthDriverCard;
+    @BindView(R.id.auth_driver_work)
+    ImageView mAuthDriverWork;
     @BindView(R.id.et_name)
     EditText etName;
     @BindView(R.id.et_idcard)
@@ -118,7 +120,7 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
 
     // 驾驶证类型
-    private List<String> driverLicenseItems = new ArrayList<String>(Arrays.asList("A1","A2","A3","B1","B2","C1","C2","C3","C4","D","E","F","M","N","P"));
+    private List<String> driverLicenseItems = new ArrayList<String>(Arrays.asList("A1", "A2", "A3", "B1", "B2", "C1", "C2", "C3", "C4", "D", "E", "F", "M", "N", "P"));
 
 
     public static void action(Context context) {
@@ -157,6 +159,8 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
                 , mAuthBody, mContext.getResources().getDrawable(R.mipmap.img_authentication_body));
         CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + authInfo.getDriverImage()
                 , mAuthDriverCard, mContext.getResources().getDrawable(R.mipmap.img_authentication_driver));
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + authInfo.getCyzgzImage()
+                , mAuthDriverWork, mContext.getResources().getDrawable(R.mipmap.img_authentication_id));
         etName.setText(authInfo.getPersonName());
         etIdcard.setText(authInfo.getIdCode());
         etAddress.setText(authInfo.getAddress());
@@ -174,6 +178,7 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
         mAuthCard.setClickable(false);
         mAuthBody.setClickable(false);
         mAuthDriverCard.setClickable(false);
+        mAuthDriverWork.setClickable(false);
         etName.setFocusable(false);
         etIdcard.setFocusable(false);
         llAddress.setClickable(false);
@@ -204,7 +209,7 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
         mTitle.setText("司机身份认证");
     }
 
-    @OnClick({R.id.auth_card, R.id.auth_body, R.id.auth_driver_card, R.id.auth_submit, R.id.ll_address, R.id.et_address, R.id.ll_driver_license, R.id.et_driver_license, R.id.cb_select, R.id.tv_protocal})
+    @OnClick({R.id.auth_card, R.id.auth_body, R.id.auth_driver_card, R.id.auth_driver_work, R.id.auth_submit, R.id.ll_address, R.id.et_address, R.id.ll_driver_license, R.id.et_driver_license, R.id.cb_select, R.id.tv_protocal})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.auth_card:
@@ -215,6 +220,9 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
                 break;
             case R.id.auth_driver_card:
                 getPhoto(Const.AUTH_DRIVER_CARD);
+                break;
+            case R.id.auth_driver_work:
+                getPhoto(Const.AUTH_DRIVER_WORK);
                 break;
             case R.id.ll_address:
             case R.id.et_address:
@@ -247,7 +255,7 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
         String jsonStr = new GetJsonDataUtil().getJson(this, "province.json");//获取assets目录下的json文件数据
         // 数据解析
         Gson gson = new Gson();
-        java.lang.reflect.Type type = new TypeToken<List<ShengBean>>() {
+        Type type = new TypeToken<List<ShengBean>>() {
         }.getType();
         List<ShengBean> shengList = gson.fromJson(jsonStr, type);
         // 把解析后的数据组装成想要的list
@@ -316,7 +324,7 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
         //条件选择器
         OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
-            public void onOptionsSelect(int options1, int option2, int options3 ,View v) {
+            public void onOptionsSelect(int options1, int option2, int options3, View v) {
                 //返回的分别是三个级别的选中位置
                 String tx = driverLicenseItems.get(options1);
                 etDriverLicense.setText(tx);
@@ -369,7 +377,7 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
             return;
         }
 
-        mPresenter.submitDriverVerified(mAuthInfo.getIdImage(),mAuthInfo.getIdHandImage(),mAuthInfo.getDriverImage(),name,idcard,address,driverLicense);
+        mPresenter.submitDriverVerified(mAuthInfo.getIdImage(), mAuthInfo.getIdHandImage(), mAuthInfo.getDriverImage(), mAuthInfo.getCyzgzImage(), name, idcard, address, driverLicense);
     }
 
     @Override
@@ -387,6 +395,10 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
             case Const.AUTH_DRIVER_CARD:
                 mAuthInfo.setDriverImage(data);
                 CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + data, mAuthDriverCard);
+                break;
+            case Const.AUTH_DRIVER_WORK:
+                mAuthInfo.setCyzgzImage(data);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + data, mAuthDriverWork);
                 break;
         }
     }

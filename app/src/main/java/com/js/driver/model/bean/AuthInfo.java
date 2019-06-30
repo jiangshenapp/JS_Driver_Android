@@ -29,6 +29,7 @@ public class AuthInfo {
     private String idHandImage;
     private String address;
     private String driverImage;
+    private String cyzgzImage;
     private String driverLevel;
     private String auditRemark;
 
@@ -93,6 +94,14 @@ public class AuthInfo {
 
     public void setDriverImage(String driverImage) {
         this.driverImage = driverImage;
+    }
+
+    public String getCyzgzImage() {
+        return cyzgzImage;
+    }
+
+    public void setCyzgzImage(String cyzgzImage) {
+        this.cyzgzImage = cyzgzImage;
     }
 
     public String getDriverLevel() {

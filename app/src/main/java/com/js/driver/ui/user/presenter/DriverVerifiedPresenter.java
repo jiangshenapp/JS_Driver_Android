@@ -47,9 +47,9 @@ public class DriverVerifiedPresenter extends RxPresenter<DriverVerifiedContract.
     }
 
     @Override
-    public void submitDriverVerified(String idImage, String idHandImage, String driverImage, String personName, String idCode, String address, String driverLevel) {
+    public void submitDriverVerified(String idImage, String idHandImage, String driverImage, String cyzgzImage, String personName, String idCode, String address, String driverLevel) {
         Disposable disposable = mApiFactory.getApi(UserApi.class)
-                .driverVerified(new DriverVerifiedRequest(idImage, idHandImage, driverImage, personName, idCode, address, driverLevel))
+                .driverVerified(new DriverVerifiedRequest(idImage, idHandImage, driverImage, cyzgzImage, personName, idCode, address, driverLevel))
                 .compose(RxSchedulers.io_main())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override

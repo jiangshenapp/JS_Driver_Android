@@ -17,10 +17,11 @@ public class Const {
     public static final int AUTH_CARD = 1;
     public static final int AUTH_BODY = 2;
     public static final int AUTH_DRIVER_CARD = 3;
-    public static final int AUTH_BUSINESS_LICENSE = 4;
-    public static final int UPLOAD_HEADIMG = 5;
-    public static final int AUTH_CAR_LICENSE = 6;
-    public static final int AUTH_CAR_HEAD = 7;
+    public static final int AUTH_DRIVER_WORK = 4;
+    public static final int AUTH_BUSINESS_LICENSE = 5;
+    public static final int UPLOAD_HEADIMG = 6;
+    public static final int AUTH_CAR_LICENSE = 7;
+    public static final int AUTH_CAR_HEAD = 8;
 
     public static final int PAGE_SIZE = 10;
     public static final int PAGE_NUM = 1;
