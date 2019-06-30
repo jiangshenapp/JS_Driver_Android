@@ -29,9 +29,11 @@ public class CarRequest {
     private String carLengthId;
     private String cphm;
     private String capacityTonnage;
+    private String tradingNo; //营运许可
+    private String transportNo; //运输许可
 
     //添加车辆
-    public CarRequest(String image1, String carModelId, String image2, String capacityVolume, String state, String carLengthId, String cphm, String capacityTonnage) {
+    public CarRequest(String image1, String carModelId, String image2, String capacityVolume, String state, String carLengthId, String cphm, String capacityTonnage, String tradingNo, String transportNo) {
         this.image1 = image1;
         this.carModelId = carModelId;
         this.image2 = image2;
@@ -40,10 +42,12 @@ public class CarRequest {
         this.carLengthId = carLengthId;
         this.cphm = cphm;
         this.capacityTonnage = capacityTonnage;
+        this.tradingNo = tradingNo;
+        this.transportNo = transportNo;
     }
 
     //重新提交车辆
-    public CarRequest(long id, String image1, String carModelId, String image2, String capacityVolume, String state, String carLengthId, String cphm, String capacityTonnage) {
+    public CarRequest(long id, String image1, String carModelId, String image2, String capacityVolume, String state, String carLengthId, String cphm, String capacityTonnage, String tradingNo, String transportNo) {
         this.id = id;
         this.image1 = image1;
         this.carModelId = carModelId;
@@ -53,6 +57,8 @@ public class CarRequest {
         this.carLengthId = carLengthId;
         this.cphm = cphm;
         this.capacityTonnage = capacityTonnage;
+        this.tradingNo = tradingNo;
+        this.transportNo = transportNo;
     }
 
     public long getId() {

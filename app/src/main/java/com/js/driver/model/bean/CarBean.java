@@ -37,6 +37,9 @@ public class CarBean implements Parcelable {
     private String carModelName;
     private int subscriberId;
     private int capacityVolume;
+    private String tradingNo; //营运许可
+    private String transportNo; //运输许可
+
     public CarBean(){
 
     }
@@ -55,6 +58,8 @@ public class CarBean implements Parcelable {
         carModelName = in.readString();
         subscriberId = in.readInt();
         capacityVolume = in.readInt();
+        tradingNo = in.readString();
+        transportNo = in.readString();
     }
 
     @Override
@@ -72,6 +77,8 @@ public class CarBean implements Parcelable {
         dest.writeString(carModelName);
         dest.writeInt(subscriberId);
         dest.writeInt(capacityVolume);
+        dest.writeString(tradingNo);
+        dest.writeString(transportNo);
     }
 
     @Override
@@ -193,5 +200,21 @@ public class CarBean implements Parcelable {
 
     public void setCapacityVolume(int capacityVolume) {
         this.capacityVolume = capacityVolume;
+    }
+
+    public String getTradingNo() {
+        return tradingNo;
+    }
+
+    public void setTradingNo(String tradingNo) {
+        this.tradingNo = tradingNo;
+    }
+
+    public String getTransportNo() {
+        return transportNo;
+    }
+
+    public void setTransportNo(String transportNo) {
+        this.transportNo = transportNo;
     }
 }
