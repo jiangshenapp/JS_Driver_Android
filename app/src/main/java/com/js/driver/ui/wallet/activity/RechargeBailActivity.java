@@ -57,8 +57,8 @@ public class RechargeBailActivity extends BaseActivity<RechargeBailPresenter> im
     private static final int SDK_PAY_FLAG = 99;
     @BindView(R.id.tv_deposit)
     TextView tvDeposit;
-    @BindView(R.id.tv_trade_deposit)
-    TextView tvTradeDeposit;
+    @BindView(R.id.et_trade_deposit)
+    TextView etTradeDeposit;
     @BindView(R.id.cb_select)
     CheckBox cbSelect;
     private int type;
@@ -88,7 +88,6 @@ public class RechargeBailActivity extends BaseActivity<RechargeBailPresenter> im
 
     private void initView() {
         tvDeposit.setText(mAccountInfo.getDriverDeposit() + "元");
-        tvTradeDeposit.setText(mAccountInfo.getTradeDeposit() + "元");
         initAdapter();
     }
 
@@ -131,7 +130,7 @@ public class RechargeBailActivity extends BaseActivity<RechargeBailPresenter> im
                     toast("请勾选保证金协议");
                     return;
                 }
-                if (mAccountInfo.getTradeDeposit()<=0) {
+                if (Float.parseFloat(etTradeDeposit.getText().toString())<=0) {
                     toast("缴纳保证金需要大于0元");
                     return;
                 }

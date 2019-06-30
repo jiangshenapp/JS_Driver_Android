@@ -310,12 +310,12 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
         }
 
         if (tvSubmit.getText().toString().equals("提交审核")) {
-            mPresenter.bindingCar(mCarBean.getImage1(), String.valueOf(mCarModelBean.getId()), mCarBean.getImage2(),
-                    carVolume, "0", String.valueOf(mCarLengthBean.getId()), carNo, carWeight, tradeNo, transportNo);
+            mPresenter.bindingCar(mCarBean.getImage1(), String.valueOf(mCarModelBean.getValue()), mCarBean.getImage2(),
+                    carVolume, "0", String.valueOf(mCarLengthBean.getValue()), carNo, carWeight, tradeNo, transportNo);
         }
         if (tvSubmit.getText().toString().equals("重新提交")) {
-            mPresenter.reBindingCar(mCarBean.getId(), mCarBean.getImage1(), String.valueOf(mCarModelBean.getId()), mCarBean.getImage2(),
-                    carVolume, "2", String.valueOf(mCarLengthBean.getId()), carNo, carWeight, tradeNo, transportNo);
+            mPresenter.reBindingCar(mCarBean.getId(), mCarBean.getImage1(), String.valueOf(mCarModelBean.getValue()), mCarBean.getImage2(),
+                    carVolume, "2", String.valueOf(mCarLengthBean.getValue()), carNo, carWeight, tradeNo, transportNo);
         }
     }
 
