@@ -27,10 +27,10 @@ public class AccountInfo implements Parcelable {
     private int subscriberId;
     private int id;
     private int balanceState;
-    private int driverDeposit;
-    private int tradeDeposit;
+    private double driverDeposit;
+    private double tradeDeposit;
     private double balance;
-    private int consignorDeposit;
+    private double consignorDeposit;
 
     public int getDriverDepositState() {
         return driverDepositState;
@@ -64,19 +64,19 @@ public class AccountInfo implements Parcelable {
         this.balanceState = balanceState;
     }
 
-    public int getDriverDeposit() {
+    public double getDriverDeposit() {
         return driverDeposit;
     }
 
-    public void setDriverDeposit(int driverDeposit) {
+    public void setDriverDeposit(double driverDeposit) {
         this.driverDeposit = driverDeposit;
     }
 
-    public int getTradeDeposit() {
+    public double getTradeDeposit() {
         return tradeDeposit;
     }
 
-    public void setTradeDeposit(int tradeDeposit) {
+    public void setTradeDeposit(double tradeDeposit) {
         this.tradeDeposit = tradeDeposit;
     }
 
@@ -88,11 +88,11 @@ public class AccountInfo implements Parcelable {
         this.balance = balance;
     }
 
-    public int getConsignorDeposit() {
+    public double getConsignorDeposit() {
         return consignorDeposit;
     }
 
-    public void setConsignorDeposit(int consignorDeposit) {
+    public void setConsignorDeposit(double consignorDeposit) {
         this.consignorDeposit = consignorDeposit;
     }
 
@@ -106,10 +106,10 @@ public class AccountInfo implements Parcelable {
         subscriberId = in.readInt();
         id = in.readInt();
         balanceState = in.readInt();
-        driverDeposit = in.readInt();
-        tradeDeposit = in.readInt();
+        driverDeposit = in.readDouble();
+        tradeDeposit = in.readDouble();
         balance = in.readDouble();
-        consignorDeposit = in.readInt();
+        consignorDeposit = in.readDouble();
     }
 
     @Override
@@ -119,10 +119,10 @@ public class AccountInfo implements Parcelable {
         dest.writeInt(subscriberId);
         dest.writeInt(id);
         dest.writeInt(balanceState);
-        dest.writeInt(driverDeposit);
-        dest.writeInt(tradeDeposit);
+        dest.writeDouble(driverDeposit);
+        dest.writeDouble(tradeDeposit);
         dest.writeDouble(balance);
-        dest.writeInt(consignorDeposit);
+        dest.writeDouble(consignorDeposit);
     }
 
     // 反序列过程：必须实现Parcelable.Creator接口，并且对象名必须为CREATOR
