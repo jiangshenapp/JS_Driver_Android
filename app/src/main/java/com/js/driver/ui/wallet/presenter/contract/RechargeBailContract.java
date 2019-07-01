@@ -20,11 +20,15 @@ public interface RechargeBailContract {
         void onPayOrder(PayInfo payInfo);
 
         void onPayRouter(List<PayRouter> payRouters);
+
+        void onPayAccount(Boolean isOk);
     }
 
     interface Presenter extends IPresenter<View> {
         void payOrder(int tradeType, int channelType, double money, int routeId);
 
         void getPayRouter();
+
+        void payAccount(double deposit);
     }
 }

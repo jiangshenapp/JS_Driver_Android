@@ -13,6 +13,7 @@ public class Const {
     public static final int CHANNEL_ALI_PAY = 1;//支付宝app支付
     public static final int CHANNEL_WX_PAY = 2;//微信app支付
     public static final int CHANNEL_UNION_PAY = 3;//银联app支付
+    public static final int CHANNEL_ACCOUNT_PAY = 4;//余额支付
 
     public static final int AUTH_CARD = 1;
     public static final int AUTH_BODY = 2;

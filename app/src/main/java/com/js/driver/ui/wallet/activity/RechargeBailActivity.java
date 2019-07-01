@@ -26,6 +26,7 @@ import com.js.driver.global.Const;
 import com.js.driver.model.bean.AccountInfo;
 import com.js.driver.model.bean.PayInfo;
 import com.js.driver.model.bean.PayRouter;
+import com.js.driver.ui.order.activity.OrdersActivity;
 import com.js.driver.ui.wallet.adapter.PayAdapter;
 import com.js.driver.ui.wallet.presenter.RechargeBailPresenter;
 import com.js.driver.ui.wallet.presenter.contract.RechargeBailContract;
@@ -53,20 +54,19 @@ public class RechargeBailActivity extends BaseActivity<RechargeBailPresenter> im
 
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
-
-    private static final int SDK_PAY_FLAG = 99;
     @BindView(R.id.tv_deposit)
     TextView tvDeposit;
     @BindView(R.id.et_trade_deposit)
     TextView etTradeDeposit;
     @BindView(R.id.cb_select)
     CheckBox cbSelect;
-    private int type;
-    private PayAdapter mAdapter;
+
     private List<PayRouter> mPayRouters;
     private int channelType = 0;
     private int routerId = 0;
 
+    private PayAdapter mAdapter;
+    private static final int SDK_PAY_FLAG = 99;
     private AccountInfo mAccountInfo;
 
     public static void action(Context context, AccountInfo accountInfo) {
@@ -130,12 +130,21 @@ public class RechargeBailActivity extends BaseActivity<RechargeBailPresenter> im
                     toast("请勾选保证金协议");
                     return;
                 }
-                if (Float.parseFloat(etTradeDeposit.getText().toString())<=0) {
-                    toast("缴纳保证金需要大于0元");
+                if (TextUtils.isEmpty(etTradeDeposit.getText().toString())) {
+                    toast("请输入你要充值的保证金金额");
                     return;
                 }
-                //交易类型, 1账户充值, 5运费支付，10运力端保证金，11货主端保证金
-                mPresenter.payOrder(10, channelType, mAccountInfo.getTradeDeposit(), routerId);
+                Double deposit = Double.parseDouble(etTradeDeposit.getText().toString());
+                if (deposit<=0) {
+                    toast("缴纳保证金金额需要大于0元");
+                    return;
+                }
+                if (channelType == Const.CHANNEL_ACCOUNT_PAY) {
+                    mPresenter.payAccount(deposit);
+                } else {
+                    //交易类型, 1账户充值, 5运费支付，10运力端保证金，11货主端保证金
+                    mPresenter.payOrder(10, channelType, Double.parseDouble(etTradeDeposit.getText().toString()), routerId);
+                }
                 break;
         }
     }
@@ -222,7 +231,21 @@ public class RechargeBailActivity extends BaseActivity<RechargeBailPresenter> im
             channelType = payRouters.get(0).getChannelType();
             routerId = payRouters.get(0).getRouteId();
             payRouters.get(0).setChecked(true);
+            PayRouter payRouter = new PayRouter();
+            payRouter.setChannelType(Const.CHANNEL_ACCOUNT_PAY);
+            payRouter.setRouteId(1);
+            payRouters.add(payRouter);
             mAdapter.setNewData(payRouters);
+        }
+    }
+
+    @Override
+    public void onPayAccount(Boolean isOk) {
+        if (isOk) {
+            toast("支付成功");
+            finish();
+        } else {
+            toast("支付失败");
         }
     }
 

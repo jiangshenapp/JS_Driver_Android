@@ -67,4 +67,10 @@ public interface PayApi {
     Observable<HttpResponse<List<PayRouter>>> getPayRouter(@Query("business") int businessId,
                                                            @Query("merchantId") int merchantId);
 
+    /**
+     * 运力端缴纳保证金
+     */
+    @POST("app/account/rechargeDriverDeposit")
+    Observable<BaseHttpResponse> payAccount(@Query("deposit") double deposit);
+
 }
