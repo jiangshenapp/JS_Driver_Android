@@ -46,9 +46,9 @@ public class AddCarPresenter extends RxPresenter<AddCarContract.View> implements
     }
 
     @Override
-    public void bindingCar(String image1, String carModelId, String image2, String capacityVolume, String state, String carLengthId, String cphm, String capacityTonnage) {
+    public void bindingCar(String image1, String carModelId, String image2, String capacityVolume, String state, String carLengthId, String cphm, String capacityTonnage, String tradingNo, String transportNo) {
         Disposable disposable = mApiFactory.getApi(CarApi.class)
-                .bindingCar(new CarRequest(image1, carModelId, image2, capacityVolume, state, carLengthId, cphm, capacityTonnage))
+                .bindingCar(new CarRequest(image1, carModelId, image2, capacityVolume, state, carLengthId, cphm, capacityTonnage, tradingNo, transportNo))
                 .compose(RxSchedulers.io_main())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
@@ -102,9 +102,9 @@ public class AddCarPresenter extends RxPresenter<AddCarContract.View> implements
     }
 
     @Override
-    public void reBindingCar(long id, String image1, String carModelId, String image2, String capacityVolume, String state, String carLengthId, String cphm, String capacityTonnage) {
+    public void reBindingCar(long id, String image1, String carModelId, String image2, String capacityVolume, String state, String carLengthId, String cphm, String capacityTonnage, String tradingNo, String transportNo) {
         Disposable disposable = mApiFactory.getApi(CarApi.class)
-                .reBindingCar(id, new CarRequest(image1, carModelId, image2, capacityVolume, state, carLengthId, cphm, capacityTonnage))
+                .reBindingCar(id, new CarRequest(id, image1, carModelId, image2, capacityVolume, state, carLengthId, cphm, capacityTonnage, tradingNo, transportNo))
                 .compose(RxSchedulers.io_main())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override

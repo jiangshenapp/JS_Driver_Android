@@ -14,15 +14,17 @@ public class DriverVerifiedRequest {
     private String idImage;
     private String idHandImage;
     private String driverImage;
+    private String cyzgzImage;
     private String personName;
     private String idCode;
     private String address;
     private String driverLevel;
 
-    public DriverVerifiedRequest(String idImage, String idHandImage, String driverImage, String personName, String idCode, String address, String driverLevel) {
+    public DriverVerifiedRequest(String idImage, String idHandImage, String driverImage, String cyzgzImage, String personName, String idCode, String address, String driverLevel) {
         this.idImage = idImage;
         this.idHandImage = idHandImage;
         this.driverImage = driverImage;
+        this.cyzgzImage = cyzgzImage;
         this.personName = personName;
         this.idCode = idCode;
         this.address = address;
@@ -51,6 +53,14 @@ public class DriverVerifiedRequest {
 
     public void setDriverImage(String driverImage) {
         this.driverImage = driverImage;
+    }
+
+    public String getCyzgzImage() {
+        return cyzgzImage;
+    }
+
+    public void setCyzgzImage(String cyzgzImage) {
+        this.cyzgzImage = cyzgzImage;
     }
 
     public String getPersonName() {

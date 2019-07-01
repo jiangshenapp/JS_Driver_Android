@@ -43,6 +43,11 @@ public class LoginActivity extends SimpleActivity {
     }
 
     @Override
+    public void backAction() {
+        MainActivity.action(this);
+    }
+
+    @Override
     protected int getLayout() {
         return R.layout.activity_login;
     }

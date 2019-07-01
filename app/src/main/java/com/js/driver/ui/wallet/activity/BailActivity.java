@@ -31,6 +31,18 @@ public class BailActivity extends BaseActivity<BailPresenter> implements BailCon
 
     private AccountInfo mAccountInfo;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.getAccountInfo();
+    }
+
+    @Override
+    public void onAccountInfo(AccountInfo accountInfo) {
+        mAccountInfo = accountInfo;
+        mMoney.setText(String.valueOf(mAccountInfo.getDriverDeposit()));
+    }
+
     public static void action(Context context, AccountInfo accountInfo) {
         Intent intent = new Intent(context, BailActivity.class);
         intent.putExtra("accountInfo", accountInfo);

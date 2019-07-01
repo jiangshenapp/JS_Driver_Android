@@ -18,8 +18,10 @@ public interface AddCarContract {
 
     interface Presenter extends IPresenter<View>{
         void getCarDetail(long id);
-        void bindingCar(String image1, String carModelId, String image2, String capacityVolume, String state, String carLengthId, String cphm, String capacityTonnage);
+        void bindingCar(String image1, String carModelId, String image2, String capacityVolume, String state,
+                        String carLengthId, String cphm, String capacityTonnage, String tradingNo, String transportNo);
         void unbindingCar(long id);
-        void reBindingCar(long id, String image1, String carModelId, String image2, String capacityVolume, String state, String carLengthId, String cphm, String capacityTonnage);
+        void reBindingCar(long id, String image1, String carModelId, String image2, String capacityVolume, String state,
+                          String carLengthId, String cphm, String capacityTonnage, String tradingNo, String transportNo);
     }
 }

@@ -13,14 +13,16 @@ public class Const {
     public static final int CHANNEL_ALI_PAY = 1;//支付宝app支付
     public static final int CHANNEL_WX_PAY = 2;//微信app支付
     public static final int CHANNEL_UNION_PAY = 3;//银联app支付
+    public static final int CHANNEL_ACCOUNT_PAY = 4;//余额支付
 
     public static final int AUTH_CARD = 1;
     public static final int AUTH_BODY = 2;
     public static final int AUTH_DRIVER_CARD = 3;
-    public static final int AUTH_BUSINESS_LICENSE = 4;
-    public static final int UPLOAD_HEADIMG = 5;
-    public static final int AUTH_CAR_LICENSE = 6;
-    public static final int AUTH_CAR_HEAD = 7;
+    public static final int AUTH_DRIVER_WORK = 4;
+    public static final int AUTH_BUSINESS_LICENSE = 5;
+    public static final int UPLOAD_HEADIMG = 6;
+    public static final int AUTH_CAR_LICENSE = 7;
+    public static final int AUTH_CAR_HEAD = 8;
 
     public static final int PAGE_SIZE = 10;
     public static final int PAGE_NUM = 1;

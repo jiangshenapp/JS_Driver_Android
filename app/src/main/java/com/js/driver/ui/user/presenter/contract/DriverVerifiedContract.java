@@ -17,6 +17,6 @@ public interface DriverVerifiedContract {
 
     interface Presenter extends IPresenter<View>{
         void getDriverVerifiedInfo();
-        void submitDriverVerified(String idImage, String idHandImage, String driverImage, String personName, String idCode, String address, String driverLevel);
+        void submitDriverVerified(String idImage, String idHandImage, String driverImage, String cyzgzImage, String personName, String idCode, String address, String driverLevel);
     }
 }

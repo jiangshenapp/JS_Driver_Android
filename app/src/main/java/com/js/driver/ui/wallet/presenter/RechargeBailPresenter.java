@@ -11,6 +11,7 @@ import com.js.driver.ui.wallet.presenter.contract.RechargeBailContract;
 import com.js.driver.ui.wallet.presenter.contract.RechargeContract;
 import com.xlgcx.frame.mvp.RxPresenter;
 import com.xlgcx.http.ApiFactory;
+import com.xlgcx.http.BaseHttpResponse;
 
 import java.util.List;
 
@@ -75,6 +76,34 @@ public class RechargeBailPresenter extends RxPresenter<RechargeBailContract.View
                 }, new RxException<>(e -> {
                     mView.closeProgress();
                     mView.toast(e.getMessage());
+                }));
+        addDispose(disposable);
+    }
+
+    @Override
+    public void payAccount(double deposit) {
+        Disposable disposable = mApiFactory.getApi(PayApi.class)
+                .payAccount(deposit)
+                .compose(RxSchedulers.io_main())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<BaseHttpResponse>() {
+                    @Override
+                    public void accept(BaseHttpResponse response) throws Exception {
+                        mView.closeProgress();
+                        if (response.isSuccess()){
+                            mView.onPayAccount(true);
+                        }else {
+                            mView.onPayAccount(false);
+                        }
+                    }
+                }, new RxException<>(e -> {
+                    mView.toast(e.getMessage());
+                    mView.closeProgress();
                 }));
         addDispose(disposable);
     }

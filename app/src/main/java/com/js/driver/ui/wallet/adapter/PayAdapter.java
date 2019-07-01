@@ -36,6 +36,11 @@ public class PayAdapter extends BaseQuickAdapter<PayRouter, BaseViewHolder> {
 //                helper.setImageResource(R.id.item_pay_type_img,R.mipmap.ic_wallet_payment_balance);
 //                helper.setText(R.id.item_pay_type_name,"微信");
                 break;
+            case Const.CHANNEL_ACCOUNT_PAY:
+                helper.setImageResource(R.id.item_pay_type_img,R.mipmap.ic_wallet_payment_balance);
+                helper.setText(R.id.item_pay_type_name,"账号余额");
+                helper.setChecked(R.id.item_pay_type_check,item.isChecked());
+                break;
         }
     }
 }

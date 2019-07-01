@@ -106,6 +106,76 @@
             android:background="@color/_F0F0F0" />
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="12dp"
+                android:gravity="center_vertical"
+                android:text="车辆营运证号"
+                android:textColor="@color/_000000"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/et_trade_no"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="end|center_vertical"
+                android:hint="请输入证号"
+                android:textColorHint="@color/_B4B4B4"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/_F0F0F0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="12dp"
+                android:gravity="center_vertical"
+                android:text="道路运输许可证号"
+                android:textColor="@color/_000000"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/et_transport_no"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="end|center_vertical"
+                android:hint="请输入证号"
+                android:textColorHint="@color/_B4B4B4"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/_F0F0F0" />
+
+        <LinearLayout
             android:id="@+id/ll_car_length"
             android:layout_width="match_parent"
             android:layout_height="48dp"

@@ -41,7 +41,6 @@ import com.js.driver.presenter.contract.DictContract;
 import com.js.driver.presenter.contract.FileContract;
 import com.js.driver.ui.center.presenter.AddCarPresenter;
 import com.js.driver.ui.center.presenter.contract.AddCarContract;
-import com.js.driver.ui.order.activity.OrderDetailActivity;
 import com.xlgcx.frame.view.BaseActivity;
 
 import java.io.File;
@@ -68,6 +67,10 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
     ImageView ivArrowCarModel;
     @BindView(R.id.ll_car_model)
     LinearLayout llCarModel;
+    @BindView(R.id.et_trade_no)
+    EditText etTradeNo;
+    @BindView(R.id.et_transport_no)
+    EditText etTransportNo;
     @BindView(R.id.et_car_length)
     EditText etCarLength;
     @BindView(R.id.iv_arrow_car_length)
@@ -187,6 +190,8 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
         tvAuthState.setTextColor(Color.parseColor(Const.CarStateColor[authState]));
         etCarNo.setText(carBean.getCphm());
         etCarModel.setText(carBean.getCarModelName());
+        etTradeNo.setText(carBean.getTradingNo());
+        etTransportNo.setText(carBean.getTransportNo());
         etCarLength.setText(carBean.getCarLengthName());
         etCarWeight.setText(String.valueOf(carBean.getCapacityTonnage()));
         etCarVolume.setText(String.valueOf(carBean.getCapacityVolume()));
@@ -201,6 +206,8 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
         etCarNo.setFocusable(false);
         etCarWeight.setFocusable(false);
         etCarVolume.setFocusable(false);
+        etTradeNo.setFocusable(false);
+        etTransportNo.setFocusable(false);
         llCarModel.setClickable(false);
         etCarModel.setEnabled(false);
         llCarLength.setClickable(false);
@@ -267,6 +274,8 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
 
         String carNo = etCarNo.getText().toString();
         String carModel = etCarModel.getText().toString();
+        String tradeNo = etTradeNo.getText().toString();
+        String transportNo = etTransportNo.getText().toString();
         String carLength = etCarLength.getText().toString();
         String carWeight = etCarWeight.getText().toString();
         String carVolume = etCarVolume.getText().toString();
@@ -301,12 +310,12 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
         }
 
         if (tvSubmit.getText().toString().equals("提交审核")) {
-            mPresenter.bindingCar(mCarBean.getImage1(), String.valueOf(mCarModelBean.getId()), mCarBean.getImage2(),
-                    carVolume, "0", String.valueOf(mCarLengthBean.getId()), carNo, carWeight);
+            mPresenter.bindingCar(mCarBean.getImage1(), String.valueOf(mCarModelBean.getValue()), mCarBean.getImage2(),
+                    carVolume, "0", String.valueOf(mCarLengthBean.getValue()), carNo, carWeight, tradeNo, transportNo);
         }
         if (tvSubmit.getText().toString().equals("重新提交")) {
-            mPresenter.reBindingCar(mCarBean.getId(), mCarBean.getImage1(), String.valueOf(mCarModelBean.getId()), mCarBean.getImage2(),
-                    carVolume, "2", String.valueOf(mCarLengthBean.getId()), carNo, carWeight);
+            mPresenter.reBindingCar(mCarBean.getId(), mCarBean.getImage1(), String.valueOf(mCarModelBean.getValue()), mCarBean.getImage2(),
+                    carVolume, "2", String.valueOf(mCarLengthBean.getValue()), carNo, carWeight, tradeNo, transportNo);
         }
     }
 
