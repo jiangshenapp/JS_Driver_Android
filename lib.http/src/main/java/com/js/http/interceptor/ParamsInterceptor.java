@@ -1,8 +1,5 @@
-package com.xlgcx.http.interceptor;
+package com.js.http.interceptor;
 
-
-import com.xlgcx.http.HttpApp;
-import com.xlgcx.http.global.Const;
 
 import java.io.IOException;
 import java.util.Map;

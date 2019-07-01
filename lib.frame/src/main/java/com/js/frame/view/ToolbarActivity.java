@@ -1,4 +1,4 @@
-package com.xlgcx.frame.view;
+package com.js.frame.view;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -7,11 +7,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
-import com.xlgcx.frame.R;
+import com.js.frame.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

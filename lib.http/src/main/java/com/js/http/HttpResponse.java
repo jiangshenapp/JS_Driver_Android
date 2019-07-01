@@ -1,4 +1,4 @@
-package com.xlgcx.http;
+package com.js.http;
 
 /**
  * Created by huyg on 2018/9/25.

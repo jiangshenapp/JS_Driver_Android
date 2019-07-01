@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xlgcx.http" >
+    package="com.js.http" >
 
     <application android:allowBackup="true">
         <meta-data
-            android:name="com.xlgcx.http.HttpApp"
+            android:name="com.js.http.HttpApp"
             android:value="IModuleConfig" />
     </application>
 </manifest>

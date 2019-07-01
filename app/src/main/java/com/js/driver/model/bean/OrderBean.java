@@ -54,8 +54,8 @@ public class OrderBean {
     private int feeType;//运费类型，1自己出价，2电议
     private String finishTime;//订单完成时间
     private String goodsType;//货物类型,字典表，多个
-    private int goodsVolume;//货物体积，单位立方米
-    private int goodsWeight;//货物重量、吨
+    private double goodsVolume;//货物体积，单位立方米
+    private double goodsWeight;//货物重量、吨
     private long id;//主键
     private String image1;//图片1
     private String image2;//图片2
@@ -193,19 +193,19 @@ public class OrderBean {
         this.goodsType = goodsType;
     }
 
-    public int getGoodsVolume() {
+    public double getGoodsVolume() {
         return goodsVolume;
     }
 
-    public void setGoodsVolume(int goodsVolume) {
+    public void setGoodsVolume(double goodsVolume) {
         this.goodsVolume = goodsVolume;
     }
 
-    public int getGoodsWeight() {
+    public double getGoodsWeight() {
         return goodsWeight;
     }
 
-    public void setGoodsWeight(int goodsWeight) {
+    public void setGoodsWeight(double goodsWeight) {
         this.goodsWeight = goodsWeight;
     }
 

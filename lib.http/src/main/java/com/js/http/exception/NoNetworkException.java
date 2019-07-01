@@ -1,4 +1,4 @@
-package com.xlgcx.http.exception;
+package com.js.http.exception;
 
 /**
  * Created by ccdt on 2016/9/21.

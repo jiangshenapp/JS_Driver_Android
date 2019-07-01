@@ -1,4 +1,4 @@
-package com.xlgcx.http;
+package com.js.http;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

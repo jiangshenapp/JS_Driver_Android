@@ -1,4 +1,4 @@
-package com.xlgcx.http;
+package com.js.http;
 
 import org.junit.Test;
 

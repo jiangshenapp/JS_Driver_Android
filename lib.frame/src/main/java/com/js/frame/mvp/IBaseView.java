@@ -1,4 +1,4 @@
-package com.xlgcx.frame.mvp;
+package com.js.frame.mvp;
 
 /**
  * Created by huyg on 2018/8/22.

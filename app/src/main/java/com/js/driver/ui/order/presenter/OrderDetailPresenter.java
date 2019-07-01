@@ -140,7 +140,7 @@ public class OrderDetailPresenter extends RxPresenter<OrderDetailContract.View> 
 
     @Override
     public void distribution(long id, OrderDistribution orderDistribution) {
-        Disposable disposable = mApiFactory.getApi(OrderApi.class).distribution(id,orderDistribution)
+        Disposable disposable = mApiFactory.getApi(OrderApi.class).distribution(id, orderDistribution)
                 .compose(RxSchedulers.io_main())
                 .compose(RxResult.handleResult())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -249,6 +249,7 @@ public class OrderDetailPresenter extends RxPresenter<OrderDetailContract.View> 
                     }
                 }, new RxException<>(e -> {
                     mView.closeProgress();
+                    mView.toast(e.getMessage());
                 }));
         addDispose(disposable);
     }

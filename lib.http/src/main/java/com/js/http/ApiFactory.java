@@ -1,4 +1,4 @@
-package com.xlgcx.http;
+package com.js.http;
 
 import java.util.HashMap;
 import java.util.Map;

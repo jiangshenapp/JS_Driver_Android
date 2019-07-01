@@ -1,7 +1,7 @@
-package com.xlgcx.http.converter;
+package com.js.http.converter;
 
 
-import com.xlgcx.http.TypeString;
+import com.js.http.TypeString;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;

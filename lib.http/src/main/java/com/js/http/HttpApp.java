@@ -1,9 +1,9 @@
-package com.xlgcx.http;
+package com.js.http;
 
 import android.app.Application;
 import android.content.Context;
 
-import com.xlgcx.frame.module.IAppLife;
+import com.js.frame.module.IAppLife;
 
 /**
  * Created by huyg on 2019/1/31.

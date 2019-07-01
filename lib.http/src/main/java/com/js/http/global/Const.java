@@ -1,4 +1,4 @@
-package com.xlgcx.http.global;
+package com.js.http.global;
 
 
 /**

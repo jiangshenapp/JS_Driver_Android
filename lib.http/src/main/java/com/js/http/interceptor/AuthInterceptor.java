@@ -1,11 +1,11 @@
-package com.xlgcx.http.interceptor;
+package com.js.http.interceptor;
 
 import android.text.TextUtils;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.Gson;
-import com.xlgcx.http.BaseHttpResponse;
-import com.xlgcx.http.HttpApp;
+import com.js.http.BaseHttpResponse;
+import com.js.http.HttpApp;
 
 import java.io.IOException;
 

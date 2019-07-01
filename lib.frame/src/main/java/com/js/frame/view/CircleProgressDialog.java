@@ -1,4 +1,4 @@
-package com.xlgcx.frame.view;
+package com.js.frame.view;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -7,8 +7,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.wang.avi.AVLoadingIndicatorView;
-import com.xlgcx.frame.R;
-import com.xlgcx.frame.R2;
+import com.js.frame.R;
+import com.js.frame.R2;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

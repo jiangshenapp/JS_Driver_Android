@@ -1,4 +1,4 @@
-package com.xlgcx.frame.view;
+package com.js.frame.view;
 
 import android.app.Activity;
 import android.content.Context;

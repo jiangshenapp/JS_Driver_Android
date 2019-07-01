@@ -1,11 +1,11 @@
-package com.xlgcx.frame.view;
+package com.js.frame.view;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.xlgcx.frame.mvp.IBaseView;
-import com.xlgcx.frame.mvp.IPresenter;
+import com.js.frame.mvp.IBaseView;
+import com.js.frame.mvp.IPresenter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

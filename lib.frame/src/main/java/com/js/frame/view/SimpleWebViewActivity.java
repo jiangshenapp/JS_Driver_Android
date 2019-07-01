@@ -1,4 +1,4 @@
-package com.xlgcx.frame.view;
+package com.js.frame.view;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
@@ -10,8 +10,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 
-import com.xlgcx.frame.R;
-import com.xlgcx.frame.R2;
+import com.js.frame.R;
+import com.js.frame.R2;
 
 import butterknife.BindView;
 

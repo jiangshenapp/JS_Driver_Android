@@ -1,4 +1,4 @@
-package com.xlgcx.frame;
+package com.js.frame;
 
 import android.content.Context;
 
@@ -8,7 +8,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.tencent.bugly.crashreport.CrashReport;
-import com.xlgcx.frame.global.Const;
+import com.js.frame.global.Const;
 
 import androidx.multidex.MultiDexApplication;
 

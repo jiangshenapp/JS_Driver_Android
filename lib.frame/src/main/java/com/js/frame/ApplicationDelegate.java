@@ -1,10 +1,10 @@
-package com.xlgcx.frame;
+package com.js.frame;
 
 import android.app.Application;
 import android.content.Context;
 
-import com.xlgcx.frame.module.IAppLife;
-import com.xlgcx.frame.module.ManifestParser;
+import com.js.frame.module.IAppLife;
+import com.js.frame.module.ManifestParser;
 
 import java.util.List;
 

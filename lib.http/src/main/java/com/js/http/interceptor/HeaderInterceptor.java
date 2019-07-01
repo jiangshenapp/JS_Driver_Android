@@ -1,4 +1,4 @@
-package com.xlgcx.http.interceptor;
+package com.js.http.interceptor;
 
 import java.io.IOException;
 import java.lang.reflect.Field;

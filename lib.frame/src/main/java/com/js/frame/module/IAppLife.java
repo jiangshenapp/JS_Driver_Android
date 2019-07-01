@@ -1,4 +1,4 @@
-package com.xlgcx.frame.module;
+package com.js.frame.module;
 
 import android.app.Application;
 import android.content.Context;

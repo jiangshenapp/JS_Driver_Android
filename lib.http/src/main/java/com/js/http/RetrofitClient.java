@@ -1,13 +1,11 @@
-package com.xlgcx.http;
+package com.js.http;
 
 import android.content.Context;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
-import com.xlgcx.http.converter.StringConverterFactory;
-import com.xlgcx.http.global.Const;
-import com.xlgcx.http.interceptor.AuthInterceptor;
-import com.xlgcx.http.interceptor.HeaderInterceptor;
-import com.xlgcx.http.interceptor.ParamsInterceptor;
+import com.js.http.converter.StringConverterFactory;
+import com.js.http.global.Const;
+import com.js.http.interceptor.AuthInterceptor;
 
 import java.util.concurrent.TimeUnit;
 

@@ -1,4 +1,4 @@
-package com.xlgcx.frame.global;
+package com.js.frame.global;
 
 /**
  * Created by huyg on 2019/1/30.

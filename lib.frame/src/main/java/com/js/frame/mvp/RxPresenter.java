@@ -1,4 +1,4 @@
-package com.xlgcx.frame.mvp;
+package com.js.frame.mvp;
 
 
 import io.reactivex.disposables.CompositeDisposable;

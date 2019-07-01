@@ -1,4 +1,4 @@
-package com.xlgcx.frame.view;
+package com.js.frame.view;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.trello.rxlifecycle2.components.support.RxFragment;
-import com.xlgcx.frame.mvp.IBaseView;
-import com.xlgcx.frame.mvp.IPresenter;
+import com.js.frame.mvp.IBaseView;
+import com.js.frame.mvp.IPresenter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

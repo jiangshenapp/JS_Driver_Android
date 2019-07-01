@@ -1,4 +1,4 @@
-package com.xlgcx.http.converter;
+package com.js.http.converter;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
