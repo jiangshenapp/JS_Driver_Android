@@ -11,6 +11,7 @@ import com.js.driver.R;
 import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
 import com.js.driver.global.Const;
+import com.js.driver.manager.UserManager;
 import com.js.driver.model.bean.DictBean;
 import com.js.driver.model.bean.OrderBean;
 import com.js.driver.model.event.CitySelectEvent;
@@ -24,6 +25,8 @@ import com.js.driver.ui.main.presenter.FindOrderPresenter;
 import com.js.driver.ui.main.presenter.contract.FindOrderContract;
 import com.js.driver.ui.order.activity.OrderDetailActivity;
 import com.js.driver.ui.order.activity.OrdersActivity;
+import com.js.driver.ui.user.activity.UserVerifiedActivity;
+import com.js.driver.widget.dialog.AppDialogFragment;
 import com.js.driver.widget.window.CityWindow;
 import com.js.driver.widget.window.FilterWindow;
 import com.js.driver.widget.window.SortWindow;
@@ -67,7 +70,7 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
     TextView mFilter;
 
 
-    @OnClick({R.id.send_address, R.id.end_address, R.id.sort, R.id.filter,R.id.waybill})
+    @OnClick({R.id.send_address, R.id.end_address, R.id.sort, R.id.filter, R.id.waybill})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.send_address:
@@ -135,7 +138,6 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
     }
 
 
-
     private void initView() {
         mDictPresenter.attachView(this);
         initRecycler();
@@ -155,7 +157,7 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
         mAdapter = new FindOrderAdapter(R.layout.item_home_order, orders);
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.setAdapter(mAdapter);
-        mAdapter.setEmptyView(R.layout.layout_data_empty,mRecycler);
+        mAdapter.setEmptyView(R.layout.layout_data_empty, mRecycler);
         mAdapter.setOnItemClickListener(this);
     }
 
@@ -165,7 +167,7 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 type = Const.MORE;
-                int num = (int) Math.ceil(((float)mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
+                int num = (int) Math.ceil(((float) mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
                 getOrders(num);
             }
 
@@ -180,10 +182,23 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        if (!UserManager.getUserManager().isVerified()) {
+            AppDialogFragment appDialogFragment = AppDialogFragment.getInstance();
+            appDialogFragment.setTitle("温馨提示");
+            appDialogFragment.setMessage("您尚未认证通过");
+            appDialogFragment.setPositiveButton("前往认证", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    UserVerifiedActivity.action(mContext);
+                }
+            });
+            appDialogFragment.show(getChildFragmentManager(), "appDialog");
+            return;
+        }
         List<OrderBean> orderBeans = adapter.getData();
         OrderBean orderBean = orderBeans.get(position);
         if (orderBean != null) {
-            OrderDetailActivity.action(mContext,orderBean.getId());
+            OrderDetailActivity.action(mContext, orderBean.getId());
         }
     }
 
@@ -229,7 +244,7 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
         getOrders(Const.PAGE_NUM);
     }
 
-    private void getOrders(int num){
+    private void getOrders(int num) {
         if ("发货地".equals(mSendAddress.getText().toString())) {
             lineAppFind.setStartAddressCode("0");
         } else {
@@ -242,7 +257,7 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
         }
 
         lineAppFind.setSort(sort);
-        mPresenter.findOrders(num, (int)Const.PAGE_SIZE, lineAppFind);
+        mPresenter.findOrders(num, (int) Const.PAGE_SIZE, lineAppFind);
     }
 
     @Subscribe

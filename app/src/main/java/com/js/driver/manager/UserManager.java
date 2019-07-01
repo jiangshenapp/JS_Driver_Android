@@ -49,7 +49,12 @@ public class UserManager {
     /**
      * 判断认证状态
      */
-    public boolean isVerified(Activity activity) {
-        return true;
+    public boolean isVerified() {
+        if (App.getInstance().driverVerified != 2
+                && App.getInstance().parkVerified != 2 ) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

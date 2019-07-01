@@ -16,6 +16,7 @@ import com.js.driver.R;
 import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
 import com.js.driver.manager.CommonGlideImageLoader;
+import com.js.driver.manager.UserManager;
 import com.js.driver.model.bean.AccountInfo;
 import com.js.driver.model.bean.MineMenu;
 import com.js.driver.model.bean.UserInfo;
@@ -29,9 +30,11 @@ import com.js.driver.ui.main.presenter.contract.MineContract;
 import com.js.driver.ui.order.activity.OrdersActivity;
 import com.js.driver.ui.user.activity.LoginActivity;
 import com.js.driver.ui.user.activity.UserCenterActivity;
+import com.js.driver.ui.user.activity.UserVerifiedActivity;
 import com.js.driver.ui.wallet.activity.WalletActivity;
 import com.js.driver.util.UIUtil;
 import com.js.driver.widget.adapter.DividerGridItemDecoration;
+import com.js.driver.widget.dialog.AppDialogFragment;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -265,12 +268,24 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         switch (position) {
             case 0://我的车辆
+                if (!UserManager.getUserManager().isVerified()) {
+                    showVerifiedDialog();
+                    return;
+                }
                 CarsActivity.action(mContext);
                 break;
             case 1://我的司机
+                if (!UserManager.getUserManager().isVerified()) {
+                    showVerifiedDialog();
+                    return;
+                }
                 DriversActivity.action(mContext);
                 break;
             case 2://我的路线
+                if (!UserManager.getUserManager().isVerified()) {
+                    showVerifiedDialog();
+                    return;
+                }
                 RoutesActivity.action(mContext);
                 break;
             case 3://我的客服
@@ -284,4 +299,19 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 break;
         }
     }
+
+
+    private void showVerifiedDialog() {
+        AppDialogFragment appDialogFragment = AppDialogFragment.getInstance();
+        appDialogFragment.setTitle("温馨提示");
+        appDialogFragment.setMessage("您尚未认证通过");
+        appDialogFragment.setPositiveButton("前往认证", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserVerifiedActivity.action(mContext);
+            }
+        });
+        appDialogFragment.show(getChildFragmentManager(), "appDialog");
+    }
+
 }
