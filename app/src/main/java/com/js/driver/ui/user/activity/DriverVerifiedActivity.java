@@ -45,7 +45,7 @@ import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.user.presenter.DriverVerifiedPresenter;
 import com.js.driver.ui.user.presenter.contract.DriverVerifiedContract;
 import com.js.driver.util.GetJsonDataUtil;
-import com.xlgcx.frame.view.BaseActivity;
+import com.js.frame.view.BaseActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -153,13 +153,13 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
 
         mAuthInfo = authInfo;
 
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + authInfo.getIdImage()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + authInfo.getIdImage()
                 , mAuthCard, mContext.getResources().getDrawable(R.mipmap.img_authentication_id));
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + authInfo.getIdHandImage()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + authInfo.getIdHandImage()
                 , mAuthBody, mContext.getResources().getDrawable(R.mipmap.img_authentication_body));
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + authInfo.getDriverImage()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + authInfo.getDriverImage()
                 , mAuthDriverCard, mContext.getResources().getDrawable(R.mipmap.img_authentication_driver));
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + authInfo.getCyzgzImage()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + authInfo.getCyzgzImage()
                 , mAuthDriverWork, mContext.getResources().getDrawable(R.mipmap.img_authentication_id));
         etName.setText(authInfo.getPersonName());
         etIdcard.setText(authInfo.getIdCode());
@@ -386,19 +386,19 @@ public class DriverVerifiedActivity extends BaseActivity<DriverVerifiedPresenter
         switch (choseCode) {
             case Const.AUTH_CARD:
                 mAuthInfo.setIdImage(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + data, mAuthCard);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + data, mAuthCard);
                 break;
             case Const.AUTH_BODY:
                 mAuthInfo.setIdHandImage(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + data, mAuthBody);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + data, mAuthBody);
                 break;
             case Const.AUTH_DRIVER_CARD:
                 mAuthInfo.setDriverImage(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + data, mAuthDriverCard);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + data, mAuthDriverCard);
                 break;
             case Const.AUTH_DRIVER_WORK:
                 mAuthInfo.setCyzgzImage(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + data, mAuthDriverWork);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + data, mAuthDriverWork);
                 break;
         }
     }

@@ -1,8 +1,8 @@
 package com.js.driver.ui.wallet.presenter.contract;
 
 import com.js.driver.model.bean.AccountInfo;
-import com.xlgcx.frame.mvp.IBaseView;
-import com.xlgcx.frame.mvp.IPresenter;
+import com.js.frame.mvp.IBaseView;
+import com.js.frame.mvp.IPresenter;
 
 /**
  * Created by huyg on 2019/4/24.

@@ -3,17 +3,15 @@ package com.js.driver.ui.user.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.global.Const;
-import com.xlgcx.frame.view.SimpleActivity;
+import com.js.frame.view.SimpleActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

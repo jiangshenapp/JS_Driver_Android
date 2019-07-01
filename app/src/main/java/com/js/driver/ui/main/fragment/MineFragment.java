@@ -35,8 +35,8 @@ import com.js.driver.widget.adapter.DividerGridItemDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.xlgcx.frame.view.BaseFragment;
-import com.xlgcx.http.global.Const;
+import com.js.frame.view.BaseFragment;
+import com.js.http.global.Const;
 
 import org.greenrobot.eventbus.Subscribe;
 

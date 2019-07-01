@@ -2,7 +2,6 @@ package com.js.driver.ui.wallet.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,13 +10,11 @@ import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.model.bean.AccountInfo;
-import com.js.driver.ui.center.activity.AddRouteActivity;
 import com.js.driver.ui.wallet.presenter.BailPresenter;
 import com.js.driver.ui.wallet.presenter.contract.BailContract;
-import com.xlgcx.frame.view.BaseActivity;
+import com.js.frame.view.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

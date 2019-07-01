@@ -41,7 +41,7 @@ import com.js.driver.presenter.contract.DictContract;
 import com.js.driver.presenter.contract.FileContract;
 import com.js.driver.ui.center.presenter.AddCarPresenter;
 import com.js.driver.ui.center.presenter.contract.AddCarContract;
-import com.xlgcx.frame.view.BaseActivity;
+import com.js.frame.view.BaseActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -195,9 +195,9 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
         etCarLength.setText(carBean.getCarLengthName());
         etCarWeight.setText(String.valueOf(carBean.getCapacityTonnage()));
         etCarVolume.setText(String.valueOf(carBean.getCapacityVolume()));
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + carBean.getImage1()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + carBean.getImage1()
                 , ivCarLicense, mContext.getResources().getDrawable(R.mipmap.ic_car_auth_travel));
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + carBean.getImage2()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + carBean.getImage2()
                 , ivCarHead, mContext.getResources().getDrawable(R.mipmap.ic_car_auth_header));
     }
 
@@ -383,11 +383,11 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
         switch (choseCode) {
             case Const.AUTH_CAR_LICENSE:
                 mCarBean.setImage1(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + data, ivCarLicense);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + data, ivCarLicense);
                 break;
             case Const.AUTH_CAR_HEAD:
                 mCarBean.setImage2(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + data, ivCarHead);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + data, ivCarHead);
                 break;
         }
     }

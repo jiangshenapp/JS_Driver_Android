@@ -4,18 +4,15 @@ import com.js.driver.model.bean.AuthInfo;
 import com.js.driver.model.bean.UserInfo;
 import com.js.driver.model.request.DriverVerifiedRequest;
 import com.js.driver.model.request.ParkVerifiedRequest;
-import com.xlgcx.http.BaseHttpResponse;
-import com.xlgcx.http.HttpResponse;
+import com.js.http.BaseHttpResponse;
+import com.js.http.HttpResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.http.Query;
 
 /**
  * Created by huyg on 2019/4/21.

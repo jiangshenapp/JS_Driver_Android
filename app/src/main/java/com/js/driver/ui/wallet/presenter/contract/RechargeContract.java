@@ -2,12 +2,10 @@ package com.js.driver.ui.wallet.presenter.contract;
 
 import com.js.driver.model.bean.PayInfo;
 import com.js.driver.model.bean.PayRouter;
-import com.xlgcx.frame.mvp.IBaseView;
-import com.xlgcx.frame.mvp.IPresenter;
+import com.js.frame.mvp.IBaseView;
+import com.js.frame.mvp.IPresenter;
 
 import java.util.List;
-
-import retrofit2.http.Field;
 
 /**
  * Created by huyg on 2019/4/24.

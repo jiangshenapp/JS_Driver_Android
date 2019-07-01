@@ -2,12 +2,11 @@ package com.js.driver.ui.wallet.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 import com.js.driver.R;
 import com.js.driver.ui.wallet.fragment.BillFragment;
-import com.xlgcx.frame.view.SimpleActivity;
+import com.js.frame.view.SimpleActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by huyg on 2019/4/24.

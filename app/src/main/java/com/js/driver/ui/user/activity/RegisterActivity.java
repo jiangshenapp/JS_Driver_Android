@@ -2,12 +2,10 @@ package com.js.driver.ui.user.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.js.driver.App;
@@ -18,14 +16,13 @@ import com.js.driver.ui.user.presenter.RegisterPresenter;
 import com.js.driver.ui.user.presenter.SmsCodePresenter;
 import com.js.driver.ui.user.presenter.contract.RegisterContract;
 import com.js.driver.ui.user.presenter.contract.SmsCodeContract;
-import com.xlgcx.frame.view.BaseActivity;
+import com.js.frame.view.BaseActivity;
 
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;

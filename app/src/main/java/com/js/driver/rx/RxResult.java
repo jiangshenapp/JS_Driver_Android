@@ -3,8 +3,7 @@ package com.js.driver.rx;
 
 import android.text.TextUtils;
 
-import com.js.driver.manager.UserManager;
-import com.xlgcx.http.HttpResponse;
+import com.js.http.HttpResponse;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;

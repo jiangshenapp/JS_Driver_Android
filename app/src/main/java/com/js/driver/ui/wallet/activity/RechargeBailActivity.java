@@ -2,7 +2,6 @@ package com.js.driver.ui.wallet.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -26,20 +25,18 @@ import com.js.driver.global.Const;
 import com.js.driver.model.bean.AccountInfo;
 import com.js.driver.model.bean.PayInfo;
 import com.js.driver.model.bean.PayRouter;
-import com.js.driver.ui.order.activity.OrdersActivity;
 import com.js.driver.ui.wallet.adapter.PayAdapter;
 import com.js.driver.ui.wallet.presenter.RechargeBailPresenter;
 import com.js.driver.ui.wallet.presenter.contract.RechargeBailContract;
 import com.js.driver.util.pay.PayResult;
 import com.js.driver.widget.adapter.Divider;
 import com.js.driver.wxapi.WXPayEntryActivity;
-import com.xlgcx.frame.view.BaseActivity;
+import com.js.frame.view.BaseActivity;
 
 import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

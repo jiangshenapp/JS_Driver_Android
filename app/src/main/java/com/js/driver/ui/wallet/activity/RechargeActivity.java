@@ -31,10 +31,7 @@ import com.js.driver.util.AppUtils;
 import com.js.driver.util.pay.PayResult;
 import com.js.driver.widget.adapter.Divider;
 import com.js.driver.wxapi.WXPayEntryActivity;
-import com.xlgcx.frame.view.BaseActivity;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
+import com.js.frame.view.BaseActivity;
 
 import java.util.List;
 import java.util.Map;

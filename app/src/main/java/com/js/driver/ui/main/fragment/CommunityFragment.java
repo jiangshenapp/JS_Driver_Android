@@ -6,7 +6,7 @@ import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
 import com.js.driver.ui.main.presenter.CommunityPresenter;
 import com.js.driver.ui.main.presenter.contract.CommunityContract;
-import com.xlgcx.frame.view.BaseFragment;
+import com.js.frame.view.BaseFragment;
 
 /**
  * Created by huyg on 2019/4/1.

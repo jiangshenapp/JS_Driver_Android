@@ -1,7 +1,7 @@
 package com.js.driver.ui.main.presenter;
 
 import com.js.driver.ui.main.presenter.contract.CommunityContract;
-import com.xlgcx.frame.mvp.RxPresenter;
+import com.js.frame.mvp.RxPresenter;
 
 import javax.inject.Inject;
 

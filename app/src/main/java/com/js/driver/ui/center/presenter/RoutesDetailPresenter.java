@@ -1,18 +1,14 @@
 package com.js.driver.ui.center.presenter;
 
-import com.js.driver.api.CarApi;
-import com.js.driver.api.DriverApi;
 import com.js.driver.api.RouteApi;
-import com.js.driver.model.bean.CarBean;
 import com.js.driver.model.bean.RouteBean;
 import com.js.driver.rx.RxException;
 import com.js.driver.rx.RxResult;
 import com.js.driver.rx.RxSchedulers;
-import com.js.driver.ui.center.presenter.contract.RoutesContract;
 import com.js.driver.ui.center.presenter.contract.RoutesDetailContract;
-import com.xlgcx.frame.mvp.RxPresenter;
-import com.xlgcx.http.ApiFactory;
-import com.xlgcx.http.BaseHttpResponse;
+import com.js.frame.mvp.RxPresenter;
+import com.js.http.ApiFactory;
+import com.js.http.BaseHttpResponse;
 
 import javax.inject.Inject;
 

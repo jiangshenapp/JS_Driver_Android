@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.js.driver.R;
-import com.js.driver.ui.user.activity.UserVerifiedActivity;
-import com.xlgcx.frame.view.BaseActivity;
-import com.xlgcx.frame.view.SimpleActivity;
+import com.js.frame.view.SimpleActivity;
 
 /**
  * author : hzb

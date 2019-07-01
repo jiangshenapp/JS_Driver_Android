@@ -6,7 +6,7 @@ import android.content.Intent;
 import com.google.android.material.tabs.TabLayout;
 import com.js.driver.R;
 import com.js.driver.ui.order.fragment.OrderFragment;
-import com.xlgcx.frame.view.SimpleActivity;
+import com.js.frame.view.SimpleActivity;
 
 import java.util.ArrayList;
 import java.util.List;

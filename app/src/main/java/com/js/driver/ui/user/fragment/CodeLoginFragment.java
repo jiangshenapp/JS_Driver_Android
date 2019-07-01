@@ -1,6 +1,5 @@
 package com.js.driver.ui.user.fragment;
 
-import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -10,17 +9,14 @@ import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
-import com.js.driver.manager.SpManager;
 import com.js.driver.model.event.LoginChangeEvent;
 import com.js.driver.model.event.UserStatusChangeEvent;
-import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.user.activity.RegisterActivity;
 import com.js.driver.ui.user.presenter.CodeLoginPresenter;
 import com.js.driver.ui.user.presenter.SmsCodePresenter;
 import com.js.driver.ui.user.presenter.contract.CodeLoginContract;
 import com.js.driver.ui.user.presenter.contract.SmsCodeContract;
-import com.xlgcx.frame.view.BaseFragment;
-import com.xlgcx.http.HttpApp;
+import com.js.frame.view.BaseFragment;
 
 import org.greenrobot.eventbus.EventBus;
 

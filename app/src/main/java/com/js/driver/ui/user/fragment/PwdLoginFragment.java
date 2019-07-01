@@ -9,16 +9,13 @@ import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
-import com.js.driver.manager.SpManager;
 import com.js.driver.model.event.LoginChangeEvent;
 import com.js.driver.model.event.UserStatusChangeEvent;
-import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.user.activity.ForgetPwdActivity;
 import com.js.driver.ui.user.activity.RegisterActivity;
-import com.js.driver.ui.user.activity.ResetPwdActivity;
 import com.js.driver.ui.user.presenter.PwdLoginPresenter;
 import com.js.driver.ui.user.presenter.contract.PwdLoginContract;
-import com.xlgcx.frame.view.BaseFragment;
+import com.js.frame.view.BaseFragment;
 
 import org.greenrobot.eventbus.EventBus;
 

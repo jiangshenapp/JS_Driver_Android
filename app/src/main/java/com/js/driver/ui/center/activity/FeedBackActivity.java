@@ -2,7 +2,6 @@ package com.js.driver.ui.center.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,11 +12,9 @@ import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.ui.center.presenter.FeedBackPresenter;
 import com.js.driver.ui.center.presenter.contract.FeedBackContract;
-import com.xlgcx.frame.view.BaseActivity;
-import com.xlgcx.frame.view.SimpleActivity;
+import com.js.frame.view.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

@@ -1,14 +1,10 @@
 package com.js.driver.api;
 
-import com.js.driver.model.bean.CarBean;
-import com.js.driver.model.bean.DriverBean;
 import com.js.driver.model.bean.RouteBean;
-import com.js.driver.model.request.CarRequest;
-import com.js.driver.model.request.FindOrder;
 import com.js.driver.model.request.RouteRequest;
 import com.js.driver.model.response.ListResponse;
-import com.xlgcx.http.BaseHttpResponse;
-import com.xlgcx.http.HttpResponse;
+import com.js.http.BaseHttpResponse;
+import com.js.http.HttpResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;

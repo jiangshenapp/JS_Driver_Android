@@ -1,9 +1,7 @@
 package com.js.driver.ui.user.presenter.contract;
 
-import com.xlgcx.frame.mvp.IBaseView;
-import com.xlgcx.frame.mvp.IPresenter;
-
-import retrofit2.http.Field;
+import com.js.frame.mvp.IBaseView;
+import com.js.frame.mvp.IPresenter;
 
 /**
  * Created by huyg on 2019/4/24.

@@ -1,12 +1,11 @@
 package com.js.driver.api;
 
-import com.xlgcx.http.HttpResponse;
+import com.js.http.HttpResponse;
 import com.js.driver.model.bean.DictBean;
 
 import java.util.List;
 
 import io.reactivex.Observable;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 

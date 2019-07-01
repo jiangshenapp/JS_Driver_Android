@@ -9,8 +9,8 @@ import com.js.driver.rx.RxException;
 import com.js.driver.rx.RxResult;
 import com.js.driver.rx.RxSchedulers;
 import com.js.driver.ui.wallet.presenter.contract.WalletContract;
-import com.xlgcx.frame.mvp.RxPresenter;
-import com.xlgcx.http.ApiFactory;
+import com.js.frame.mvp.RxPresenter;
+import com.js.http.ApiFactory;
 
 import javax.inject.Inject;
 

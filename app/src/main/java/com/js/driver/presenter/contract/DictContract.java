@@ -1,7 +1,7 @@
 package com.js.driver.presenter.contract;
 
-import com.xlgcx.frame.mvp.IBaseView;
-import com.xlgcx.frame.mvp.IPresenter;
+import com.js.frame.mvp.IBaseView;
+import com.js.frame.mvp.IPresenter;
 import com.js.driver.model.bean.DictBean;
 
 import java.util.List;

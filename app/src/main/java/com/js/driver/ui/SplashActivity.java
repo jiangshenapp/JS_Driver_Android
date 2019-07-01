@@ -14,7 +14,7 @@ import com.js.driver.presenter.SplashPresenter;
 import com.js.driver.presenter.contract.SplashContract;
 import com.js.driver.service.LocationService;
 import com.js.driver.ui.main.activity.MainActivity;
-import com.xlgcx.frame.view.BaseActivity;
+import com.js.frame.view.BaseActivity;
 
 import java.util.List;
 

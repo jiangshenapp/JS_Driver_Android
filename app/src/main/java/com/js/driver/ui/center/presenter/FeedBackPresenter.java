@@ -1,8 +1,8 @@
 package com.js.driver.ui.center.presenter;
 
 import com.js.driver.ui.center.presenter.contract.FeedBackContract;
-import com.xlgcx.frame.mvp.RxPresenter;
-import com.xlgcx.http.ApiFactory;
+import com.js.frame.mvp.RxPresenter;
+import com.js.http.ApiFactory;
 
 import javax.inject.Inject;
 

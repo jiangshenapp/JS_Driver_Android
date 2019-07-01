@@ -1,20 +1,16 @@
 package com.js.driver.api;
 
 import com.js.driver.model.bean.OrderBean;
-import com.js.driver.model.request.FindOrder;
 import com.js.driver.model.request.LineAppFind;
+import com.js.driver.model.request.OrderComment;
 import com.js.driver.model.request.OrderDistribution;
 import com.js.driver.model.request.OrderStatus;
 import com.js.driver.model.response.ListResponse;
-import com.xlgcx.http.BaseHttpResponse;
-import com.xlgcx.http.HttpResponse;
-
-import java.util.List;
+import com.js.http.BaseHttpResponse;
+import com.js.http.HttpResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -27,6 +23,7 @@ public interface OrderApi {
 
     /**
      * 拒绝配送
+     *
      * @param id 订单id
      * @return
      */
@@ -43,6 +40,7 @@ public interface OrderApi {
 
     /**
      * 回执评价
+     *
      * @param id
      * @return
      */
@@ -52,6 +50,7 @@ public interface OrderApi {
 
     /**
      * 完成配送
+     *
      * @param id
      * @return
      */
@@ -61,6 +60,7 @@ public interface OrderApi {
 
     /**
      * 等待货主接货
+     *
      * @param id
      * @return
      */
@@ -70,16 +70,18 @@ public interface OrderApi {
 
     /**
      * 开始配送
+     *
      * @param id
      * @return
      */
     @POST("app/driver/order/distribution/{id}")
     Observable<HttpResponse<Boolean>> distribution(@Path("id") long id,
-                                              @Body OrderDistribution orderDistribution);
+                                                   @Body OrderDistribution orderDistribution);
 
 
     /**
      * 找货 所有待分配订单
+     *
      * @param current
      * @param size
      * @param findOrder
@@ -93,6 +95,7 @@ public interface OrderApi {
 
     /**
      * 我的运单
+     *
      * @param current
      * @param size
      * @param orderStatus
@@ -100,12 +103,13 @@ public interface OrderApi {
      */
     @POST("app/driver/order/list")
     Observable<HttpResponse<ListResponse<OrderBean>>> getOrderList(@Query("current") int current,
-                                                        @Query("size") int size,
-                                                        @Body OrderStatus orderStatus);
+                                                                   @Query("size") int size,
+                                                                   @Body OrderStatus orderStatus);
 
 
     /**
      * 接单
+     *
      * @param id
      * @return
      */
@@ -115,6 +119,7 @@ public interface OrderApi {
 
     /**
      * 拒绝接单
+     *
      * @param id
      * @return
      */
@@ -124,6 +129,7 @@ public interface OrderApi {
 
     /**
      * 获取订单详情
+     *
      * @param id
      * @return
      */
@@ -133,6 +139,7 @@ public interface OrderApi {
 
     /**
      * 取消确认
+     *
      * @param id
      * @return
      */
@@ -140,11 +147,13 @@ public interface OrderApi {
     Observable<HttpResponse<Boolean>> cancelConfirmOrder(@Path("id") long id);
 
 
-
-
     @POST("app/driver/order/confirm/{id}")
     Observable<HttpResponse<Boolean>> confirmOrder(@Path("id") long id);
 
+
+    //回执
+    @POST("app/driver/order/comment")
+    Observable<HttpResponse<Boolean>> commentOrder(@Body OrderComment orderComment);
 
 
 }

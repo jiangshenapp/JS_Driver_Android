@@ -2,9 +2,9 @@ package com.js.driver.ui.user.presenter;
 
 import com.js.driver.api.UserApi;
 import com.js.driver.ui.user.presenter.contract.RegisterContract;
-import com.xlgcx.frame.mvp.RxPresenter;
-import com.xlgcx.http.ApiFactory;
-import com.xlgcx.http.BaseHttpResponse;
+import com.js.frame.mvp.RxPresenter;
+import com.js.http.ApiFactory;
+import com.js.http.BaseHttpResponse;
 import com.js.driver.rx.RxException;
 import com.js.driver.rx.RxSchedulers;
 

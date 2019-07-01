@@ -4,9 +4,8 @@ import com.js.driver.model.bean.AccountInfo;
 import com.js.driver.model.bean.BillBean;
 import com.js.driver.model.bean.PayInfo;
 import com.js.driver.model.bean.PayRouter;
-import com.js.driver.model.bean.UserInfo;
-import com.xlgcx.http.BaseHttpResponse;
-import com.xlgcx.http.HttpResponse;
+import com.js.http.BaseHttpResponse;
+import com.js.http.HttpResponse;
 
 import java.util.List;
 

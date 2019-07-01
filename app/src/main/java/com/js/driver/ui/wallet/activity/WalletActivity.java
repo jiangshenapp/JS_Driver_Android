@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.js.driver.App;
 import com.js.driver.R;
@@ -18,10 +17,7 @@ import com.js.driver.ui.wallet.presenter.contract.WalletContract;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.xlgcx.frame.view.BaseActivity;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
+import com.js.frame.view.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;

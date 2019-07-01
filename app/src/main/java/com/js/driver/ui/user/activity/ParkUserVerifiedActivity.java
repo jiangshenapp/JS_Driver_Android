@@ -45,7 +45,7 @@ import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.user.presenter.ParkUserVerifiedPresenter;
 import com.js.driver.ui.user.presenter.contract.ParkUserVerifiedContract;
 import com.js.driver.util.GetJsonDataUtil;
-import com.xlgcx.frame.view.BaseActivity;
+import com.js.frame.view.BaseActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -57,7 +57,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -164,7 +163,7 @@ public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPrese
         etAddress.setText(authInfo.getAddress());
         etDetailAddress.setText(authInfo.getDetailAddress());
 
-        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + authInfo.getBusinessLicenceImage()
+        CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + authInfo.getBusinessLicenceImage()
                 , authBusinessLicense, mContext.getResources().getDrawable(R.mipmap.img_authentication_id));
     }
 
@@ -395,7 +394,7 @@ public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPrese
         switch (choseCode) {
             case Const.AUTH_BUSINESS_LICENSE:
                 mAuthInfo.setBusinessLicenceImage(data);
-                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.xlgcx.http.global.Const.IMG_URL + data, authBusinessLicense);
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + data, authBusinessLicense);
                 break;
         }
     }

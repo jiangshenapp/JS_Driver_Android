@@ -9,8 +9,8 @@ import com.js.driver.di.componet.DaggerAppComponent;
 import com.js.driver.di.module.AppModule;
 import com.js.driver.manager.SpManager;
 import com.js.driver.model.bean.UserInfo;
-import com.xlgcx.frame.BaseApplication;
-import com.xlgcx.http.HttpApp;
+import com.js.frame.BaseApplication;
+import com.js.http.HttpApp;
 
 /**
  * Created by huyg on 2019/4/1.

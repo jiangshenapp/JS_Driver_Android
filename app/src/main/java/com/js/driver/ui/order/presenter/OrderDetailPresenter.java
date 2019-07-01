@@ -2,13 +2,14 @@ package com.js.driver.ui.order.presenter;
 
 import com.js.driver.api.OrderApi;
 import com.js.driver.model.bean.OrderBean;
+import com.js.driver.model.request.OrderComment;
 import com.js.driver.model.request.OrderDistribution;
 import com.js.driver.rx.RxException;
 import com.js.driver.rx.RxResult;
 import com.js.driver.rx.RxSchedulers;
 import com.js.driver.ui.order.presenter.contract.OrderDetailContract;
-import com.xlgcx.frame.mvp.RxPresenter;
-import com.xlgcx.http.ApiFactory;
+import com.js.frame.mvp.RxPresenter;
+import com.js.http.ApiFactory;
 
 import javax.inject.Inject;
 
@@ -222,6 +223,29 @@ public class OrderDetailPresenter extends RxPresenter<OrderDetailContract.View> 
                     public void accept(Boolean aBoolean) throws Exception {
                         mView.closeProgress();
                         mView.onCancelReceive(aBoolean);
+                    }
+                }, new RxException<>(e -> {
+                    mView.closeProgress();
+                }));
+        addDispose(disposable);
+    }
+
+    @Override
+    public void commentOrder(OrderComment orderComment) {
+        Disposable disposable = mApiFactory.getApi(OrderApi.class).commentOrder(orderComment)
+                .compose(RxSchedulers.io_main())
+                .compose(RxResult.handleResult())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mView.showProgress();
+                    }
+                })
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        mView.closeProgress();
+                        mView.onCommentOrder(aBoolean);
                     }
                 }, new RxException<>(e -> {
                     mView.closeProgress();

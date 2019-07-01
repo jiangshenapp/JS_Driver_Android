@@ -2,8 +2,8 @@ package com.js.driver.ui.user.presenter;
 
 import com.js.driver.api.UserApi;
 import com.js.driver.ui.user.presenter.contract.PwdLoginContract;
-import com.xlgcx.frame.mvp.RxPresenter;
-import com.xlgcx.http.ApiFactory;
+import com.js.frame.mvp.RxPresenter;
+import com.js.http.ApiFactory;
 import com.js.driver.rx.RxException;
 import com.js.driver.rx.RxResult;
 import com.js.driver.rx.RxSchedulers;

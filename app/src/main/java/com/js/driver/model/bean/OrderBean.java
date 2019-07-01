@@ -81,6 +81,10 @@ public class OrderBean {
     private int state;
     private String transferTime;//配送时间
     private String useCarType;//用车类型，字典
+    private String packType;
+    private boolean requireDeposit;
+    private double deposit;
+    private String goodsName;
     /**
      * id : 57
      * receiveName : null
@@ -104,9 +108,9 @@ public class OrderBean {
      * receiveAddressCodeName : 浙江省宁波市鄞州区
      * sendAddressCodeName : 浙江省宁波市鄞州区
      */
-    private Object commentImage1;
-    private Object commentImage2;
-    private Object commentImage3;
+    private String commentImage1;
+    private String commentImage2;
+    private String commentImage3;
     private String stateName;
     private String stateNameDriver;
     private String stateNameConsignor;
@@ -404,27 +408,27 @@ public class OrderBean {
     public void setUseCarType(String useCarType) {
         this.useCarType = useCarType;
     }
-    public Object getCommentImage1() {
+    public String getCommentImage1() {
         return commentImage1;
     }
 
-    public void setCommentImage1(Object commentImage1) {
+    public void setCommentImage1(String commentImage1) {
         this.commentImage1 = commentImage1;
     }
 
-    public Object getCommentImage2() {
+    public String getCommentImage2() {
         return commentImage2;
     }
 
-    public void setCommentImage2(Object commentImage2) {
+    public void setCommentImage2(String commentImage2) {
         this.commentImage2 = commentImage2;
     }
 
-    public Object getCommentImage3() {
+    public String getCommentImage3() {
         return commentImage3;
     }
 
-    public void setCommentImage3(Object commentImage3) {
+    public void setCommentImage3(String commentImage3) {
         this.commentImage3 = commentImage3;
     }
 
@@ -498,5 +502,37 @@ public class OrderBean {
 
     public void setSendAddressCodeName(String sendAddressCodeName) {
         this.sendAddressCodeName = sendAddressCodeName;
+    }
+
+    public String getPackType() {
+        return packType;
+    }
+
+    public void setPackType(String packType) {
+        this.packType = packType;
+    }
+
+    public boolean isRequireDeposit() {
+        return requireDeposit;
+    }
+
+    public void setRequireDeposit(boolean requireDeposit) {
+        this.requireDeposit = requireDeposit;
+    }
+
+    public double getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(double deposit) {
+        this.deposit = deposit;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
 }

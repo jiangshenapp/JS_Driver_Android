@@ -17,7 +17,7 @@ import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-import com.xlgcx.frame.view.SimpleActivity;
+import com.js.frame.view.SimpleActivity;
 
 /**
  * Created by huyg on 2019-05-31.

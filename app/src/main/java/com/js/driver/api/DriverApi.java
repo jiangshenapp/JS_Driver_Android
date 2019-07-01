@@ -1,16 +1,12 @@
 package com.js.driver.api;
 
-import com.js.driver.model.bean.AccountInfo;
-import com.js.driver.model.bean.CarBean;
 import com.js.driver.model.bean.DriverBean;
 import com.js.driver.model.response.ListResponse;
-import com.xlgcx.http.BaseHttpResponse;
-import com.xlgcx.http.HttpResponse;
+import com.js.http.BaseHttpResponse;
+import com.js.http.HttpResponse;
 
 import io.reactivex.Observable;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**

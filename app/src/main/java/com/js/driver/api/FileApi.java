@@ -1,12 +1,10 @@
 package com.js.driver.api;
 
-import com.xlgcx.http.BaseHttpResponse;
-import com.xlgcx.http.HttpResponse;
+import com.js.http.HttpResponse;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import retrofit2.http.Field;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;

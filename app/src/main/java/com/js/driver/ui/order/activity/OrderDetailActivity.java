@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -15,6 +16,14 @@ import androidx.annotation.Nullable;
 
 import com.baidu.mapapi.model.LatLng;
 import com.google.gson.Gson;
+import com.jph.takephoto.app.TakePhoto;
+import com.jph.takephoto.app.TakePhotoImpl;
+import com.jph.takephoto.model.InvokeParam;
+import com.jph.takephoto.model.TContextWrap;
+import com.jph.takephoto.model.TResult;
+import com.jph.takephoto.permission.InvokeListener;
+import com.jph.takephoto.permission.PermissionManager;
+import com.jph.takephoto.permission.TakePhotoInvocationHandler;
 import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
@@ -22,7 +31,10 @@ import com.js.driver.di.module.ActivityModule;
 import com.js.driver.global.Const;
 import com.js.driver.manager.CommonGlideImageLoader;
 import com.js.driver.model.bean.OrderBean;
+import com.js.driver.model.request.OrderComment;
 import com.js.driver.model.request.OrderDistribution;
+import com.js.driver.presenter.FilePresenter;
+import com.js.driver.presenter.contract.FileContract;
 import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.order.presenter.OrderDetailPresenter;
 import com.js.driver.ui.order.presenter.contract.OrderDetailContract;
@@ -33,16 +45,19 @@ import com.mylhyl.circledialog.params.DialogParams;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.xlgcx.frame.view.BaseActivity;
+import com.js.frame.view.BaseActivity;
+
+import java.io.File;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * Created by huyg on 2019/4/29.
  */
-public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> implements OrderDetailContract.View {
+public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> implements OrderDetailContract.View, FileContract.View, InvokeListener, TakePhoto.TakeResultListener {
 
 
     @BindView(R.id.detail_avatar)
@@ -71,8 +86,8 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     TextView mLoadingTime;
     @BindView(R.id.detail_car_info)
     TextView mCarInfo;
-    @BindView(R.id.detail_goods_type)
-    TextView mGoodsType;
+    @BindView(R.id.detail_goods_name)
+    TextView mGoodsName;
     @BindView(R.id.detail_car_use_type)
     TextView mCarUseType;
     @BindView(R.id.detail_pay_type)
@@ -101,9 +116,17 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     SmartRefreshLayout mRefresh;
     @BindView(R.id.control_layout)
     LinearLayout mControlLayout;
+    @BindView(R.id.bail)
+    TextView mBail;
+    @BindView(R.id.pack_type)
+    TextView mPackType;
+    @BindView(R.id.receipt_layout)
+    LinearLayout mReceiptLayout;
+    @BindView(R.id.receipt_title)
+    TextView mReceiptTitle;
 
 
-    @OnClick({R.id.detail_send_phone, R.id.detail_send_wechat, R.id.detail_send_navigate, R.id.detail_arrive_navigate, R.id.detail_img1_layout, R.id.detail_img2_layout, R.id.detail_img3_layout, R.id.detail_order_navigate, R.id.detail_order_positive})
+    @OnClick({R.id.detail_send_phone, R.id.detail_send_wechat, R.id.detail_send_navigate, R.id.detail_arrive_navigate, R.id.detail_img1, R.id.detail_img2, R.id.detail_img3, R.id.detail_order_navigate, R.id.detail_order_positive})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.detail_send_phone://打电话
@@ -128,12 +151,16 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 LatLng latLng1 = new LatLng(App.getInstance().mLocation.getLatitude(), App.getInstance().mLocation.getLongitude());
                 showSelectDialog(latLng1, gson1.fromJson(mOrderBean.getReceivePosition(), LatLng.class), mOrderBean.getReceiveAddress());
                 break;
-            case R.id.detail_img1_layout:
+            case R.id.detail_img1:
+                getPhoto(1);
                 break;
-            case R.id.detail_img2_layout:
+            case R.id.detail_img2:
+                getPhoto(2);
                 break;
-            case R.id.detail_img3_layout:
+            case R.id.detail_img3:
+                getPhoto(3);
                 break;
+
             case R.id.detail_order_navigate:
                 switch (status) {
                     case 2:
@@ -146,7 +173,6 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
 
                         break;
                     case 5:
-
                         mPresenter.cancelDistribution(orderId);
                         break;
 
@@ -158,7 +184,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                         mPresenter.receiveOrder(orderId);
                         break;
                     case 3:
-                        if (mOrderBean.getFeeType()==2){
+                        if (mOrderBean.getFeeType() == 2) {
                             toast("价格不可为电议 ，请联系货主修改！");
                             return;
                         }
@@ -169,6 +195,18 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                         break;
                     case 6:
                         mPresenter.completeDistribution(orderId);
+                        break;
+                    case 7://上传回执
+                        if (TextUtils.isEmpty(img2Url) || TextUtils.isEmpty(img2Url) || TextUtils.isEmpty(img2Url)) {
+                            toast("请上传图片");
+                            return;
+                        }
+                        OrderComment orderComment = new OrderComment();
+                        orderComment.setId(mOrderBean.getId());
+                        orderComment.setCommentImage1(img1Url);
+                        orderComment.setCommentImage2(img2Url);
+                        orderComment.setCommentImage3(img3Url);
+                        mPresenter.commentOrder(orderComment);
                         break;
                 }
                 break;
@@ -181,6 +219,14 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     private int carId;
     private OrderBean mOrderBean;
     private String[] items = {"百度地图", "高德地图"};
+    @Inject
+    FilePresenter mFilePresenter;
+    private int choseCode;
+    private InvokeParam invokeParam;
+    private TakePhoto takePhoto;
+    private String img1Url;
+    private String img2Url;
+    private String img3Url;
 
     public static void action(Context context, long orderId) {
         Intent intent = new Intent(context, OrderDetailActivity.class);
@@ -200,6 +246,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     }
 
     private void iniView() {
+        mFilePresenter.attachView(this);
         initRefresh();
     }
 
@@ -248,8 +295,10 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             mArriveCity.setText(orderBean.getReceiveAddressCodeName());
             mLoadingTime.setText(orderBean.getLoadingTime());
             mCarInfo.setText(orderBean.getGoodsVolume() + "方/" + orderBean.getGoodsWeight() + "吨");
-            mGoodsType.setText(orderBean.getGoodsType());
+            mGoodsName.setText(orderBean.getGoodsName());
             mCarUseType.setText(orderBean.getUseCarType());
+            mBail.setText(String.valueOf(orderBean.getDeposit()));
+            mPackType.setText(orderBean.getPackType());
             switch (orderBean.getPayWay()) {
                 case 1:
                     mPayType.setText("线上支付");
@@ -285,8 +334,19 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             }
             mArriveName.setText(orderBean.getReceiveName());
             mArrivePhone.setText(orderBean.getReceiveMobile());
-            //2待接单，3待确认，4待货主付款，5待接货, 6待送达，7待货主评价，8已完成，9已取消，10已关闭
+           //2待接单，3待确认，4待货主付款，5待接货, 6待送达，7待确认收货，8待回单收到确认，9待货主评价，10已完成，11取消，12已关闭
             mControlLayout.setVisibility(View.VISIBLE);
+            mReceiptLayout.setVisibility(View.GONE);
+            mReceiptTitle.setVisibility(View.GONE);
+            if (!TextUtils.isEmpty(mOrderBean.getCommentImage1())){
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + mOrderBean.getCommentImage1(), mImg1);
+            }
+            if (!TextUtils.isEmpty(mOrderBean.getCommentImage2())){
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + mOrderBean.getCommentImage2(), mImg2);
+            }
+            if (!TextUtils.isEmpty(mOrderBean.getCommentImage3())){
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + mOrderBean.getCommentImage3(), mImg3);
+            }
             switch (status) {
                 case 2:
                     mOrderPosition.setText("立即接单");
@@ -309,11 +369,25 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                     mOrderPosition.setText("我已送达");
                     break;
                 case 7:
+                case 8:
                     mOrderNavigate.setVisibility(View.GONE);
                     mOrderPosition.setText("上传回执");
+                    mReceiptLayout.setVisibility(View.VISIBLE);
+                    mReceiptTitle.setVisibility(View.VISIBLE);
+                    mImg1.setClickable(true);
+                    mImg2.setClickable(true);
+                    mImg3.setClickable(true);
                     break;
                 case 9:
+                case 10:
+                    mReceiptLayout.setVisibility(View.VISIBLE);
+                    mReceiptTitle.setVisibility(View.VISIBLE);
                     mControlLayout.setVisibility(View.GONE);
+                    mImg1.setClickable(false);
+                    mImg2.setClickable(false);
+                    mImg3.setClickable(false);
+                    break;
+                case 11:
                     break;
             }
         }
@@ -409,10 +483,21 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         }
     }
 
+    @Override
+    public void onCommentOrder(boolean isOk) {
+        if (isOk) {
+            mPresenter.getOrderDetail(orderId);
+            toast("回执成功");
+        } else {
+            toast("回执失败");
+        }
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        getTakePhoto().onActivityResult(requestCode, resultCode, data);
         if (requestCode == Const.CODE_REQ) {
             if (data != null) {
                 carId = data.getIntExtra("carId", 0);
@@ -442,4 +527,89 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 .setNegative("取消", null)
                 .show();
     }
+
+    public void getPhoto(int choseCode) {
+        this.choseCode = choseCode;
+        getTakePhoto().onPickFromGallery();
+    }
+
+    public TakePhoto getTakePhoto() {
+        if (takePhoto == null) {
+            takePhoto = (TakePhoto) TakePhotoInvocationHandler.of(this).bind(new TakePhotoImpl(this, this));
+        }
+        return takePhoto;
+    }
+
+    @Override
+    public void onUploadFile(String data) {
+        switch (choseCode) {
+            case 1:
+                img1Url = data;
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + data, mImg1);
+                break;
+            case 2:
+                img2Url = data;
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + data, mImg2);
+                break;
+            case 3:
+                img3Url = data;
+                CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + data, mImg3);
+                break;
+        }
+    }
+
+    @Override
+    public void takeSuccess(TResult result) {
+        if (result.getImage() == null) {
+            return;
+        }
+        mFilePresenter.uploadFile(new File(result.getImage().getOriginalPath()));
+    }
+
+    @Override
+    public void takeFail(TResult result, String msg) {
+        Log.d(getClass().getSimpleName(), msg);
+    }
+
+    @Override
+    public void takeCancel() {
+        Log.d(getClass().getSimpleName(), "takeCancel");
+    }
+
+    @Override
+    public PermissionManager.TPermissionType invoke(InvokeParam invokeParam) {
+        PermissionManager.TPermissionType type = PermissionManager.checkPermission(TContextWrap.of(this), invokeParam.getMethod());
+        if (PermissionManager.TPermissionType.WAIT.equals(type)) {
+            this.invokeParam = invokeParam;
+        }
+        return type;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionManager.TPermissionType type = PermissionManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionManager.handlePermissionsResult(mContext, type, invokeParam, this);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getTakePhoto().onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        getTakePhoto().onSaveInstanceState(outState);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mFilePresenter != null) {
+            mFilePresenter.detachView();
+        }
+    }
+
 }

@@ -2,7 +2,7 @@ package com.js.driver.presenter;
 
 
 import com.js.driver.presenter.contract.SplashContract;
-import com.xlgcx.frame.mvp.RxPresenter;
+import com.js.frame.mvp.RxPresenter;
 
 import javax.inject.Inject;
 

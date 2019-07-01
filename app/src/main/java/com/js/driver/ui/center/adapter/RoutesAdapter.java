@@ -7,11 +7,7 @@ import androidx.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.js.driver.R;
-import com.js.driver.manager.CommonGlideImageLoader;
-import com.js.driver.model.bean.DriverBean;
 import com.js.driver.model.bean.RouteBean;
-import com.js.driver.ui.center.presenter.contract.RoutesContract;
-import com.xlgcx.http.global.Const;
 
 import java.util.List;
 

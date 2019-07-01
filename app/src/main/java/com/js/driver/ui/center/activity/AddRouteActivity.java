@@ -2,7 +2,6 @@ package com.js.driver.ui.center.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -23,11 +22,9 @@ import com.js.driver.presenter.DictPresenter;
 import com.js.driver.presenter.contract.DictContract;
 import com.js.driver.ui.center.presenter.AddRoutePresenter;
 import com.js.driver.ui.center.presenter.contract.AddRouteContract;
-import com.js.driver.ui.main.activity.MainActivity;
-import com.js.driver.ui.order.activity.OrderDetailActivity;
 import com.js.driver.widget.window.CityWindow;
 import com.js.driver.widget.window.ItemWindow;
-import com.xlgcx.frame.view.BaseActivity;
+import com.js.frame.view.BaseActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -36,7 +33,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

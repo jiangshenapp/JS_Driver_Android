@@ -1,7 +1,6 @@
 package com.js.driver.di.module;
 
-import com.js.driver.ui.main.activity.MainActivity;
-import com.xlgcx.http.ApiFactory;
+import com.js.http.ApiFactory;
 
 import javax.inject.Singleton;
 

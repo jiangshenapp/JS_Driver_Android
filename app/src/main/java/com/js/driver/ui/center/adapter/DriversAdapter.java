@@ -5,7 +5,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.js.driver.R;
 import com.js.driver.manager.CommonGlideImageLoader;
 import com.js.driver.model.bean.DriverBean;
-import com.xlgcx.http.global.Const;
+import com.js.http.global.Const;
 
 import java.util.List;
 

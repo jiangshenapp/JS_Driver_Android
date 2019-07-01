@@ -1,9 +1,10 @@
 package com.js.driver.ui.order.presenter.contract;
 
 import com.js.driver.model.bean.OrderBean;
+import com.js.driver.model.request.OrderComment;
 import com.js.driver.model.request.OrderDistribution;
-import com.xlgcx.frame.mvp.IBaseView;
-import com.xlgcx.frame.mvp.IPresenter;
+import com.js.frame.mvp.IBaseView;
+import com.js.frame.mvp.IPresenter;
 
 /**
  * Created by huyg on 2019/4/29.
@@ -31,6 +32,8 @@ public interface OrderDetailContract {
 
         void onCancelReceive(boolean isOk);
 
+        void onCommentOrder(boolean isOk);
+
     }
 
     interface Presenter extends IPresenter<View> {
@@ -51,5 +54,7 @@ public interface OrderDetailContract {
         void completeDistribution(long id);
 
         void cancelReceive(long id);
+
+        void commentOrder(OrderComment orderComment);
     }
 }

@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,7 +42,7 @@ import com.js.driver.ui.user.presenter.UserCenterPresenter;
 import com.js.driver.ui.user.presenter.contract.UserCenterContract;
 import com.js.driver.util.DataCleanManager;
 import com.js.driver.widget.dialog.AppDialogFragment;
-import com.xlgcx.frame.view.BaseActivity;
+import com.js.frame.view.BaseActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -88,7 +87,7 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
     }
 
     private void initView() {
-        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.xlgcx.http.global.Const.IMG_URL + App.getInstance().avatar
+        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.js.http.global.Const.IMG_URL + App.getInstance().avatar
                 , ivHead, mContext.getResources().getDrawable(R.mipmap.ic_center_shipper_head_land));
         tvNick.setText(App.getInstance().nickName);
         try {
@@ -294,7 +293,7 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
     @Override
     public void onChangeAvatar() {
         toast("头像修改成功");
-        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.xlgcx.http.global.Const.IMG_URL + avatar, ivHead);
+        CommonGlideImageLoader.getInstance().displayNetImageWithCircle(mContext, com.js.http.global.Const.IMG_URL + avatar, ivHead);
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.CHANGE_SUCCESS));
     }
 

@@ -1,19 +1,13 @@
 package com.js.driver.ui.wallet.presenter;
 
-import com.js.driver.api.OrderApi;
 import com.js.driver.api.PayApi;
-import com.js.driver.global.Const;
 import com.js.driver.model.bean.BillBean;
-import com.js.driver.model.bean.OrderBean;
-import com.js.driver.model.bean.PayRouter;
-import com.js.driver.model.request.OrderStatus;
-import com.js.driver.model.response.ListResponse;
 import com.js.driver.rx.RxException;
 import com.js.driver.rx.RxResult;
 import com.js.driver.rx.RxSchedulers;
 import com.js.driver.ui.wallet.presenter.contract.BillContract;
-import com.xlgcx.frame.mvp.RxPresenter;
-import com.xlgcx.http.ApiFactory;
+import com.js.frame.mvp.RxPresenter;
+import com.js.http.ApiFactory;
 
 import java.util.List;
 

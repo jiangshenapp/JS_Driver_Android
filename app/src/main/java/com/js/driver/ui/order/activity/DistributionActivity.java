@@ -16,7 +16,7 @@ import com.js.driver.model.bean.CarBean;
 import com.js.driver.ui.center.activity.CarsActivity;
 import com.js.driver.ui.order.presenter.DistributionPresenter;
 import com.js.driver.ui.order.presenter.contract.DistributionContract;
-import com.xlgcx.frame.view.BaseActivity;
+import com.js.frame.view.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;

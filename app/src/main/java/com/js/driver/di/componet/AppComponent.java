@@ -2,7 +2,7 @@ package com.js.driver.di.componet;
 
 
 import com.js.driver.di.module.AppModule;
-import com.xlgcx.http.ApiFactory;
+import com.js.http.ApiFactory;
 
 import javax.inject.Singleton;
 

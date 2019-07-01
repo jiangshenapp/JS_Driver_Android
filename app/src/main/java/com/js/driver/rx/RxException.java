@@ -1,7 +1,7 @@
 package com.js.driver.rx;
 
 
-import com.xlgcx.http.exception.NoNetworkException;
+import com.js.http.exception.NoNetworkException;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;

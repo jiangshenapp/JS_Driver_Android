@@ -1,7 +1,7 @@
 package com.js.driver.presenter;
 
-import com.xlgcx.frame.mvp.RxPresenter;
-import com.xlgcx.http.ApiFactory;
+import com.js.frame.mvp.RxPresenter;
+import com.js.http.ApiFactory;
 import com.js.driver.api.DictApi;
 import com.js.driver.model.bean.DictBean;
 import com.js.driver.presenter.contract.DictContract;

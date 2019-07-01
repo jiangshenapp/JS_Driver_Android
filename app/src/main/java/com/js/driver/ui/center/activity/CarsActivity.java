@@ -14,19 +14,16 @@ import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.global.Const;
 import com.js.driver.model.bean.CarBean;
-import com.js.driver.model.bean.OrderBean;
 import com.js.driver.model.response.ListResponse;
 import com.js.driver.ui.center.adapter.CarsAdapter;
 import com.js.driver.ui.center.presenter.CarsPresenter;
 import com.js.driver.ui.center.presenter.contract.CarsContract;
-import com.js.driver.ui.order.activity.OrderDetailActivity;
 import com.js.driver.widget.adapter.Divider;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.xlgcx.frame.view.BaseActivity;
+import com.js.frame.view.BaseActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;

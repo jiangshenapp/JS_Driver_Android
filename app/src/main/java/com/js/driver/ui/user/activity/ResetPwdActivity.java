@@ -2,7 +2,6 @@ package com.js.driver.ui.user.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -12,18 +11,11 @@ import com.js.driver.R;
 import com.js.driver.di.componet.DaggerActivityComponent;
 import com.js.driver.di.module.ActivityModule;
 import com.js.driver.ui.user.presenter.ResetPwdPresenter;
-import com.js.driver.ui.user.presenter.SmsCodePresenter;
 import com.js.driver.ui.user.presenter.contract.ResetPwdContract;
-import com.xlgcx.frame.view.BaseActivity;
-
-import java.security.PublicKey;
-
-import javax.inject.Inject;
+import com.js.frame.view.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.disposables.Disposable;
 
 /**
  * author : hzb

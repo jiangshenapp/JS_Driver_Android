@@ -30,9 +30,8 @@ import com.js.driver.widget.window.SortWindow;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
-import com.xlgcx.frame.view.BaseFragment;
+import com.js.frame.view.BaseFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
