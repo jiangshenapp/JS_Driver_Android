@@ -196,9 +196,9 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
         etCarWeight.setText(String.valueOf(carBean.getCapacityTonnage()));
         etCarVolume.setText(String.valueOf(carBean.getCapacityVolume()));
         CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + carBean.getImage1()
-                , ivCarLicense, mContext.getResources().getDrawable(R.mipmap.ic_car_auth_travel));
+                , ivCarLicense);
         CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + carBean.getImage2()
-                , ivCarHead, mContext.getResources().getDrawable(R.mipmap.ic_car_auth_header));
+                , ivCarHead);
     }
 
     public void changeView() {
