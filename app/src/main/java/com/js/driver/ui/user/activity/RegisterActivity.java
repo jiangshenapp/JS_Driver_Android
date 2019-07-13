@@ -16,6 +16,7 @@ import com.js.driver.ui.user.presenter.RegisterPresenter;
 import com.js.driver.ui.user.presenter.SmsCodePresenter;
 import com.js.driver.ui.user.presenter.contract.RegisterContract;
 import com.js.driver.ui.user.presenter.contract.SmsCodeContract;
+import com.js.driver.util.RegexUtils;
 import com.js.frame.view.BaseActivity;
 
 import java.util.concurrent.TimeUnit;
@@ -100,6 +101,10 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
                     toast("请输入手机号");
                     return;
                 }
+                if (!RegexUtils.isMobile(phone)) {
+                    toast("请输入正确的手机号");
+                    return;
+                }
                 mCodePresenter.sendSmsCode(phone);
                 break;
             case R.id.btn_register:
@@ -108,6 +113,10 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
                 code = mCode.getText().toString().trim();
                 if (TextUtils.isEmpty(phone)) {
                     toast("请输入手机号");
+                    return;
+                }
+                if (!RegexUtils.isMobile(phone)) {
+                    toast("请输入正确的手机号");
                     return;
                 }
                 if (pwd.length()<6 || pwd.length()>16) {

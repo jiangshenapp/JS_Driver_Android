@@ -22,6 +22,7 @@ import androidx.fragment.app.DialogFragment;
 import com.js.driver.R;
 import com.js.driver.model.bean.DriverBean;
 import com.js.driver.model.event.AddDriverEvent;
+import com.js.driver.util.RegexUtils;
 import com.js.driver.util.UIUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -103,6 +104,10 @@ public class AddDriverFragment extends DialogFragment {
                 String name = mName.getText().toString().trim();
                 if (TextUtils.isEmpty(phone)) {
                     UIUtil.toast("请输入手机号");
+                    return;
+                }
+                if (!RegexUtils.isMobile(phone)) {
+                    UIUtil.toast("请输入正确的手机号");
                     return;
                 }
                 if (TextUtils.isEmpty(name)) {
