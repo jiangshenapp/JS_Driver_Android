@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
+
+
+    useLibrary 'org.apache.http.legacy'
+
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
     compileOptions {
@@ -70,6 +74,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation project(path: ':lib.frame')
     implementation project(path: ':lib.http')
+    implementation project(path: ':easeui')
     implementation 'com.hjq:xxpermissions:5.5'
     implementation 'com.youth.banner:banner:1.4.10'
     //di

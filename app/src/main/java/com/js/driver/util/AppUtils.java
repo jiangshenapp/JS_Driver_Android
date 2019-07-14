@@ -5,6 +5,7 @@ import com.baidu.mapapi.utils.DistanceUtil;
 import com.js.driver.App;
 
 import java.text.DecimalFormat;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -24,13 +25,20 @@ public class AppUtils {
     }
 
 
-    public static boolean isMoney(String money){
+    public static boolean isMoney(String money) {
         String regex = "(^[1-9]([0-9]+)?(\\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\\.[0-9]([0-9])?$)";
         return money.matches(regex);
     }
 
-
-
+    public static boolean isMobile(String str) {
+        Pattern p = null;
+        Matcher m = null;
+        boolean b = false;
+        p = Pattern.compile("^[1][0-9]{10}$"); // 验证手机号
+        m = p.matcher(str);
+        b = m.matches();
+        return b;
+    }
 
 
 }

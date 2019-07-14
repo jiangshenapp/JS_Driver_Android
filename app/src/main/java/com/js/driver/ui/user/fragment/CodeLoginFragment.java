@@ -16,6 +16,7 @@ import com.js.driver.ui.user.presenter.CodeLoginPresenter;
 import com.js.driver.ui.user.presenter.SmsCodePresenter;
 import com.js.driver.ui.user.presenter.contract.CodeLoginContract;
 import com.js.driver.ui.user.presenter.contract.SmsCodeContract;
+import com.js.driver.util.AppUtils;
 import com.js.frame.view.BaseFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -88,6 +89,10 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
                     toast("请输入手机号");
                     return;
                 }
+                if (!AppUtils.isMobile(phone)){
+                    toast("请输入正确手机号");
+                    return;
+                }
                 mCodePresenter.sendSmsCode(phone);
                 break;
             case R.id.tv_protocal:
@@ -99,6 +104,12 @@ public class CodeLoginFragment extends BaseFragment<CodeLoginPresenter> implemen
                     toast("请输入手机号");
                     return;
                 }
+
+                if (!AppUtils.isMobile(phone)){
+                    toast("请输入正确手机号");
+                    return;
+                }
+
                 if (TextUtils.isEmpty(code)) {
                     toast("请输入验证码");
                     return;
