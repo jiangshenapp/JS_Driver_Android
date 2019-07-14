@@ -3,7 +3,9 @@ package com.js.driver.ui.center.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.PersistableBundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
@@ -114,6 +117,7 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
     private int authState;
     private long mId;
     private int mType; //1、添加车辆  2、车辆详情
+    private String[] items = {"拍摄","从相册选择"};
 
     public static void action(Context context, int type, long id) {
         Intent intent = new Intent(context, AddCarActivity.class);
@@ -196,9 +200,9 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
         etCarWeight.setText(String.valueOf(carBean.getCapacityTonnage()));
         etCarVolume.setText(String.valueOf(carBean.getCapacityVolume()));
         CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + carBean.getImage1()
-                , ivCarLicense, mContext.getResources().getDrawable(R.mipmap.ic_car_auth_travel));
+                , ivCarLicense);
         CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + carBean.getImage2()
-                , ivCarHead, mContext.getResources().getDrawable(R.mipmap.ic_car_auth_header));
+                , ivCarHead);
     }
 
     public void changeView() {
@@ -459,8 +463,29 @@ public class AddCarActivity extends BaseActivity<AddCarPresenter> implements Add
      */
     public void getPhoto(int choseCode) {
         this.choseCode = choseCode;
-        getTakePhoto().onPickFromGallery();
+        showDialog();
     }
+
+    private void showDialog(){
+        new MaterialDialog.Builder(mContext)
+                .items(items)
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                        if (position==0){
+                            File file = new File(Environment.getExternalStorageDirectory(), "/temp/" + System.currentTimeMillis() + ".jpg");
+                            if (!file.getParentFile().exists()) {
+                                file.getParentFile().mkdirs();
+                            }
+                            Uri imageUri = Uri.fromFile(file);
+                            getTakePhoto().onPickFromCapture(imageUri);
+                        }else {
+                            getTakePhoto().onPickFromGallery();
+                        }
+                    }
+                }).show();
+    }
+
 
     public TakePhoto getTakePhoto() {
         if (takePhoto == null) {

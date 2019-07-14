@@ -2,7 +2,9 @@ package com.js.driver.ui.order.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.baidu.mapapi.model.LatLng;
 import com.google.gson.Gson;
 import com.jph.takephoto.app.TakePhoto;
@@ -219,6 +222,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     private int carId;
     private OrderBean mOrderBean;
     private String[] items = {"百度地图", "高德地图"};
+    private String[] item = {"拍摄","从相册选择"};
     @Inject
     FilePresenter mFilePresenter;
     private int choseCode;
@@ -530,7 +534,27 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
 
     public void getPhoto(int choseCode) {
         this.choseCode = choseCode;
-        getTakePhoto().onPickFromGallery();
+        showDialog();
+    }
+
+    private void showDialog(){
+        new MaterialDialog.Builder(mContext)
+                .items(item)
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                        if (position==0){
+                            File file = new File(Environment.getExternalStorageDirectory(), "/temp/" + System.currentTimeMillis() + ".jpg");
+                            if (!file.getParentFile().exists()) {
+                                file.getParentFile().mkdirs();
+                            }
+                            Uri imageUri = Uri.fromFile(file);
+                            getTakePhoto().onPickFromCapture(imageUri);
+                        }else {
+                            getTakePhoto().onPickFromGallery();
+                        }
+                    }
+                }).show();
     }
 
     public TakePhoto getTakePhoto() {

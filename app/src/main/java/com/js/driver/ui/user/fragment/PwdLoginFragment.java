@@ -16,6 +16,7 @@ import com.js.driver.ui.user.activity.RegisterActivity;
 import com.js.driver.ui.user.presenter.PwdLoginPresenter;
 import com.js.driver.ui.user.presenter.contract.PwdLoginContract;
 import com.js.driver.util.AppUtils;
+import com.js.driver.util.RegexUtils;
 import com.js.frame.view.BaseFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -79,8 +80,8 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
                     toast("请输入手机号");
                     return;
                 }
-                if (!AppUtils.isMobile(phone)){
-                    toast("请输入正确手机号");
+                if (!RegexUtils.isMobile(phone)) {
+                    toast("请输入正确的手机号");
                     return;
                 }
                 if (TextUtils.isEmpty(pwd)) {

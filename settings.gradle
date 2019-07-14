@@ -1,1 +1,2 @@
-include ':app',':lib.frame','lib.http'
+include ':app', ':lib.frame', 'lib.http'
+//        ':easeui'

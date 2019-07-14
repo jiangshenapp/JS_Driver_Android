@@ -6,7 +6,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.PersistableBundle;
 import android.text.InputFilter;
 import android.util.Log;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.app.TakePhotoImpl;
 import com.jph.takephoto.model.InvokeParam;
@@ -75,6 +78,7 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
     private TakePhoto takePhoto;
     private String avatar;
     private String nickname;
+    private String[] items = {"拍摄","从相册选择"};
 
     public static void action(Context context) {
         context.startActivity(new Intent(context, UserCenterActivity.class));
@@ -280,7 +284,28 @@ public class UserCenterActivity extends BaseActivity<UserCenterPresenter> implem
      */
     public void getPhoto(int choseCode) {
         this.choseCode = choseCode;
-        getTakePhoto().onPickFromGallery();
+        showDialog();
+    }
+
+
+    private void showDialog(){
+        new MaterialDialog.Builder(mContext)
+                .items(items)
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                        if (position==0){
+                            File file = new File(Environment.getExternalStorageDirectory(), "/temp/" + System.currentTimeMillis() + ".jpg");
+                            if (!file.getParentFile().exists()) {
+                                file.getParentFile().mkdirs();
+                            }
+                            Uri imageUri = Uri.fromFile(file);
+                            getTakePhoto().onPickFromCapture(imageUri);
+                        }else {
+                            getTakePhoto().onPickFromGallery();
+                        }
+                    }
+                }).show();
     }
 
     public TakePhoto getTakePhoto() {
