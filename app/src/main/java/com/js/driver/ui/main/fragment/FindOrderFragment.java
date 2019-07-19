@@ -15,6 +15,7 @@ import com.js.driver.manager.UserManager;
 import com.js.driver.model.bean.DictBean;
 import com.js.driver.model.bean.OrderBean;
 import com.js.driver.model.event.CitySelectEvent;
+import com.js.driver.model.event.FilterEvent;
 import com.js.driver.model.event.SortEvent;
 import com.js.driver.model.request.LineAppFind;
 import com.js.driver.model.response.ListResponse;
@@ -101,8 +102,8 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
     private SortWindow mSortWindow;
     private int sort;
     private LineAppFind lineAppFind = new LineAppFind();
-    private String arriveAddressCode = "0";
-    private String startAddressCode = "0";
+    private String arriveAddressCode;
+    private String startAddressCode;
 
     @Inject
     DictPresenter mDictPresenter;
@@ -244,18 +245,17 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
         getOrders(Const.PAGE_NUM);
     }
 
-    private void getOrders(int num) {
-        if ("发货地".equals(mSendAddress.getText().toString())) {
-            lineAppFind.setStartAddressCode("0");
-        } else {
-            lineAppFind.setStartAddressCode(startAddressCode);
-        }
-        if ("收货地".equals(mEndAddress.getText().toString())) {
-            lineAppFind.setArriveAddressCode("0");
-        } else {
-            lineAppFind.setArriveAddressCode(arriveAddressCode);
-        }
+    @Subscribe
+    public void onEvent(FilterEvent event) {
+        lineAppFind.setCarLength(event.lengthStr);
+        lineAppFind.setCarModel(event.carTypeStr);
+        lineAppFind.setUseCarType(event.typeStr);
+        getOrders(Const.PAGE_NUM);
+    }
 
+    private void getOrders(int num) {
+        lineAppFind.setStartAddressCode(startAddressCode);
+        lineAppFind.setArriveAddressCode(arriveAddressCode);
         lineAppFind.setSort(sort);
         mPresenter.findOrders(num, (int) Const.PAGE_SIZE, lineAppFind);
     }

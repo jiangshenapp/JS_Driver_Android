@@ -30,6 +30,14 @@ public class DictBean {
     private String delFlag;
     private boolean checked;
 
+
+    public DictBean(String label,String value,boolean checked){
+        this.label = label;
+        this.value = value;
+        this.checked =checked;
+    }
+
+
     public int getId() {
         return id;
     }
