@@ -51,6 +51,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.js.frame.view.BaseActivity;
 
 import java.io.File;
+import java.text.MessageFormat;
 
 import javax.inject.Inject;
 
@@ -222,7 +223,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     private int carId;
     private OrderBean mOrderBean;
     private String[] items = {"百度地图", "高德地图"};
-    private String[] item = {"拍摄","从相册选择"};
+    private String[] item = {"拍摄", "从相册选择"};
     @Inject
     FilePresenter mFilePresenter;
     private int choseCode;
@@ -336,19 +337,26 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             } else {
                 mOrderRemark.setVisibility(View.GONE);
             }
-            mArriveName.setText(orderBean.getReceiveName());
-            mArrivePhone.setText(orderBean.getReceiveMobile());
-           //2待接单，3待确认，4待货主付款，5待接货, 6待送达，7待确认收货，8待回单收到确认，9待货主评价，10已完成，11取消，12已关闭
+            if (status == 2 || status == 3 || status == 4) {
+                mArriveName.setText(orderBean.getReceiveName().substring(1) + "xx");
+                mArrivePhone.setText(orderBean.getReceiveMobile());
+            } else {
+                mArriveName.setText(orderBean.getReceiveName());
+                mArrivePhone.setText(MessageFormat.format("{0}****{1}", orderBean.getReceiveMobile().substring(0,3), orderBean.getReceiveMobile().substring(orderBean.getReceiveMobile().length() - 4)));
+            }
+
+
+            //2待接单，3待确认，4待货主付款，5待接货, 6待送达，7待确认收货，8待回单收到确认，9待货主评价，10已完成，11取消，12已关闭
             mControlLayout.setVisibility(View.VISIBLE);
             mReceiptLayout.setVisibility(View.GONE);
             mReceiptTitle.setVisibility(View.GONE);
-            if (!TextUtils.isEmpty(mOrderBean.getCommentImage1())){
+            if (!TextUtils.isEmpty(mOrderBean.getCommentImage1())) {
                 CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + mOrderBean.getCommentImage1(), mImg1);
             }
-            if (!TextUtils.isEmpty(mOrderBean.getCommentImage2())){
+            if (!TextUtils.isEmpty(mOrderBean.getCommentImage2())) {
                 CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + mOrderBean.getCommentImage2(), mImg2);
             }
-            if (!TextUtils.isEmpty(mOrderBean.getCommentImage3())){
+            if (!TextUtils.isEmpty(mOrderBean.getCommentImage3())) {
                 CommonGlideImageLoader.getInstance().displayNetImage(mContext, com.js.http.global.Const.IMG_URL + mOrderBean.getCommentImage3(), mImg3);
             }
             switch (status) {
@@ -537,20 +545,20 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         showDialog();
     }
 
-    private void showDialog(){
+    private void showDialog() {
         new MaterialDialog.Builder(mContext)
                 .items(item)
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        if (position==0){
+                        if (position == 0) {
                             File file = new File(Environment.getExternalStorageDirectory(), "/temp/" + System.currentTimeMillis() + ".jpg");
                             if (!file.getParentFile().exists()) {
                                 file.getParentFile().mkdirs();
                             }
                             Uri imageUri = Uri.fromFile(file);
                             getTakePhoto().onPickFromCapture(imageUri);
-                        }else {
+                        } else {
                             getTakePhoto().onPickFromGallery();
                         }
                     }

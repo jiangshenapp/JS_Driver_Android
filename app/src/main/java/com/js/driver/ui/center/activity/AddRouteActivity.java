@@ -243,29 +243,14 @@ public class AddRouteActivity extends BaseActivity<AddRoutePresenter> implements
 
     @Subscribe
     public void onEvent(DictSelectEvent event) {
-        StringBuilder builder = new StringBuilder();
-        StringBuilder builder1 = new StringBuilder();
-        List<DictBean> dictBeans = event.mDicts;
-        for (DictBean dictBean : dictBeans) {
-            builder.append(dictBean.getLabel());
-            builder.append(",");
-            builder1.append(dictBean.getValue());
-            builder1.append(",");
-        }
-        if (builder.length() > 0) {
-            builder.deleteCharAt(builder.length() - 1);
-        }
-        if (builder1.length() > 0) {
-            builder1.deleteCharAt(builder1.length() - 1);
-        }
         switch (event.type) {
             case Const.DICT_LENGTH:
-                etCarLength.setText(builder.toString());
-                lengthStr = builder1.toString();
+                etCarLength.setText(event.labelStr);
+                lengthStr = event.valueStr;
                 break;
             case Const.DICT_CAR_TYPE:
-                etCarModel.setText(builder.toString());
-                typeStr = builder1.toString();
+                etCarModel.setText(event.labelStr);
+                typeStr = event.valueStr;
                 break;
         }
     }

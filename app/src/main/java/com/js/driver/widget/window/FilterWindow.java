@@ -26,7 +26,7 @@ import butterknife.OnClick;
 /**
  * Created by huyg on 2019-05-22.
  */
-public class FilterWindow extends PopupWindow{
+public class FilterWindow extends PopupWindow {
 
 
     @BindView(R.id.user_car_type)
@@ -75,7 +75,15 @@ public class FilterWindow extends PopupWindow{
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 List<DictBean> dictBeans = mCarTypeAdapter.getData();
                 DictBean dictBean = dictBeans.get(position);
-                dictBean.setChecked(!dictBean.isChecked());
+                if ("不限".equals(dictBean.getValue())) {
+                    for (DictBean dictBean1 : dictBeans) {
+                        dictBean1.setChecked(false);
+                    }
+                    dictBean.setChecked(true);
+                } else {
+                    dictBeans.get(0).setChecked(false);
+                    dictBean.setChecked(!dictBean.isChecked());
+                }
                 mCarTypeAdapter.setNewData(dictBeans);
             }
         });
@@ -84,7 +92,15 @@ public class FilterWindow extends PopupWindow{
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 List<DictBean> dictBeans = mLengthAdapter.getData();
                 DictBean dictBean = dictBeans.get(position);
-                dictBean.setChecked(!dictBean.isChecked());
+                if ("不限".equals(dictBean.getValue())) {
+                    for (DictBean dictBean1 : dictBeans) {
+                        dictBean1.setChecked(false);
+                    }
+                    dictBean.setChecked(true);
+                } else {
+                    dictBeans.get(0).setChecked(false);
+                    dictBean.setChecked(!dictBean.isChecked());
+                }
                 mLengthAdapter.setNewData(dictBeans);
             }
         });
@@ -93,7 +109,15 @@ public class FilterWindow extends PopupWindow{
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 List<DictBean> dictBeans = mTypeAdapter.getData();
                 DictBean dictBean = dictBeans.get(position);
-                dictBean.setChecked(!dictBean.isChecked());
+                if ("不限".equals(dictBean.getValue())) {
+                    for (DictBean dictBean1 : dictBeans) {
+                        dictBean1.setChecked(false);
+                    }
+                    dictBean.setChecked(true);
+                } else {
+                    dictBeans.get(0).setChecked(false);
+                    dictBean.setChecked(!dictBean.isChecked());
+                }
                 mTypeAdapter.setNewData(dictBeans);
             }
         });
@@ -114,8 +138,12 @@ public class FilterWindow extends PopupWindow{
             case R.id.submit:
                 StringBuilder carTypeStr = new StringBuilder();
                 for (DictBean dictBean : mCarTypeDict) {
-                    carTypeStr.append(dictBean.getValue());
-                    carTypeStr.append(",");
+                    if (dictBean.isChecked()) {
+                        if (!"不限".equals(dictBean.getValue())) {
+                            carTypeStr.append(dictBean.getValue());
+                            carTypeStr.append(",");
+                        }
+                    }
                 }
                 if (carTypeStr.length() > 0) {
                     carTypeStr.deleteCharAt(carTypeStr.length() - 1);
@@ -123,20 +151,28 @@ public class FilterWindow extends PopupWindow{
 
                 StringBuilder lengthStr = new StringBuilder();
                 for (DictBean dictBean : mLengthDict) {
-                    lengthStr.append(dictBean.getValue());
-                    lengthStr.append(",");
+                    if (dictBean.isChecked()) {
+                        if (!"不限".equals(dictBean.getValue())) {
+                            lengthStr.append(dictBean.getValue());
+                            lengthStr.append(",");
+                        }
+                    }
                 }
                 if (lengthStr.length() > 0) {
-                    lengthStr.deleteCharAt(carTypeStr.length() - 1);
+                    lengthStr.deleteCharAt(lengthStr.length() - 1);
                 }
 
                 StringBuilder typeStr = new StringBuilder();
                 for (DictBean dictBean : mCarTypeDict) {
-                    typeStr.append(dictBean.getValue());
-                    typeStr.append(",");
+                    if (dictBean.isChecked()) {
+                        if (!"不限".equals(dictBean.getValue())) {
+                            typeStr.append(dictBean.getValue());
+                            typeStr.append(",");
+                        }
+                    }
                 }
                 if (typeStr.length() > 0) {
-                    typeStr.deleteCharAt(carTypeStr.length() - 1);
+                    typeStr.deleteCharAt(typeStr.length() - 1);
                 }
 
                 EventBus.getDefault().post(new FilterEvent(carTypeStr.toString(), lengthStr.toString(), typeStr.toString()));
@@ -148,27 +184,21 @@ public class FilterWindow extends PopupWindow{
 
     public void setCarTypes(List<DictBean> data) {
         this.mCarTypeDict = data;
-        if (mCarTypeDict != null && mCarTypeDict.size() > 0) {
-            mCarTypeDict.get(0).setChecked(true);
-            mCarTypeAdapter.setNewData(mCarTypeDict);
-        }
+        this.mCarTypeDict.add(0, new DictBean("不限", "不限", true));
+        mCarTypeAdapter.setNewData(mCarTypeDict);
     }
 
 
     public void setCarLengths(List<DictBean> data) {
         this.mLengthDict = data;
-        if (mLengthDict != null && mLengthDict.size() > 0) {
-            mLengthDict.get(0).setChecked(true);
-            mLengthAdapter.setNewData(mLengthDict);
-        }
+        this.mLengthDict.add(0, new DictBean("不限", "不限", true));
+        mLengthAdapter.setNewData(mLengthDict);
     }
 
     public void setTypes(List<DictBean> data) {
         this.mTypeDict = data;
-        if (mTypeDict != null && mTypeDict.size() > 0) {
-            mTypeDict.get(0).setChecked(true);
-            mTypeAdapter.setNewData(mTypeDict);
-        }
+        this.mTypeDict.add(0, new DictBean("不限", "不限", true));
+        mTypeAdapter.setNewData(mTypeDict);
     }
 
 }

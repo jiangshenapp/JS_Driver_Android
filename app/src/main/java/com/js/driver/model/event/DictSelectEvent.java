@@ -1,20 +1,18 @@
 package com.js.driver.model.event;
 
-import com.js.driver.model.bean.DictBean;
-
-import java.util.List;
-
 /**
  * Created by huyg on 2019-06-09.
  */
 public class DictSelectEvent {
 
-    public List<DictBean> mDicts;
+    public String labelStr;
+    public String valueStr;
     public int type;
 
 
-    public DictSelectEvent(List<DictBean> mDicts, int type) {
-        this.mDicts = mDicts;
+    public DictSelectEvent(String labelStr, String valueStr, int type) {
+        this.labelStr = labelStr;
+        this.valueStr = valueStr;
         this.type = type;
     }
 }

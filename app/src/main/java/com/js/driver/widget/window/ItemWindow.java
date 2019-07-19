@@ -53,15 +53,31 @@ public class ItemWindow extends PopupWindow implements BaseQuickAdapter.OnItemCl
             case R.id.cancel:
                 break;
             case R.id.submit:
-                List<DictBean> selectDict = new ArrayList<>();
                 List<DictBean> dictBeans = mAdapter.getData();
+                StringBuilder valueStr = new StringBuilder();
+                StringBuilder labelStr = new StringBuilder();
                 for (DictBean dictBean : dictBeans) {
                     if (dictBean.isChecked()) {
-                        selectDict.add(dictBean);
+                        if (!"不限".equals(dictBean.getValue())) {
+                            valueStr.append(dictBean.getValue());
+                            valueStr.append(",");
+                            labelStr.append(dictBean.getLabel());
+                            labelStr.append(",");
+                        }else{
+                            labelStr.append(dictBean.getLabel());
+                            labelStr.append(",");
+                        }
                     }
                 }
-                EventBus.getDefault().post(new DictSelectEvent(selectDict, type));
-                break;
+                if (labelStr.length() > 0) {
+                    labelStr.deleteCharAt(labelStr.length() - 1);
+                }
+
+                if (valueStr.length() > 0) {
+                    valueStr.deleteCharAt(valueStr.length() - 1);
+                }
+
+                EventBus.getDefault().post(new DictSelectEvent(labelStr.toString(), valueStr.toString(), type));
         }
         dismiss();
     }
@@ -106,17 +122,22 @@ public class ItemWindow extends PopupWindow implements BaseQuickAdapter.OnItemCl
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         List<DictBean> dictBeans = mAdapter.getData();
         DictBean dictBean = dictBeans.get(position);
-        dictBean.setChecked(!dictBean.isChecked());
+        if ("不限".equals(dictBean.getValue())) {
+            for (DictBean dictBean1 : dictBeans) {
+                dictBean1.setChecked(false);
+            }
+            dictBean.setChecked(true);
+        } else {
+            dictBeans.get(0).setChecked(false);
+            dictBean.setChecked(!dictBean.isChecked());
+        }
         mAdapter.setNewData(dictBeans);
     }
 
 
     public void setData(List<DictBean> data) {
         this.mDictBeans = data;
-        if (mDictBeans != null && mDictBeans.size() > 0) {
-            mDictBeans.get(0).setChecked(true);
-            mAdapter.setNewData(mDictBeans);
-        }
-
+        this.mDictBeans.add(0, new DictBean("不限", "不限", true));
+        mAdapter.setNewData(mDictBeans);
     }
 }
