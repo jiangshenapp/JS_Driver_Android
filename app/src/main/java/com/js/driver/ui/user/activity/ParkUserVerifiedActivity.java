@@ -49,6 +49,7 @@ import com.js.driver.ui.user.presenter.ParkUserVerifiedPresenter;
 import com.js.driver.ui.user.presenter.contract.ParkUserVerifiedContract;
 import com.js.driver.util.GetJsonDataUtil;
 import com.js.frame.view.BaseActivity;
+import com.lljjcoder.citypickerview.widget.CityPicker;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -113,6 +114,9 @@ public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPrese
     private AuthInfo mAuthInfo;
     private int authState;
     private String[] items = {"拍摄","从相册选择"};
+    private String province;
+    private String city;
+    private String district;
 
     // 省
     private List<ShengBean> options1Items = new ArrayList<ShengBean>();
@@ -232,10 +236,11 @@ public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPrese
                 break;
             case R.id.ll_address:
             case R.id.et_address:
-                // 解析数据
-                parseAddressData();
-                // 展示省市区选择器
-                showAddressPickerView();
+                selectAddress();//调用CityPicker选取区域
+//                // 解析数据
+//                parseAddressData();
+//                // 展示省市区选择器
+//                showAddressPickerView();
                 break;
             case R.id.auth_business_license:
                 getPhoto(Const.AUTH_BUSINESS_LICENSE);
@@ -267,6 +272,46 @@ public class ParkUserVerifiedActivity extends BaseActivity<ParkUserVerifiedPrese
         }).build();
         pvOptions.setPicker(companyTypeItems);
         pvOptions.show();
+    }
+
+    /**
+     * 选择地址
+     */
+    private void selectAddress() {
+        CityPicker cityPicker = new CityPicker.Builder(ParkUserVerifiedActivity.this)
+                .textSize(14)
+                .title("选择地址")
+                .titleBackgroundColor("#FFFFFF")
+                .confirTextColor("#696969")
+                .cancelTextColor("#696969")
+                .province(province)
+                .city(city)
+                .district(district)
+                .textColor(Color.parseColor("#000000"))
+                .provinceCyclic(true)
+                .cityCyclic(false)
+                .districtCyclic(false)
+                .visibleItemsCount(7)
+                .itemPadding(10)
+                .onlyShowProvinceAndCity(false)
+                .build();
+        cityPicker.show();
+        //监听方法，获取选择结果
+        cityPicker.setOnCityItemClickListener(new CityPicker.OnCityItemClickListener() {
+            @Override
+            public void onSelected(String... citySelected) {
+                //省份
+                province = citySelected[0];
+                //城市
+                city = citySelected[1];
+                //区县（如果设定了两级联动，那么该项返回空）
+                district = citySelected[2];
+                //邮编
+                String code = citySelected[3];
+                //为TextView赋值
+                etAddress.setText(province.trim() + city.trim() + district.trim() + code.trim());
+            }
+        });
     }
 
     /**
