@@ -41,6 +41,7 @@ import com.js.driver.presenter.contract.FileContract;
 import com.js.driver.ui.main.activity.MainActivity;
 import com.js.driver.ui.order.presenter.OrderDetailPresenter;
 import com.js.driver.ui.order.presenter.contract.OrderDetailContract;
+import com.js.driver.util.AppUtils;
 import com.js.driver.util.MapUtils;
 import com.mylhyl.circledialog.CircleDialog;
 import com.mylhyl.circledialog.callback.ConfigDialog;
@@ -134,8 +135,10 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.detail_send_phone://打电话
+                AppUtils.callPhone(mContext,mOrderBean.getSendMobile());
                 break;
             case R.id.detail_send_wechat://微信
+                toast("该功能暂未开放");
                 break;
             case R.id.detail_send_navigate:
                 if (App.getInstance().mLocation == null) {
@@ -216,7 +219,6 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 break;
         }
     }
-
 
     private long orderId;
     private int status;
@@ -299,7 +301,20 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             mArriveAddress.setText(orderBean.getReceiveAddress());
             mArriveCity.setText(orderBean.getReceiveAddressCodeName());
             mLoadingTime.setText(orderBean.getLoadingTime());
-            mCarInfo.setText(orderBean.getGoodsVolume() + "方/" + orderBean.getGoodsWeight() + "吨");
+            String info = "";
+            if (!TextUtils.isEmpty(orderBean.getCarModelName())) {
+                info += orderBean.getCarModelName();
+            }
+            if (!TextUtils.isEmpty(orderBean.getCarLengthName())) {
+                info += orderBean.getCarLengthName();
+            }
+            if (orderBean.getGoodsVolume()!=0) {
+                info += "/"+orderBean.getGoodsVolume()+"方";
+            }
+            if (orderBean.getGoodsWeight()!=0) {
+                info += "/"+orderBean.getGoodsWeight()+"吨";
+            }
+            mCarInfo.setText(info);
             mGoodsName.setText(orderBean.getGoodsName());
             mCarUseType.setText(orderBean.getUseCarType());
             mBail.setText(String.valueOf(orderBean.getDeposit()));
@@ -337,14 +352,17 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             } else {
                 mOrderRemark.setVisibility(View.GONE);
             }
-            if (status == 2 || status == 3 || status == 4) {
-                mArriveName.setText(orderBean.getReceiveName().substring(1) + "xx");
-                mArrivePhone.setText(orderBean.getReceiveMobile());
+            if (status <= 4) { //收货人信息加密
+                if (orderBean.getReceiveName().length()>0) {
+                    mArriveName.setText(orderBean.getReceiveName().substring(0) + "xx");
+                }
+                if (orderBean.getReceiveMobile().length()==11) {
+                    mArrivePhone.setText(MessageFormat.format("{0}****{1}", orderBean.getReceiveMobile().substring(0, 3), orderBean.getReceiveMobile().substring(orderBean.getReceiveMobile().length() - 4)));
+                }
             } else {
                 mArriveName.setText(orderBean.getReceiveName());
-                mArrivePhone.setText(MessageFormat.format("{0}****{1}", orderBean.getReceiveMobile().substring(0,3), orderBean.getReceiveMobile().substring(orderBean.getReceiveMobile().length() - 4)));
+                mArrivePhone.setText(orderBean.getReceiveMobile());
             }
-
 
             //2待接单，3待确认，4待货主付款，5待接货, 6待送达，7待确认收货，8待回单收到确认，9待货主评价，10已完成，11取消，12已关闭
             mControlLayout.setVisibility(View.VISIBLE);

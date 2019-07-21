@@ -100,10 +100,12 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
     private CityWindow mEndWindow;
     private FilterWindow mFilterWindow;
     private SortWindow mSortWindow;
-    private int sort;
-    private LineAppFind lineAppFind = new LineAppFind();
-    private String arriveAddressCode;
-    private String startAddressCode;
+    private String startAddressCode = "0";
+    private String arriveAddressCode = "0";
+    private int sort = 1;
+    private String carTypeStr;
+    private String lengthStr;
+    private String typeStr;
 
     @Inject
     DictPresenter mDictPresenter;
@@ -167,14 +169,12 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
         mRefresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                type = Const.MORE;
                 int num = (int) Math.ceil(((float) mAdapter.getItemCount() / Const.PAGE_SIZE)) + 1;
                 getOrders(num);
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                type = Const.REFRESH;
                 getOrders(Const.PAGE_NUM);
             }
         });
@@ -247,16 +247,35 @@ public class FindOrderFragment extends BaseFragment<FindOrderPresenter> implemen
 
     @Subscribe
     public void onEvent(FilterEvent event) {
-        lineAppFind.setCarLength(event.lengthStr);
-        lineAppFind.setCarModel(event.carTypeStr);
-        lineAppFind.setUseCarType(event.typeStr);
+        carTypeStr = event.carTypeStr;
+        lengthStr = event.lengthStr;
+        typeStr = event.typeStr;
         getOrders(Const.PAGE_NUM);
     }
 
     private void getOrders(int num) {
-        lineAppFind.setStartAddressCode(startAddressCode);
-        lineAppFind.setArriveAddressCode(arriveAddressCode);
+        if (num == Const.PAGE_NUM) {
+            type = Const.REFRESH;
+        } else {
+            type = Const.MORE;
+        }
+        LineAppFind lineAppFind = new LineAppFind();
+        if (startAddressCode.length() == 6) {
+            lineAppFind.setStartAddressCode(startAddressCode);
+        }
+        if (arriveAddressCode.length() == 6) {
+            lineAppFind.setArriveAddressCode(arriveAddressCode);
+        }
         lineAppFind.setSort(sort);
+        if (!TextUtils.isEmpty(carTypeStr)) {
+            lineAppFind.setUseCarType(carTypeStr);
+        }
+        if (!TextUtils.isEmpty(lengthStr)) {
+            lineAppFind.setCarLength(lengthStr);
+        }
+        if (!TextUtils.isEmpty(typeStr)) {
+            lineAppFind.setCarModel(typeStr);
+        }
         mPresenter.findOrders(num, (int) Const.PAGE_SIZE, lineAppFind);
     }
 
