@@ -2,11 +2,16 @@ package com.js.driver.ui.order.adapter;
 
 import android.text.TextUtils;
 
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.DistanceUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.google.gson.Gson;
+import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.model.bean.OrderBean;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import androidx.annotation.Nullable;
@@ -16,6 +21,7 @@ import androidx.annotation.Nullable;
  */
 public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
 
+    private DecimalFormat df = new DecimalFormat("#####0.0");
 
     public OrderAdapter(int layoutResId, @Nullable List<OrderBean> data) {
         super(layoutResId, data);
@@ -50,6 +56,14 @@ public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
                 helper.setText(R.id.item_waybill_money, "电议");
                 break;
         }
+        if (App.getInstance().mLocation == null) {
+            return;
+        }
+        try {
+            double distance = DistanceUtil.getDistance(new Gson().fromJson(item.getSendPosition(), LatLng.class), new LatLng(App.getInstance().mLocation.getLatitude(), App.getInstance().mLocation.getLongitude()));
+            helper.setText(R.id.item_waybill_distance, "距离您" + (distance > 1000 ? df.format(distance / 1000) + " Km" : ((int) distance) + "米"));
+        }catch (Exception e){
 
+        }
     }
 }

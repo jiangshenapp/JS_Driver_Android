@@ -33,12 +33,18 @@ public class FindOrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder
     protected void convert(BaseViewHolder helper, OrderBean item) {
 
         String info = "";
-        if (!TextUtils.isEmpty(item.getGoodsType())) {
-            info += item.getGoodsType();
+        if (!TextUtils.isEmpty(item.getCarModelName())) {
+            info += item.getCarModelName();
         }
-        info += " " + item.getGoodsVolume() + "方";
-        info += "/" + item.getGoodsWeight() + "吨";
-
+        if (!TextUtils.isEmpty(item.getCarLengthName())) {
+            info += item.getCarLengthName();
+        }
+        if (item.getGoodsVolume()!=0) {
+            info += "/"+item.getGoodsVolume()+"方";
+        }
+        if (item.getGoodsWeight()!=0) {
+            info += "/"+item.getGoodsWeight()+"吨";
+        }
         helper.setText(R.id.item_order_no, "订单编号：" + item.getOrderNo())
                 .setText(R.id.item_order_type, item.getUseCarTypeName())
                 .setText(R.id.item_send_address, item.getSendAddress())
@@ -60,6 +66,5 @@ public class FindOrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder
         }catch (Exception e){
 
         }
-
     }
 }
