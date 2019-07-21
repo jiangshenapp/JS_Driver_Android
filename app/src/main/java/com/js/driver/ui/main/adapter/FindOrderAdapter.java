@@ -31,16 +31,20 @@ public class FindOrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder
 
     @Override
     protected void convert(BaseViewHolder helper, OrderBean item) {
+
+        String info = "";
+        if (!TextUtils.isEmpty(item.getGoodsType())) {
+            info += item.getGoodsType();
+        }
+        info += " " + item.getGoodsVolume() + "方";
+        info += "/" + item.getGoodsWeight() + "吨";
+
         helper.setText(R.id.item_order_no, "订单编号：" + item.getOrderNo())
                 .setText(R.id.item_order_type, item.getUseCarTypeName())
                 .setText(R.id.item_send_address, item.getSendAddress())
                 .setText(R.id.item_receive_address, item.getReceiveAddress())
                 .setText(R.id.item_loading_time, "装货时间：" + item.getLoadingTime())
-                .setText(R.id.item_good_info, item.getGoodsType() +
-                        "  " +
-                        item.getGoodsVolume() + "方" +
-                        "/" +
-                        item.getGoodsWeight() + "吨");
+                .setText(R.id.item_good_info, info);
         if (item.getFeeType() == 1) {
             helper.setText(R.id.item_order_money, "￥" + item.getFee());
         } else {
