@@ -85,7 +85,9 @@ public class App extends BaseApplication {
      * 清空用户信息
      */
     public void clearUserInfo() {
+        String loginPhone = SpManager.getInstance(App.getInstance()).getSP("loginPhone");
         SpManager.getInstance(App.getInstance()).clear();
+        SpManager.getInstance(App.getInstance()).putSP("loginPhone",loginPhone); //登录手机号不清空
         getUserInfo();
     }
 
