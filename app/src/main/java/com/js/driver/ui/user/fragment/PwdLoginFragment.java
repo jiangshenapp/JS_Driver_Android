@@ -9,6 +9,7 @@ import com.js.driver.App;
 import com.js.driver.R;
 import com.js.driver.di.componet.DaggerFragmentComponent;
 import com.js.driver.di.module.FragmentModule;
+import com.js.driver.manager.SpManager;
 import com.js.driver.model.event.LoginChangeEvent;
 import com.js.driver.model.event.UserStatusChangeEvent;
 import com.js.driver.ui.user.activity.ForgetPwdActivity;
@@ -59,7 +60,7 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
 
     @Override
     protected void init() {
-
+        mPhone.setText(SpManager.getInstance(App.getInstance()).getSP("loginPhone"));
     }
 
     @OnClick({R.id.tv_register, R.id.tv_forget_pwd, R.id.tv_protocal, R.id.btn_login, R.id.tv_login_phonecode})
@@ -100,6 +101,7 @@ public class PwdLoginFragment extends BaseFragment<PwdLoginPresenter> implements
     public void onLogin(String token) {
         toast("登录成功");
         App.getInstance().putToken(token);
+        SpManager.getInstance(App.getInstance()).putSP("loginPhone",phone);
         EventBus.getDefault().post(new UserStatusChangeEvent(UserStatusChangeEvent.LOGIN_SUCCESS));
         getActivity().finish();
     }

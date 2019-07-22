@@ -140,16 +140,13 @@
             android:id="@+id/item_waybill_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="距离您35km"
+            android:text=""
             android:textColor="#FFB4B4B4"
-            android:textSize="12sp"
+            android:textSize="11sp"
             android:layout_marginEnd="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/item_waybill_money"
-            android:visibility="gone"
             />
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

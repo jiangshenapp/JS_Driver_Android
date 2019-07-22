@@ -4,10 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,7 +58,7 @@ public class RechargeBailActivity extends BaseActivity<RechargeBailPresenter> im
     @BindView(R.id.tv_deposit)
     TextView tvDeposit;
     @BindView(R.id.et_trade_deposit)
-    TextView etTradeDeposit;
+    EditText etTradeDeposit;
     @BindView(R.id.cb_select)
     CheckBox cbSelect;
 
@@ -85,6 +89,46 @@ public class RechargeBailActivity extends BaseActivity<RechargeBailPresenter> im
 
     private void initView() {
         tvDeposit.setText(mAccountInfo.getDriverDeposit() + "元");
+        etTradeDeposit.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        etTradeDeposit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.toString().contains(".")) {
+                    if (s.length() - 1 - s.toString().indexOf(".") > 2) {
+                        s = s.toString().subSequence(0,
+                                s.toString().indexOf(".") + 2+1);
+                        etTradeDeposit.setText(s);
+                        etTradeDeposit.setSelection(s.length()); //光标移到最后
+                    }
+                }
+                //如果"."在起始位置,则起始位置自动补0
+                if (s.toString().trim().substring(0).equals(".")) {
+                    s = "0" + s;
+                    etTradeDeposit.setText(s);
+                    etTradeDeposit.setSelection(2);
+                }
+
+                //如果起始位置为0,且第二位跟的不是".",则无法后续输入
+                if (s.toString().startsWith("0")
+                        && s.toString().trim().length() > 1) {
+                    if (!s.toString().substring(1, 2).equals(".")) {
+                        etTradeDeposit.setText(s.subSequence(0, 1));
+                        etTradeDeposit.setSelection(1);
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         initAdapter();
     }
 
