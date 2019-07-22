@@ -36,8 +36,8 @@ public class FindOrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder
                 .setText(R.id.item_send_address, item.getSendAddress())
                 .setText(R.id.item_receive_address, item.getReceiveAddress())
                 .setText(R.id.item_loading_time, "装货时间：" + item.getLoadingTime())
-                .setText(R.id.item_good_info, item.getGoodsType() +
-                        "  " +
+                .setText(R.id.item_good_info, item.getCarModelName() + " "
+                        + item.getCarLengthName() + "/" +
                         item.getGoodsVolume() + "方" +
                         "/" +
                         item.getGoodsWeight() + "吨");
@@ -53,7 +53,7 @@ public class FindOrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder
         try {
             double distance = DistanceUtil.getDistance(new Gson().fromJson(item.getSendPosition(), LatLng.class), new LatLng(App.getInstance().mLocation.getLatitude(), App.getInstance().mLocation.getLongitude()));
             helper.setText(R.id.item_distance, "距离您" + (distance > 1000 ? df.format(distance / 1000) + " Km" : ((int) distance) + "米"));
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
