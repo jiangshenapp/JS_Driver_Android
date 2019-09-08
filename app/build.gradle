@@ -88,7 +88,7 @@ dependencies {
     implementation 'com.jph.takephoto:takephoto_library:4.0.3'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
-    implementation 'com.github.anzaizai:EasySwipeMenuLayout:1.1.2'
+    implementation 'com.github.anzaizai:EasySwipeMenuLayout:1.1.4'
     //ARouter
     implementation 'com.alibaba:arouter-api:1.4.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
